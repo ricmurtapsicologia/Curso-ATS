@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Curso de Atendimento a Tentativas de Suicídio - Plataforma EAD">
-    <meta name="keywords" content="EAD, Curso, Atendimento, Suicídio, Bombeiros, Emergências">
-    <meta name="author" content="Corpo de Bombeiros Militar">
     <meta property="og:title" content="Curso de Atendimento a Tentativas de Suicídio - Plataforma EAD">
     <meta property="og:description" content="Participe do nosso curso online de Atendimento a Tentativas de Suicídio. Aprenda técnicas fundamentais para lidar com situações de emergência.">
     <meta property="og:image" content="https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg">
     <meta property="og:url" content="https://www.exemplo.com/curso-atendimento-suicidio">
-    <meta name="twitter:card" content="summary_large_image">
     <title>Curso de Atendimento a Tentativas de Suicídio</title>
     <style>
         body {
