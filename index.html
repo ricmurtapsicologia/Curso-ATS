@@ -25,6 +25,7 @@
 				    background: url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg') no-repeat center center fixed;
 				    background-size: cover;
 				    color: #333;
+		                                    overflow-x: hidden;
 				}
 				
 				header {
@@ -248,31 +249,51 @@
 				}
 				
 				
-				@media (max-width: 768px) {
-				    h1 {
-				        font-size: 2em;
-				    }
-				}
-				@media (max-width: 768px) {
-				    h1, h3 {
-				        font-size: 1.8em; /* Reduz o tamanho das fontes */
-				        max-width: 90%; /* Ocupa mais espaço em telas menores */
-				        padding: 8px 15px; /* Ajuste do espaçamento */
-				    }
-				    .container, .videos-box {
-				        grid-template-columns: 1fr; /* Uma única coluna para conteúdos */
-				    }
-				    .box img, .video-item iframe {
-				        height: auto; /* Ajusta a altura das imagens e vídeos */
-				    }
-				}
-				
-				@media (min-width: 769px) and (max-width: 1024px) {
-				    h1, h3 {
-				        font-size: 2em; /* Fonte intermediária */
-				        max-width: 80%;
-				    }
-				}
+				/* Estilos gerais para evitar overflow */
+		body {
+		    margin: 0;
+		    padding: 0;
+		    overflow-x: hidden; /* Evita o scroll horizontal indesejado */
+		}
+		
+		/* Responsividade para telas pequenas */
+		@media (max-width: 768px) {
+		    h1, h3 {
+		        font-size: 1.8em; /* Tamanho reduzido das fontes */
+		        max-width: 90%; /* Ocupa mais espaço da largura */
+		        padding: 8px 15px; /* Ajuste do espaçamento */
+		    }
+		    .container, .videos-box {
+		        grid-template-columns: 1fr; /* Conteúdo em uma única coluna */
+		    }
+		    .box, .video-item {
+		        height: 300px; /* Altura fixa para garantir proporção */
+		        display: flex;
+		        flex-direction: column;
+		        justify-content: space-between;
+		    }
+		    .box img, .video-item iframe {
+		        height: auto; /* Ajusta automaticamente ao conteúdo */
+		        max-height: 150px; /* Limita a altura das imagens */
+		        object-fit: cover; /* Garante proporção das imagens */
+		    }
+		}
+		
+		/* Responsividade para telas intermediárias */
+		@media (min-width: 769px) and (max-width: 1024px) {
+		    h1, h3 {
+		        font-size: 2em; /* Fonte intermediária */
+		        max-width: 80%;
+		    }
+		    .container {
+		        grid-template-columns: repeat(2, 1fr); /* Duas colunas para melhor uso do espaço */
+		        gap: 20px; /* Espaçamento consistente */
+		    }
+		    .box {
+		        height: auto; /* Permite ajuste automático */
+		    }
+		}
+		
 	</style>
 	<script>
 		function toggleLinks() {
