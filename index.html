@@ -2,462 +2,157 @@
 <html lang="pt-BR">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta property="og:title" content="Curso de Atendimento a Tentativas de Suicídio - Plataforma EAD">
-	<meta property="og:description" content="Participe do nosso curso online de Atendimento a Tentativas de Suicídio. Aprenda técnicas fundamentais para lidar com situações de emergência.">
-	<meta property="og:image" content="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg"> <!-- Imagem corrigida -->
-	<meta property="og:url" content="https://ricmurtapsicologia.github.io/Curso-ATS/"> <!-- URL corrigida -->
-	<title>Curso de Atendimento a Tentativas de Suicídio</title>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-38D052F915"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		
-		function gtag() {
-		    dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-		gtag('config', 'G-38D052F915');
-	</script>
-	<style>
-		body {
-		    font-family: Arial, sans-serif;
-		    margin: 0;
-		    padding: 0;
-		    background: url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg') no-repeat center center fixed;
-		    background-size: cover;
-		    color: #333;
-		    overflow-x: hidden;
-		}
-		
-		header {
-		    color: #fff;
-		    text-align: center;
-		    padding: 20px;
-		    background-color: rgba(0, 0, 0, 0.6);
-		}
-		
-		h1 {
-		    margin: 20px 0;
-		    font-size: 2.5em;
-		    text-shadow: 2px 2px 4px #000;
-		}
-		
-		.container {
-		    display: grid;
-		    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		    gap: 20px;
-		    margin: 20px auto;
-		    max-width: 1200px;
-		    padding: 0 20px;
-		}
-		
-		.box {
-		    background-color: rgba(255, 255, 255, 0.95);
-		    border-radius: 8px;
-		    padding: 20px;
-		    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-		    text-align: center;
-		    transition: transform 0.3s ease, box-shadow 0.3s ease;
-		    display: flex;
-		    flex-direction: column;
-		    justify-content: space-between;
-		}
-		
-		.box img {
-		    width: 100%;
-		    border-radius: 8px;
-		    height: 250px;
-		    object-fit: cover;
-		    object-position: center 30%;
-		    transition: transform 0.3s ease;
-		}
-		
-		.box:hover img {
-		    transform: scale(1.05);
-		}
-		
-		.box:hover {
-		    transform: translateY(-5px);
-		    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-		}
-		
-		.box h3 {
-		    margin-top: 15px;
-		    color: #003366;
-		    font-size: 1.5em;
-		}
-		
-		.box p {
-		    color: #555;
-		    font-size: 1em;
-		    line-height: 1.5;
-		    margin-bottom: 20px;
-		}
-		
-		.box a,
-		.box button {
-		    display: inline-block;
-		    margin-top: auto;
-		    padding: 12px 20px;
-		    color: #fff;
-		    background-color: #003366;
-		    border-radius: 5px;
-		    text-decoration: none;
-		    font-weight: bold;
-		    transition: background-color 0.3s ease, transform 0.3s ease;
-		    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-		    cursor: pointer;
-		    border: none;
-		    font-size: 1em;
-		}
-		
-		.box a:hover,
-		.box button:hover {
-		    background-color: #002244;
-		    transform: translateY(-2px);
-		}
-		
-		.videos-box {
-		    display: grid;
-		    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		    gap: 20px;
-		    margin: 40px auto;
-		    max-width: 1200px;
-		    padding: 0 20px;
-		}
-		
-		.videos-box h3 {
-		    color: #FFFFFF;
-		    /* Texto branco */
-		    text-shadow: 1px 1px 2px #000000;
-		    /* Sombra preta para contraste */
-		    background-color: rgba(0, 0, 0, 0.7);
-		    /* Fundo preto com transparência */
-		    padding: 10px;
-		    border-radius: 8px;
-		}
-		
-		.video-item {
-		    text-align: center;
-		    background-color: rgba(255, 255, 255, 0.95);
-		    border-radius: 8px;
-		    padding: 15px;
-		    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-		    transition: transform 0.3s ease, box-shadow 0.3s ease;
-		}
-		
-		.video-item iframe {
-		    width: 100%;
-		    height: 200px;
-		    border-radius: 8px;
-		    transition: transform 0.3s ease;
-		}
-		
-		.video-item:hover iframe {
-		    transform: scale(1.05);
-		}
-		
-		.video-item:hover {
-		    transform: translateY(-5px);
-		    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-		}
-		
-		.video-item p {
-		    color: #333;
-		    font-size: 1em;
-		    margin-top: 10px;
-		}
-		
-		footer {
-		    background-color: rgba(0, 0, 0, 0.8);
-		    color: #fff;
-		    text-align: center;
-		    padding: 20px;
-		    width: 100%;
-		    position: relative;
-		    bottom: 0;
-		    display: flex;
-		    flex-direction: column;
-		    align-items: center;
-		}
-		
-		.footer-button {
-		    display: inline-block;
-		    padding: 15px 25px;
-		    color: #fff;
-		    background-color: #003366;
-		    border-radius: 5px;
-		    text-decoration: none;
-		    font-weight: bold;
-		    transition: background-color 0.3s ease, transform 0.3s ease;
-		    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-		    margin-top: 10px;
-		}
-		
-		.footer-button:hover {
-		    background-color: #002244;
-		    transform: translateY(-2px);
-		}
-		
-		.cvv-section {
-		    background-color: rgba(0, 0, 0, 0.6);
-		    color: #fff;
-		    text-align: center;
-		    padding: 30px 20px;
-		    margin-top: 20px;
-		    border-radius: 8px;
-		    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-		}
-		
-		.cvv-section h3 {
-		    font-size: 1.8em;
-		    margin-bottom: 15px;
-		}
-		
-		.cvv-section p {
-		    font-size: 1.2em;
-		    margin-bottom: 15px;
-		}
-		
-		.cvv-section .footer-button {
-		    background-color: #003366;
-		    /* Azul Prussiano */
-		}
-		
-		.cvv-section .footer-button:hover {
-		    background-color: #002244;
-		    /* Azul Prussiano mais escuro no hover */
-		}
-		
-		/* Botões Dinâmicos para Materiais Complementares */
-		.hidden-links {
-		    display: none;
-		    margin-top: 15px;
-		    text-align: left;
-		    /* Alinha os links à esquerda */
-		}
-		
-		.hidden-links a {
-		    display: block;
-		    padding: 10px 20px;
-		    /* Espaçamento interno mais confortável */
-		    margin: 10px 0;
-		    /* Espaçamento entre os botões */
-		    color: #fff;
-		    background-color: #FF7F0E;
-		    /* Botões Laranja */
-		    border-radius: 5px;
-		    text-decoration: none;
-		    font-weight: bold;
-		    font-size: 1em;
-		    /* Tamanho consistente */
-		    transition: background-color 0.3s ease, transform 0.3s ease;
-		    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-		    /* Sombra */
-		}
-		
-		.hidden-links a:hover {
-		    background-color: #E0660C;
-		    /* Cor mais escura no hover */
-		    transform: translateY(-2px);
-		    /* Animação no hover */
-		}
-		
-		
-		/* Estilos gerais para evitar overflow */
-		body {
-		    margin: 0;
-		    padding: 0;
-		    overflow-x: hidden;
-		    /* Evita o scroll horizontal indesejado */
-		}
-		
-		@media (max-width: 768px) {
-		    body {
-		        margin: 0;
-		        padding: 0;
-		        overflow-x: hidden;
-		        /* Impede o deslize lateral */
-		    }
-		
-		    h1 {
-		        font-size: 2em;
-		        /* Mantém o ajuste de tamanho do título */
-		    }
-		}
-	</style>
-	<script>
-		function toggleLinks() {
-		    var links = document.getElementById("hiddenLinks");
-		    if (links.style.display === "none" || links.style.display === "") {
-		        links.style.display = "block";
-		    } else {
-		        links.style.display = "none";
-		    }
-		}
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Curso de Atendimento a Tentativas de Suicídio - Plataforma EAD">
+    <meta property="og:description" content="Participe do nosso curso online de Atendimento a Tentativas de Suicídio. Aprenda técnicas fundamentais para lidar com situações de emergência.">
+    <meta property="og:image" content="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg">
+    <meta property="og:url" content="https://ricmurtapsicologia.github.io/Curso-ATS/">
+    <title>Curso de Atendimento a Tentativas de Suicídio</title>
+    <!-- Estilos CSS Externo -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-38D052F915"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-38D052F915');
+    </script>
 </head>
 
 <body>
-	<header style="
-    background: none; 
-    margin: 0; 
-    padding: 0; 
-">
-		<h1 style="
-        color: #FFDD00; 
-        font-size: 2.5em; 
-        text-align: center; 
-        background-color: rgba(0, 0, 0, 0.7); 
-        padding: 15px 25px; /* Aumentei o padding para dar mais destaque */
-        border-radius: 10px; /* Bordas levemente mais arredondadas */
-        max-width: 70%; 
-        margin: 50px auto 40px auto; /* Margem ajustada para criar mais respiro */
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra igual */
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Adicionado leve box-shadow para destacar o título */
-    "> Curso de Atendimento a Tentativas de Suicídio </h1>
-	</header>
-	<section class="container">
-		<div class="box">
-			<img src="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" alt="Imagem Encontro 1" class="encontro1">
-			<h3>Encontro 1: Aspectos Gerais</h3>
-			<p>Introdução aos conceitos gerais sobre o comportamento suicida, incluindo dinâmicas psicológicas, psicopatologia e mitos. O foco é proporcionar uma visão abrangente do tema.</p>
-			<a href="https://docs.google.com/presentation/d/1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB/edit?usp=sharing&ouid=108383429800204795084&rtpof=true&sd=true" target="_blank">Acesse a Aula</a>
-		</div>
-		<div class="box">
-			<img src="https://i.pinimg.com/originals/3d/ed/d3/3dedd32bf56863095e45ecd35ced74d6.jpg" alt="Imagem Encontro 2" class="encontro2">
-			<h3>Encontro 2: Abordagem Técnica</h3>
-			<p>Discussão sobre os procedimentos técnicos em ocorrências de tentativas de suicídio, com ênfase na comunicação eficaz e nas estratégias de abordagem, evitando o uso de força física, a menos que seja absolutamente necessário.</p>
-			<a href="https://docs.google.com/presentation/d/1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs/edit?usp=sharing&ouid=108383429800204795084&rtpof=true&sd=true" target="_blank">Acesse a Aula</a>
-		</div>
-		<div class="box">
-			<img src="https://i.pinimg.com/originals/8f/ef/40/8fef409190b4a29413762c81ecb8bf86.jpg" alt="Imagem Encontro 3">
-			<h3>Encontro 3: Aspectos Específicos</h3>
-			<p>Abordagens específicas para diferentes perfis de tentantes, como agressivos, depressivos e psicóticos. Além disso, introdução ao gerenciamento de ocorrências, incluindo planejamento de ação e coordenação de equipes.</p>
-			<a href="https://docs.google.com/presentation/d/1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp/edit?usp=sharing&ouid=108383429800204795084&rtpof=true&sd=true" target="_blank">Acesse a Aula</a>
-		</div>
-		<div class="box">
-			<img src="https://i.pinimg.com/originals/f1/f2/4d/f1f24d12b7ee9f2d3415179b6de9089f.jpg" alt="Imagem Encontro 4">
-			<h3>Encontro 4: Gerenciamento em ATS</h3>
-			<p>Gerenciamento de ocorrências envolvendo tentativas de suicídio, com foco em planos de ação e uso de métodos como o SMART para resolução de situações complexas.</p>
-			<a href="https://docs.google.com/presentation/d/1_6dVFpv3trAtLAd2dXSrZbMris95jy1B/edit?usp=sharing&ouid=108383429800204795084&rtpof=true&sd=true" target="_blank">Acesse a Aula</a>
-		</div>
-		<div class="box">
-			<img src="https://i.pinimg.com/originals/1f/68/67/1f6867294fd6c1b101f2fdab626e658b.jpg" alt="Imagem Aula Bônus">
-			<h3>Aula Bônus: Prevenção ao Suicídio</h3>
-			<p>Explore a aula bônus sobre prevenção ao suicídio, com estratégias e abordagens para ajudar a prevenir situações de risco.</p>
-			<a href="https://docs.google.com/presentation/d/1BMqWl87S-dgdNcNHAHNe3oLGqc1eCo8d/edit?usp=sharing&ouid=108383429800204795084&rtpof=true&sd=true" target="_blank">Acesse a Aula Bônus</a>
-		</div>
-		<div class="box">
-			<img src="https://i.pinimg.com/originals/44/aa/8b/44aa8bcf9d52cf5bc1c14be0d6740bd3.jpg" alt="Imagem Material Complementar">
-			<h3>Materiais Complementares</h3>
-			<p>Acesse materiais adicionais que complementam o conteúdo das aulas, proporcionando um aprendizado mais profundo.</p>
-			<button onclick="toggleLinks()">Acesse aqui os Materiais</button>
-			<div id="hiddenLinks" class="hidden-links">
-				<a href="https://drive.google.com/file/d/19G98R3O4MKzOSiEWULyv13u4e_t_L57p/view?usp=drive_link" target="_blank">Boletim Epidemiológico 1</a>
-				<a href="https://drive.google.com/file/d/1CmZ5pAgDNk7OhPZkM0mgHANYj9PTVaBa/view?usp=drive_link" target="_blank">Boletim Epidemiológico 2</a>
-				<a href="https://drive.google.com/open?id=142Xo_BKypSz7PInWKay5y-8X--O8gYjO&usp=drive_copy" target="_blank">Boletim Epidemiológico 3</a>
-				<a href="https://drive.google.com/file/d/1iQIiE9gXo64CtaxMDdpeoaZ9Jp3TqLW1/view?usp=drive_link" target="_blank">Boletim Epidemiológico 4</a>
-				<a href="https://drive.google.com/file/d/16sftiwkml3TWOt4tMk6dohvt8MZE6zRO/view?usp=drive_link" target="_blank">Instrução Técnica Operacional Nr 30</a>
-				<a href="https://play.google.com/store/apps/details?id=es.aciliainternet.prevensuic&hl=pt_BR" target="_blank">Aplicativo PREVENSUIC</a>
-				<a href="https://docs.google.com/presentation/d/1-HdlJM4UPWrA1Upb9sl2qrLojcuDbBfi/edit?usp=sharing&ouid=108383429800204795084&rtpof=true&sd=true" target="_blank">Palestra Desvendando a Mente Juvenil</a>
-			</div>
-		</div>
-		</div>
-		<!-- Seção do Projeto Girando a Ampulheta da Vida -->
-		<section style="margin-top: 30px; text-align: center;">
-			<div class="box" style="max-width: 400px; margin: 0 auto;">
-				<img src="https://i.pinimg.com/736x/46/a2/33/46a2335ebc2074b6df9a9774ce9cfd5d.jpg" alt="Girando a Ampulheta da Vida" style="border-radius: 8px; width: 100%; height: 250px; object-fit: cover;">
-				<h3 style="color: #003366; margin-top: 15px;">Projeto Girando a Ampulheta da Vida</h3>
-				<p style="font-size: 1em; color: #555; line-height: 1.5; margin-bottom: 20px;"> Acesse o Projeto Girando a Ampulheta da Vida, um material complementar desenvolvido para enriquecer seus conhecimentos sobre o atendimento a tentativas de suicídio. </p>
-				<a href="https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/" target="_blank" class="footer-button" style="background-color: #003366; padding: 12px 20px; font-size: 1em; text-decoration: none; color: #fff; border-radius: 5px; display: inline-block; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);"> Acesse o Projeto Agora </a>
-			</div>
-		</section>
-	</section>
-	<!-- Título Centralizado -->
-	<section style="text-align: center; margin: 40px 0;">
-		<h3 style="
-        color: #FFDD00; 
-        font-size: 2.5em; 
-        font-weight: bold; 
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-        background-color: rgba(0, 0, 0, 0.5); 
-        display: inline-block; 
-        padding: 10px 20px; 
-        border-radius: 8px;
-    "> Conteúdo Audiovisual Complementar </h3>
-	</section>
-	<!-- Seção de Vídeos -->
-	<section class="videos-box">
-		<div class="video-item">
-			<iframe src="https://www.youtube.com/embed/gJBlY3opAVU" frameborder="0" allowfullscreen></iframe>
-			<p>Suicídio explicado no Nerdologia</p>
-		</div>
-		<div class="video-item">
-			<iframe src="https://www.youtube.com/embed/N88STTQVaE8" frameborder="0" allowfullscreen></iframe>
-			<p>CVV/Unicef: O que evitar na prevenção do suicídio</p>
-		</div>
-		<div class="video-item">
-			<iframe src="https://www.youtube.com/embed/VW3mvMz5AXs" frameborder="0" allowfullscreen></iframe>
-			<p>CVV/Unicef: Quebrando tabus sobre suicídio</p>
-		</div>
-		<div class="video-item">
-			<iframe src="https://www.youtube.com/embed/YmIIiuaJgkk" frameborder="0" allowfullscreen></iframe>
-			<p>CVV/Unicef: Situações que levam ao suicídio</p>
-		</div>
-		<div class="video-item">
-			<iframe src="https://www.youtube.com/embed/BbJi72PmDXI" frameborder="0" allowfullscreen></iframe>
-			<p>CVV/Unicef: Prevenção do suicídio entre jovens</p>
-		</div>
-		<div class="video-item">
-			<iframe src="https://www.youtube.com/embed/w6qQW5neQek" frameborder="0" allowfullscreen></iframe>
-			<p>Diógenes Munhoz: Primeiros cuidados emocionais</p>
-		</div>
-	</section>
-	<footer style="background-color: #003366; color: #fff; padding: 20px 15px; text-align: center; margin-top: 20px;">
-		<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
-			<!-- Coluna 1: Links Úteis -->
-			<div style="flex: 1; min-width: 250px; text-align: left;">
-				<h4 style="color: #FFDD00; font-size: 1.2em; margin-bottom: 10px;"> Links Úteis: </h4>
-				<ul style="list-style: none; padding: 0; margin: 0; font-size: 1em; line-height: 2;">
-					<li>
-						<a href="https://www.instagram.com/bombeirosmg/?theme=dark" target="_blank" style="color: #FFF; text-decoration: none;">
-							<img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Ícone Instagram" style="width: 18px; height: 18px; margin-right: 8px;"> Instagram do CBMMG </a>
-					</li>
-					<li>
-						<a href="https://cvv.org.br/" target="_blank" style="color: #FFF; text-decoration: none;">
-							<img src="https://cdn-icons-png.flaticon.com/512/2538/2538089.png" alt="Ícone CVV" style="width: 18px; height: 18px; margin-right: 8px;"> Centro de Valorização da Vida (CVV) </a>
-					</li>
-					<li>
-						<a href="https://ricmurtapsicologia.github.io/Guia-de-Apoio-a-Saude-Mental/" target="_blank" style="color: #FFF; text-decoration: none;">
-							<img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Ícone Guia" style="width: 18px; height: 18px; margin-right: 8px;"> Guia de Apoio à Saúde Mental </a>
-					</li>
-				</ul>
-			</div>
-			<!-- Coluna 2: Contato -->
-			<div style="flex: 1; min-width: 250px; text-align: left;">
-				<h4 style="color: #FFDD00; font-size: 1.2em; margin-bottom: 10px;"> Contato: </h4>
-				<p style="margin: 5px 0; font-size: 1em;">
-					<strong>Email:</strong> <a href="mailto:richelmy.pinto@bombeiros.mg.gov.br" style="color: #FFF; text-decoration: none;">richelmy.pinto@bombeiros.mg.gov.br</a>
-				</p>
-				<p style="margin: 5px 0; font-size: 1em;">
-					<strong>Telefone:</strong> <a href="tel:+5535984640729" style="color: #FFF; text-decoration: none;">(35) 98464-0729</a>
-				</p>
-			</div>
-			<!-- Coluna 3: Sugestões -->
-			<div style="flex: 1; min-width: 250px; text-align: left;">
-				<h4 style="color: #FFDD00; font-size: 1.2em; margin-bottom: 10px;"> Queremos ouvir você! </h4>
-				<p style="margin: 0; font-size: 1em;">Compartilhe sua opinião em segundos:</p>
-				<a href="https://wa.me/5535984640729?text=Olá,%20tenho%20uma%20sugestão!" target="_blank" style="display: inline-block; background-color: #FFDD00; color: #003366; padding: 10px 15px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 1em; margin-top: 10px;">Contribua Agora</a>
-			</div>
-		</div>
-		<!-- Linha de Direitos Autorais -->
-		<div style="text-align: center; margin-top: 15px; border-top: 1px solid #FFDD00; padding-top: 10px;">
-			<p style="font-size: 0.9em; margin: 0; color: #FFF;"> © 2025 Corpo de Bombeiros Militar de Minas Gerais. Todos os direitos reservados. </p>
-		</div>
-	</footer>
-</body>
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Curso de Atendimento a Tentativas de Suicídio</h1>
+        <h2>Plataforma EAD</h2>
+    </header>
+    <!-- Conteúdo Principal -->
+    <section class="container">
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" alt="Encontro 1">
+            <h3>Encontro 1: Aspectos Gerais</h3>
+            <p>Introdução aos conceitos gerais sobre o comportamento suicida, incluindo dinâmicas psicológicas, psicopatologia e mitos.</p>
+            <a href="https://docs.google.com/presentation/d/1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB/edit?usp=sharing" target="_blank">Acesse a Aula</a>
+        </div>
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/3d/ed/d3/3dedd32bf56863095e45ecd35ced74d6.jpg" alt="Encontro 2">
+            <h3>Encontro 2: Abordagem Técnica</h3>
+            <p>Procedimentos técnicos em ocorrências de tentativas de suicídio, com foco na comunicação e estratégias de abordagem.</p>
+            <a href="https://docs.google.com/presentation/d/1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs/edit?usp=sharing" target="_blank">Acesse a Aula</a>
+        </div>
+    </section>
+    <section class="container">
+        <!-- Encontro 1 -->
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" alt="Encontro 1">
+            <h3>Encontro 1: Aspectos Gerais</h3>
+            <p>Introdução aos conceitos gerais sobre o comportamento suicida, incluindo dinâmicas psicológicas, psicopatologia e mitos.</p>
+            <a href="https://docs.google.com/presentation/d/1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB/edit?usp=sharing" target="_blank">Acesse a Aula</a>
+        </div>
+        <!-- Encontro 2 -->
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/3d/ed/d3/3dedd32bf56863095e45ecd35ced74d6.jpg" alt="Encontro 2">
+            <h3>Encontro 2: Abordagem Técnica</h3>
+            <p>Procedimentos técnicos em ocorrências de tentativas de suicídio, com foco na comunicação e estratégias de abordagem.</p>
+            <a href="https://docs.google.com/presentation/d/1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs/edit?usp=sharing" target="_blank">Acesse a Aula</a>
+        </div>
+        <!-- Encontro 3 -->
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/8f/ef/40/8fef409190b4a29413762c81ecb8bf86.jpg" alt="Encontro 3">
+            <h3>Encontro 3: Aspectos Específicos</h3>
+            <p>Abordagens específicas para diferentes perfis de tentantes, como agressivos, depressivos e psicóticos.</p>
+            <a href="https://docs.google.com/presentation/d/1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp/edit?usp=sharing" target="_blank">Acesse a Aula</a>
+        </div>
+        <!-- Encontro 4 -->
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/f1/f2/4d/f1f24d12b7ee9f2d3415179b6de9089f.jpg" alt="Encontro 4">
+            <h3>Encontro 4: Gerenciamento em ATS</h3>
+            <p>Gerenciamento de ocorrências envolvendo tentativas de suicídio, com foco em planos de ação e uso de métodos.</p>
+            <a href="https://docs.google.com/presentation/d/1_6dVFpv3trAtLAd2dXSrZbMris95jy1B/edit?usp=sharing" target="_blank">Acesse a Aula</a>
+        </div>
+        <!-- Aula Bônus -->
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/1f/68/67/1f6867294fd6c1b101f2fdab626e658b.jpg" alt="Aula Bônus">
+            <h3>Aula Bônus: Prevenção ao Suicídio</h3>
+            <p>Explore estratégias e abordagens para ajudar a prevenir situações de risco.</p>
+            <a href="https://docs.google.com/presentation/d/1BMqWl87S-dgdNcNHAHNe3oLGqc1eCo8d/edit?usp=sharing" target="_blank">Acesse a Aula Bônus</a>
+        </div>
+        <!-- Materiais Complementares -->
+        <div class="box">
+            <img src="https://i.pinimg.com/originals/44/aa/8b/44aa8bcf9d52cf5bc1c14be0d6740bd3.jpg" alt="Materiais Complementares">
+            <h3>Materiais Complementares</h3>
+            <p>Acesse materiais adicionais que complementam o conteúdo das aulas.</p>
+            <button onclick="toggleLinks()">Ver Materiais</button>
+            <div id="hiddenLinks" class="hidden-links">
+                <a href="https://drive.google.com/file/d/19G98R3O4MKzOSiEWULyv13u4e_t_L57p/view?usp=drive_link" target="_blank">Boletim Epidemiológico 1</a>
+                <a href="https://drive.google.com/file/d/1CmZ5pAgDNk7OhPZkM0mgHANYj9PTVaBa/view?usp=drive_link" target="_blank">Boletim Epidemiológico 2</a>
+                <a href="https://drive.google.com/open?id=142Xo_BKypSz7PInWKay5y-8X--O8gYjO&usp=drive_copy" target="_blank">Boletim Epidemiológico 3</a>
+                <a href="https://drive.google.com/file/d/1iQIiE9gXo64CtaxMDdpeoaZ9Jp3TqLW1/view?usp=drive_link" target="_blank">Boletim Epidemiológico 4</a>
+                <a href="https://drive.google.com/file/d/16sftiwkml3TWOt4tMk6dohvt8MZE6zRO/view?usp=drive_link" target="_blank">Instrução Técnica Operacional Nr 30</a>
+                <a href="https://play.google.com/store/apps/details?id=es.aciliainternet.prevensuic&hl=pt_BR" target="_blank">Aplicativo PREVENSUIC</a>
+            </div>
+        </div>
+        <!-- Podcast Girando a Ampulheta -->
+        <div class="box">
+            <img src="https://i.pinimg.com/736x/46/a2/33/46a2335ebc2074b6df9a9774ce9cfd5d.jpg" alt="Girando a Ampulheta">
+            <h3>Projeto Girando a Ampulheta da Vida</h3>
+            <p>Explore o material complementar desenvolvido para enriquecer seus conhecimentos.</p>
+            <a href="https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/" target="_blank">Acesse o Projeto Agora</a>
+        </div>
+    </section>
+    <section class="videos-box">
+        <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/gJBlY3opAVU" frameborder="0" allowfullscreen></iframe>
+            <p>Suicídio explicado no Nerdologia</p>
+        </div>
+        <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/N88STTQVaE8" frameborder="0" allowfullscreen></iframe>
+            <p>O que evitar na prevenção do suicídio</p>
+        </div>
+        <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/VW3mvMz5AXs" frameborder="0" allowfullscreen></iframe>
+            <p>Quebrando tabus sobre suicídio</p>
+        </div>
+        <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/YmIIiuaJgkk" frameborder="0" allowfullscreen></iframe>
+            <p>Situações que levam ao suicídio</p>
+        </div>
+        <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/BbJi72PmDXI" frameborder="0" allowfullscreen></iframe>
+            <p>Prevenção do suicídio entre jovens</p>
+        </div>
+        <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/w6qQW5neQek" frameborder="0" allowfullscreen></iframe>
+            <p>Primeiros cuidados emocionais</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 Corpo de Bombeiros Militar de Minas Gerais. Todos os direitos reservados.</p>
+    </footer>
 
+    <script>
+        // Função para alternar a exibição dos materiais complementares
+        function toggleLinks() {
+            const links = document.getElementById("hiddenLinks");
+            if (links.style.display === "none" || links.style.display === "") {
+                links.style.display = "block";
+            } else {
+                links.style.display = "none";
+            }
+        }
+
+        // Scroll suave para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute("href")).scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+</body>
 </html>
