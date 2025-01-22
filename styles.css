@@ -6,7 +6,7 @@ body {
     background: url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #333;
-    overflow-x: hidden; /* Evita rolagem horizontal */
+    overflow-x: hidden; /* Impede rolagem horizontal */
 }
 
 /* Cabeçalho */
@@ -120,7 +120,7 @@ h2 {
 
 .video-item iframe {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Garante que o vídeo seja quadrado */
+    aspect-ratio: 1 / 1.618; /* Proporção áurea */
     border-radius: 8px;
     transition: transform 0.3s ease;
 }
@@ -197,7 +197,7 @@ footer a:hover {
 
     .card img,
     .video-item iframe {
-        height: auto; /* Garantir que as imagens e vídeos se ajustem corretamente */
+        height: auto; /* Ajusta imagens e vídeos para não ultrapassarem o limite */
     }
 
     .videos-box {
