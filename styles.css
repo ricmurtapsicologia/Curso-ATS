@@ -119,8 +119,8 @@ h2 {
 }
 
 .video-item iframe {
-    width: 100%;
-    aspect-ratio: 1 / 1.618; /* Proporção áurea */
+    width: 100%; /* Mantém o vídeo responsivo */
+    height: 200px; /* Altura fixa para manter proporção */
     border-radius: 8px;
     transition: transform 0.3s ease;
 }
