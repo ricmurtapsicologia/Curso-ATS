@@ -34,8 +34,9 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: 100%; /* Ajuste para evitar overflow */
     padding: 0 20px;
+    box-sizing: border-box; /* Garante cálculo correto com padding */
 }
 
 .card {
@@ -51,10 +52,10 @@ h2 {
 }
 
 .card img {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Garante que a imagem seja quadrada */
+    width: 100%; /* Mantém imagem responsiva */
+    aspect-ratio: 1 / 1; /* Garante proporção quadrada */
     object-fit: cover;
-    object-position: center; /* Centraliza a imagem */
+    object-position: center;
     border-radius: 8px;
     transition: transform 0.3s ease;
 }
@@ -105,8 +106,9 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     margin: 40px auto;
-    max-width: 1200px;
+    max-width: 100%; /* Ajuste para evitar overflow */
     padding: 0 20px;
+    box-sizing: border-box; /* Garante cálculo correto com padding */
 }
 
 .video-item {
@@ -120,9 +122,10 @@ h2 {
 
 .video-item iframe {
     width: 100%; /* Mantém o vídeo responsivo */
-    height: 200px; /* Altura fixa para manter proporção */
+    height: 300px; /* Altura fixa para manter proporção */
     border-radius: 8px;
     transition: transform 0.3s ease;
+    max-width: 100%; /* Evita transbordamento horizontal */
 }
 
 .video-item:hover iframe {
