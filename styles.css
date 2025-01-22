@@ -52,9 +52,9 @@ h2 {
 
 .card img {
     width: 100%;
-    height: 300px; /* Tornar imagem quadrada */
+    aspect-ratio: 1 / 1; /* Garante que a imagem seja quadrada */
     object-fit: cover;
-    object-position: center; /* Centralizar imagem */
+    object-position: center; /* Centraliza a imagem */
     border-radius: 8px;
     transition: transform 0.3s ease;
 }
@@ -97,6 +97,47 @@ h2 {
 .card .btn:hover {
     background-color: #002244;
     transform: translateY(-2px);
+}
+
+/* Seção de Vídeos */
+.videos-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.video-item {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item iframe {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Garante que o vídeo seja quadrado */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.video-item:hover iframe {
+    transform: scale(1.05);
+}
+
+.video-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.video-item p {
+    color: #333;
+    font-size: 1em;
+    margin-top: 10px;
 }
 
 /* Botões Dinâmicos para Materiais Complementares */
@@ -155,7 +196,7 @@ footer a:hover {
 
     .card img,
     .video-item iframe {
-        height: 200px; /* Ajustar altura das imagens em dispositivos móveis */
+        height: auto; /* Garantir que as imagens e vídeos se ajustem corretamente */
     }
 
     .videos-box {
