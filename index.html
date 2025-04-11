@@ -2,19 +2,21 @@
 <html lang="pt-BR">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta property="og:title" content="Curso de Atendimento a Tentativas de Suicídio - Plataforma EAD">
-	<meta property="og:description" content="Participe do nosso curso online de Atendimento a Tentativas de Suicídio. Aprenda técnicas fundamentais para lidar com situações de emergência.">
-	<meta property="og:image" content="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg">
-	<meta property="og:url" content="https://ricmurtapsicologia.github.io/Curso-ATS/">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta property="og:title" content="Curso de Atendimento a Tentativas de Suicídio - Plataforma EAD" />
+	<meta property="og:description" content="Participe do nosso curso online de Atendimento a Tentativas de Suicídio. Aprenda técnicas fundamentais para lidar com situações de emergência." />
+	<meta property="og:image" content="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" />
+	<meta property="og:url" content="https://ricmurtapsicologia.github.io/Curso-ATS/" />
 	<title>Curso de Atendimento a Tentativas de Suicídio</title>
 	<!-- Favicon: usando a imagem de pré-visualização do WhatsApp -->
-	<link rel="icon" href="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg">
+	<link rel="icon" href="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" />
 	<!-- CSS Consolidado -->
 	<style>
-		/* Reset e Variáveis */
-		*, *::before, *::after {
+		/* Reset, Base e Variáveis */
+		*,
+		*::before,
+		*::after {
 		  margin: 0;
 		  padding: 0;
 		  box-sizing: border-box;
@@ -25,12 +27,12 @@
 		  --header-bg: rgba(0, 0, 0, 0.6);
 		  --header-text: #fff;
 		  --card-bg: rgba(255, 255, 255, 0.95);
-		  --btn-bg: #003366; /* azul dos botões */
+		  --btn-bg: #003366;
 		  --btn-bg-hover: #002244;
-		  --link-bg: #FF7F0E;
-		  --link-bg-hover: #E0660C;
+		  --link-bg: #ff7f0e;
+		  --link-bg-hover: #e0660c;
 		  --footer-bg: rgba(0, 0, 0, 0.8);
-		  --footer-accent: #FFDD00;
+		  --footer-accent: #ffdd00;
 		  --body-bg: url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg');
 		}
 		html {
@@ -66,7 +68,7 @@
 		  margin-bottom: 20px;
 		}
 		
-		/* ONBOARDING */
+		/* ONBOARDING - adicionando papel de diálogo para melhor acessibilidade */
 		#onboarding {
 		  display: none;
 		  position: fixed;
@@ -225,7 +227,6 @@
 		  background-color: var(--link-bg-hover);
 		  transform: translateY(-2px);
 		}
-		/* Indicador no Botão dos Materiais */
 		#materials-btn {
 		  position: relative;
 		}
@@ -249,7 +250,7 @@
 		  background-color: var(--card-bg);
 		  border-radius: 8px;
 		  padding: 15px;
-		  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+		  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 		  transition: transform 0.3s ease, box-shadow 0.3s ease;
 		  display: flex;
 		  flex-direction: column;
@@ -340,39 +341,41 @@
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-38D052F915"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){ dataLayer.push(arguments); }
-		gtag('js', new Date());
-		gtag('config', 'G-38D052F915');
+		function gtag() {
+		  dataLayer.push(arguments);
+		}
+		gtag("js", new Date());
+		gtag("config", "G-38D052F915");
 	</script>
 </head>
 
 <body>
 	<!-- SPLASH SCREEN -->
-	<div id="splash-screen">
+	<div id="splash-screen" role="status" aria-live="polite">
 		<h1>Bem-vindo(a) ao Curso de Atendimento a Tentativas de Suicídio</h1>
 		<p>Aguarde...</p>
 	</div>
 	<!-- ONBOARDING -->
-<div id="onboarding">
-	<div class="onboarding-content">
-		<div class="onboarding-slide active" id="slide-1">
-			<h2>Bem-vindo(a)!</h2>
-			<p>Material complementar da disciplina de ATS. Aprofunde seus conhecimentos!</p>
+	<div id="onboarding" role="dialog" aria-modal="true" aria-labelledby="onboarding-heading">
+		<div class="onboarding-content">
+			<div class="onboarding-slide active" id="slide-1">
+				<h2 id="onboarding-heading">Bem-vindo(a)!</h2>
+				<p>Material complementar da disciplina de ATS. Aprofunde seus conhecimentos!</p>
+			</div>
+			<div class="onboarding-slide" id="slide-2">
+				<h2>O que você encontrará aqui?</h2>
+				<p>Aulas, vídeos e recursos extras para aprender.</p>
+			</div>
+			<div class="onboarding-slide" id="slide-3">
+				<h2>Pronto para começar?</h2>
+				<p>Ao concluir, você terá acesso à plataforma completa.</p>
+			</div>
 		</div>
-		<div class="onboarding-slide" id="slide-2">
-			<h2>O que você encontrará aqui?</h2>
-			<p>Aulas, vídeos e recursos extras para aprender.</p>
-		</div>
-		<div class="onboarding-slide" id="slide-3">
-			<h2>Pronto para começar?</h2>
-			<p>Ao concluir, você terá acesso à plataforma completa.</p>
+		<div class="onboarding-buttons">
+			<button id="skip-btn">Pular</button>
+			<button id="next-btn">Próximo</button>
 		</div>
 	</div>
-	<div class="onboarding-buttons">
-		<button id="skip-btn">Pular</button>
-		<button id="next-btn">Próximo</button>
-	</div>
-</div>
 	<!-- PÁGINA PRINCIPAL -->
 	<header>
 		<h1>Curso de Atendimento a Tentativas de Suicídio</h1>
@@ -381,49 +384,49 @@
 	<main>
 		<!-- Cards -->
 		<section class="container">
-			<div class="card">
+			<article class="card">
 				<div class="card-image">
-					<img src="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" alt="Encontro 1">
+					<img src="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" alt="Encontro 1: Aspectos Gerais" />
 				</div>
 				<h3>Encontro 1: Aspectos Gerais</h3>
-				<p>Introdução aos conceitos gerais sobre o comportamento suicida, incluindo dinâmicas psicológicas, psicopatologia e mitos.</p>
+				<p> Introdução aos conceitos gerais sobre o comportamento suicida, incluindo dinâmicas psicológicas, psicopatologia e mitos. </p>
 				<a href="https://docs.google.com/presentation/d/1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB/edit?usp=sharing" target="_blank" class="btn">Acesse a Aula</a>
-			</div>
-			<div class="card">
+			</article>
+			<article class="card">
 				<div class="card-image">
-					<img src="https://i.pinimg.com/originals/3d/ed/d3/3dedd32bf56863095e45ecd35ced74d6.jpg" alt="Encontro 2">
+					<img src="https://i.pinimg.com/originals/3d/ed/d3/3dedd32bf56863095e45ecd35ced74d6.jpg" alt="Encontro 2: Abordagem Técnica" />
 				</div>
 				<h3>Encontro 2: Abordagem Técnica</h3>
-				<p>Procedimentos técnicos em ocorrências de tentativas de suicídio, com foco na comunicação e estratégias de abordagem.</p>
+				<p> Procedimentos técnicos em ocorrências de tentativas de suicídio, com foco na comunicação e estratégias de abordagem. </p>
 				<a href="https://docs.google.com/presentation/d/1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs/edit?usp=sharing" target="_blank" class="btn">Acesse a Aula</a>
-			</div>
-			<div class="card">
+			</article>
+			<article class="card">
 				<div class="card-image">
-					<img src="https://i.pinimg.com/originals/8f/ef/40/8fef409190b4a29413762c81ecb8bf86.jpg" alt="Encontro 3">
+					<img src="https://i.pinimg.com/originals/8f/ef/40/8fef409190b4a29413762c81ecb8bf86.jpg" alt="Encontro 3: Aspectos Específicos" />
 				</div>
 				<h3>Encontro 3: Aspectos Específicos</h3>
-				<p>Abordagens específicas para diferentes perfis de tentantes, como agressivos, depressivos e psicóticos.</p>
+				<p> Abordagens específicas para diferentes perfis de tentantes, como agressivos, depressivos e psicóticos. </p>
 				<a href="https://docs.google.com/presentation/d/1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp/edit?usp=sharing" target="_blank" class="btn">Acesse a Aula</a>
-			</div>
-			<div class="card">
+			</article>
+			<article class="card">
 				<div class="card-image">
-					<img src="https://i.pinimg.com/originals/f1/f2/4d/f1f24d12b7ee9f2d3415179b6de9089f.jpg" alt="Encontro 4">
+					<img src="https://i.pinimg.com/originals/f1/f2/4d/f1f24d12b7ee9f2d3415179b6de9089f.jpg" alt="Encontro 4: Gerenciamento em ATS" />
 				</div>
 				<h3>Encontro 4: Gerenciamento em ATS</h3>
-				<p>Gerenciamento de ocorrências envolvendo tentativas de suicídio, com foco em planos de ação e uso de métodos.</p>
+				<p> Gerenciamento de ocorrências envolvendo tentativas de suicídio, com foco em planos de ação e uso de métodos. </p>
 				<a href="https://docs.google.com/presentation/d/1_6dVFpv3trAtLAd2dXSrZbMris95jy1B/edit?usp=sharing" target="_blank" class="btn">Acesse a Aula</a>
-			</div>
-			<div class="card">
+			</article>
+			<article class="card">
 				<div class="card-image">
-					<img src="https://i.pinimg.com/originals/1f/68/67/1f6867294fd6c1b101f2fdab626e658b.jpg" alt="Aula Bônus">
+					<img src="https://i.pinimg.com/originals/1f/68/67/1f6867294fd6c1b101f2fdab626e658b.jpg" alt="Aula Bônus: Prevenção ao Suicídio" />
 				</div>
 				<h3>Aula Bônus: Prevenção ao Suicídio</h3>
-				<p>Explore estratégias e abordagens para ajudar a prevenir situações de risco.</p>
+				<p> Explore estratégias e abordagens para ajudar a prevenir situações de risco. </p>
 				<a href="https://docs.google.com/presentation/d/1BMqWl87S-dgdNcNHAHNe3oLGqc1eCo8d/edit?usp=sharing" target="_blank" class="btn">Acesse a Aula Bônus</a>
-			</div>
-			<div class="card">
+			</article>
+			<article class="card">
 				<div class="card-image">
-					<img src="https://i.pinimg.com/originals/44/aa/8b/44aa8bcf9d52cf5bc1c14be0d6740bd3.jpg" alt="Materiais Complementares">
+					<img src="https://i.pinimg.com/originals/44/aa/8b/44aa8bcf9d52cf5bc1c14be0d6740bd3.jpg" alt="Materiais Complementares" />
 				</div>
 				<h3>Materiais Complementares</h3>
 				<p>Acesse materiais adicionais que complementam o conteúdo das aulas.</p>
@@ -436,45 +439,45 @@
 					<a href="#" target="_blank">Instrução Técnica Operacional Nr 30</a>
 					<a href="#" target="_blank">Aplicativo PREVENSUIC</a>
 				</div>
-			</div>
-			<div class="card">
+			</article>
+			<article class="card">
 				<div class="card-image">
-					<img src="https://i.pinimg.com/736x/46/a2/33/46a2335ebc2074b6df9a9774ce9cfd5d.jpg" alt="Girando a Ampulheta">
+					<img src="https://i.pinimg.com/736x/46/a2/33/46a2335ebc2074b6df9a9774ce9cfd5d.jpg" alt="Projeto Girando a Ampulheta da Vida" />
 				</div>
 				<h3>Projeto Girando a Ampulheta da Vida</h3>
-				<p>Explore o material complementar desenvolvido para enriquecer seus conhecimentos.</p>
+				<p> Explore o material complementar desenvolvido para enriquecer seus conhecimentos. </p>
 				<a href="https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/" target="_blank" class="btn">Acesse o Projeto Agora</a>
-			</div>
+			</article>
 		</section>
 		<!-- Seção de Vídeos -->
 		<section class="videos-box">
-			<div class="video-item">
+			<article class="video-item">
 				<iframe src="https://www.youtube.com/embed/gJBlY3opAVU" frameborder="0" allowfullscreen></iframe>
 				<p>Suicídio explicado no Nerdologia</p>
-			</div>
-			<div class="video-item">
+			</article>
+			<article class="video-item">
 				<iframe src="https://www.youtube.com/embed/N88STTQVaE8" frameborder="0" allowfullscreen></iframe>
 				<p>CVV/Unicef: O que evitar na prevenção do suicídio</p>
-			</div>
-			<div class="video-item">
+			</article>
+			<article class="video-item">
 				<iframe src="https://www.youtube.com/embed/VW3mvMz5AXs" frameborder="0" allowfullscreen></iframe>
 				<p>CVV/Unicef: Quebrando tabus sobre suicídio</p>
-			</div>
-			<div class="video-item">
+			</article>
+			<article class="video-item">
 				<iframe src="https://www.youtube.com/embed/YmIIiuaJgkk" frameborder="0" allowfullscreen></iframe>
 				<p>CVV/Unicef: Situações que levam ao suicídio</p>
-			</div>
-			<div class="video-item">
+			</article>
+			<article class="video-item">
 				<iframe src="https://www.youtube.com/embed/BbJi72PmDXI" frameborder="0" allowfullscreen></iframe>
 				<p>CVV/Unicef: Prevenção do suicídio entre jovens</p>
-			</div>
-			<div class="video-item">
+			</article>
+			<article class="video-item">
 				<iframe src="https://www.youtube.com/embed/w6qQW5neQek" frameborder="0" allowfullscreen></iframe>
 				<p>Diógenes Munhoz: Primeiros cuidados emocionais</p>
-			</div>
+			</article>
 		</section>
 	</main>
-	<!-- Rodapé -->
+	<!-- RODAPÉ -->
 	<footer>
 		<div class="footer-container">
 			<!-- Coluna 1: Links Úteis -->
@@ -483,23 +486,29 @@
 				<ul>
 					<li>
 						<a href="https://www.instagram.com/bombeirosmg/?theme=dark" target="_blank">
-							<img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Ícone Instagram" style="width: 18px; height: 18px; margin-right: 8px;"> Instagram do CBMMG </a>
+							<img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Ícone Instagram" style="width: 18px; height: 18px; margin-right: 8px;" /> Instagram do CBMMG </a>
 					</li>
 					<li>
 						<a href="https://cvv.org.br/" target="_blank">
-							<img src="https://cdn-icons-png.flaticon.com/512/2538/2538089.png" alt="Ícone CVV" style="width: 18px; height: 18px; margin-right: 8px;"> Centro de Valorização da Vida (CVV) </a>
+							<img src="https://cdn-icons-png.flaticon.com/512/2538/2538089.png" alt="Ícone CVV" style="width: 18px; height: 18px; margin-right: 8px;" /> Centro de Valorização da Vida (CVV) </a>
 					</li>
 					<li>
 						<a href="https://ricmurtapsicologia.github.io/Guia-de-Apoio-a-Saude-Mental/" target="_blank">
-							<img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Ícone Guia" style="width: 18px; height: 18px; margin-right: 8px;"> Guia de Apoio à Saúde Mental </a>
+							<img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Ícone Guia" style="width: 18px; height: 18px; margin-right: 8px;" /> Guia de Apoio à Saúde Mental </a>
 					</li>
 				</ul>
 			</div>
 			<!-- Coluna 2: Contato -->
 			<div class="footer-col">
 				<h4>Contato:</h4>
-				<p><strong>Email:</strong> <a href="mailto:richelmy.pinto@bombeiros.mg.gov.br">richelmy.pinto@bombeiros.mg.gov.br</a></p>
-				<p><strong>Telefone:</strong> <a href="tel:+5535984640729">(35) 98464-0729</a></p>
+				<p>
+					<strong>Email:</strong>
+					<a href="mailto:richelmy.pinto@bombeiros.mg.gov.br">richelmy.pinto@bombeiros.mg.gov.br</a>
+				</p>
+				<p>
+					<strong>Telefone:</strong>
+					<a href="tel:+5535984640729">(35) 98464-0729</a>
+				</p>
 			</div>
 			<!-- Coluna 3: Sugestões -->
 			<div class="footer-col">
@@ -509,74 +518,69 @@
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p>© 2025 Corpo de Bombeiros Militar de Minas Gerais. Todos os direitos reservados.</p>
+			<p> © 2025 Corpo de Bombeiros Militar de Minas Gerais. Todos os direitos reservados. </p>
 		</div>
 	</footer>
 	<!-- JavaScript Moderno -->
 	<script>
-		// SPLASH SCREEN: aguarda 1.5s e exibe o Onboarding
-		window.addEventListener('load', () => {
+		// SPLASH SCREEN: Ao carregar a página, aguarda 1.5s para ocultar a splash e exibir o onboarding
+		window.addEventListener("load", () => {
 		  setTimeout(() => {
-		    document.getElementById('splash-screen').style.display = 'none';
-		    document.getElementById('onboarding').style.display = 'flex';
+		    document.getElementById("splash-screen").style.display = "none";
+		    document.getElementById("onboarding").style.display = "flex";
 		  }, 1500);
 		});
 		
-		// ONBOARDING
-		const slides = document.querySelectorAll('.onboarding-slide');
+		// ONBOARDING: Uso de arrow functions e constantes/let para controle dos slides
+		const slides = document.querySelectorAll(".onboarding-slide");
 		let currentSlide = 0;
-		const nextBtn = document.getElementById('next-btn');
-		const skipBtn = document.getElementById('skip-btn');
+		const nextBtn = document.getElementById("next-btn");
+		const skipBtn = document.getElementById("skip-btn");
 		
-		function showSlide(index) {
+		const showSlide = (index) => {
 		  slides.forEach((slide, i) => {
-		    slide.classList.remove('active');
-		    if (i === index) {
-		      slide.classList.add('active');
-		    }
+		    slide.classList.toggle("active", i === index);
 		  });
-		}
+		};
 		
-		nextBtn.addEventListener('click', () => {
+		nextBtn.addEventListener("click", () => {
 		  currentSlide++;
 		  if (currentSlide >= slides.length) {
-		    // Fim do onboarding
-		    document.getElementById('onboarding').style.display = 'none';
+		    document.getElementById("onboarding").style.display = "none";
 		  } else {
 		    showSlide(currentSlide);
 		  }
 		});
 		
-		skipBtn.addEventListener('click', () => {
-		  // Fecha onboarding
-		  document.getElementById('onboarding').style.display = 'none';
+		skipBtn.addEventListener("click", () => {
+		  document.getElementById("onboarding").style.display = "none";
 		});
 		
-		// MATERIAIS COMPLEMENTARES: Remover rotação do botão
-		document.addEventListener('DOMContentLoaded', () => {
-		  const materialsBtn = document.getElementById('materials-btn');
-		  const materialsLinks = document.getElementById('materials-links');
+		// MATERIAIS COMPLEMENTARES: Toggle na exibição dos links
+		document.addEventListener("DOMContentLoaded", () => {
+		  const materialsBtn = document.getElementById("materials-btn");
+		  const materialsLinks = document.getElementById("materials-links");
 		
-		  materialsBtn.addEventListener('click', () => {
-		    materialsLinks.classList.toggle('active');
-		    if (materialsLinks.classList.contains('active')) {
-		      materialsLinks.style.display = 'block';
-		    } else {
-		      materialsLinks.style.display = 'none';
-		    }
+		  materialsBtn.addEventListener("click", () => {
+		    materialsLinks.classList.toggle("active");
+		    materialsLinks.style.display = materialsLinks.classList.contains("active")
+		      ? "block"
+		      : "none";
 		  });
 		});
 	</script>
 	<!--Start of Tawk.to Script-->
 	<script type="text/javascript">
-		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-		(function(){
-		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-		s1.async=true;
-		s1.src='https://embed.tawk.to/67e3528ffee510190b03d2cc/1in7vl05n';
-		s1.charset='UTF-8';
-		s1.setAttribute('crossorigin','*');
-		s0.parentNode.insertBefore(s1,s0);
+		var Tawk_API = Tawk_API || {},
+		  Tawk_LoadStart = new Date();
+		(function () {
+		  var s1 = document.createElement("script"),
+		    s0 = document.getElementsByTagName("script")[0];
+		  s1.async = true;
+		  s1.src = "https://embed.tawk.to/67e3528ffee510190b03d2cc/1in7vl05n";
+		  s1.charset = "UTF-8";
+		  s1.setAttribute("crossorigin", "*");
+		  s0.parentNode.insertBefore(s1, s0);
 		})();
 	</script>
 	<!--End of Tawk.to Script-->
