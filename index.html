@@ -30,33 +30,19 @@
         radial-gradient(1200px 600px at 100% -10%,rgba(255,140,0,.25),transparent 60%),
         radial-gradient(1200px 600px at -10% 110%,rgba(0,51,102,.25),transparent 60%),
         linear-gradient(180deg,#0b1220 0%,#0f172a 60%,#0b1220 100%);
-      min-height:100vh;
-      overflow-x:hidden;
+      min-height:100vh; overflow-x:hidden;
     }
 
     /* ===== Paleta (dark/light) ===== */
     :root{
-      --brand:#ff7f0e;
-      --brand-2:#ff9d47;
-      --primary:#003366;
-      --glass:rgba(255,255,255,.06);
-      --glass-2:rgba(255,255,255,.10);
-      --stroke:rgba(255,255,255,.14);
-      --text-1:#eef2ff;
-      --text-2:#cbd5e1;
-      --text-3:#94a3b8;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:16px;
-      --backdrop: blur(10px);
+      --brand:#ff7f0e; --brand-2:#ff9d47; --primary:#003366;
+      --glass:rgba(255,255,255,.06); --glass-2:rgba(255,255,255,.10);
+      --stroke:rgba(255,255,255,.14); --text-1:#eef2ff; --text-2:#cbd5e1; --text-3:#94a3b8;
+      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px; --backdrop: blur(10px);
     }
     .light{
-      --glass:#ffffffcc;
-      --glass-2:#fff;
-      --stroke:rgba(0,0,0,.07);
-      --text-1:#0f172a;
-      --text-2:#334155;
-      --text-3:#64748b;
-      background:#f6f7fb;
+      --glass:#ffffffcc; --glass-2:#fff; --stroke:rgba(0,0,0,.07);
+      --text-1:#0f172a; --text-2:#334155; --text-3:#64748b; background:#f6f7fb;
     }
 
     /* ===== Barra de progresso do scroll ===== */
@@ -65,16 +51,12 @@
       transform-origin:left;transform:scaleX(0);z-index:9999;box-shadow:0 0 10px rgba(255,193,120,.6)
     }
 
-    /* ===== Splash (centralizado em desktop e mobile) ===== */
-    #splash{
-      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;
-      background:linear-gradient(180deg,#001a33,#000814);color:#fff;z-index:9999;text-align:center;padding:16px
-    }
+    /* ===== Splash ===== */
+    #splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;
+      background:linear-gradient(180deg,#001a33,#000814);color:#fff;z-index:9999;text-align:center;padding:16px}
     #splash h1{font-size:1.6rem;margin-bottom:12px}
-    .spinner{
-      width:44px;height:44px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;
-      border-radius:50%;animation:spin .9s linear infinite;margin-top:10px
-    }
+    .spinner{width:44px;height:44px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;
+      animation:spin .9s linear infinite;margin-top:10px}
     @keyframes spin{to{transform:rotate(360deg)}}
 
     /* ===== Onboarding ===== */
@@ -93,15 +75,13 @@
     .brand{display:flex;align-items:center;gap:10px;color:var(--text-1);font-weight:800}
     .brand i{color:var(--brand)}
     .nav-links{display:flex;gap:18px}
-    .nav-links a{
-      color:var(--text-1); /* sempre visível nos dois temas */
-      text-decoration:none;font-weight:700;font-size:.95rem;padding:8px 10px;border-radius:10px
-    }
+    .nav-links a{color:var(--text-1);text-decoration:none;font-weight:700;font-size:.95rem;padding:8px 10px;border-radius:10px}
     .nav-links a:hover{background:var(--glass)}
     .theme-toggle{background:transparent;border:1px solid var(--stroke);color:var(--text-1);border-radius:12px;padding:8px 10px}
 
     /* ===== Hero ===== */
-    .hero{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--stroke);background:url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg') center/cover no-repeat}
+    .hero{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--stroke);
+      background:url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg') center/cover no-repeat}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,23,.75),rgba(2,8,23,.85));z-index:-1}
     .hero-inner{max-width:1200px;margin:auto;padding:72px 20px 56px;display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:center}
     .hero h1{color:#fff;font-size:clamp(2rem,1.2rem + 2.5vw,3rem);line-height:1.1;margin-bottom:10px}
@@ -110,30 +90,21 @@
 
     .hero-card{background:var(--glass);backdrop-filter:var(--backdrop);border:1px solid var(--stroke);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
     .hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
-    .hero-kpi{background:var(--glass-2);border:1px solid var(--stroke);border-radius:12px;padding:14px;text-align:center}
     .hero-kpi small{color:var(--text-3);display:block}
+    .hero-kpi{background:var(--glass-2);border:1px solid var(--stroke);border-radius:12px;padding:14px;text-align:center}
     .hero-kpi strong{color:var(--text-1);font-size:1.15rem}
 
-    /* ===== Termômetro de progresso ===== */
+    /* ===== Termômetro (4 módulos) ===== */
     .progress-wrap{margin-top:12px;background:var(--glass-2);border:1px solid var(--stroke);border-radius:12px;padding:12px}
     .progress-label{display:flex;justify-content:space-between;color:var(--text-2);font-weight:700;margin-bottom:6px}
     .thermo{height:12px;border-radius:999px;background:linear-gradient(90deg,#2d3748,#2d3748);position:relative;overflow:hidden}
-    .thermo::after{
-      content:"";position:absolute;left:0;top:0;height:100%;width:0%;
-      background:linear-gradient(90deg,#ff7f0e,#ffd166);transition:width .35s ease
-    }
+    .thermo::after{content:"";position:absolute;left:0;top:0;height:100%;width:0%;background:linear-gradient(90deg,#ff7f0e,#ffd166);transition:width .35s ease}
 
     /* ===== Seções ===== */
     .container{max-width:1200px;margin:auto;padding:40px 20px}
     .section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:16px}
     .section-head h2{color:var(--text-1);font-size:1.6rem}
     .section-head p{color:var(--text-3)}
-
-    /* Busca/ficlros */
-    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-    .input{background:var(--glass);border:1px solid var(--stroke);border-radius:12px;color:var(--text-1);padding:10px 12px;min-width:260px;outline:0}
-    .chip{border:1px solid var(--stroke);background:var(--glass);color:var(--text-1);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:700}
-    .chip[aria-pressed="true"]{background:var(--brand);color:#112;border-color:transparent}
 
     /* Cards */
     .grid{display:grid;gap:20px;grid-template-columns:repeat(12,1fr)}
@@ -147,6 +118,10 @@
     .content p{color:var(--text-2);font-size:.96rem;line-height:1.45}
     .actions{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
     .btn.small{padding:8px 12px;border-radius:10px;font-size:.92rem}
+
+    /* Foco no rosto (Módulos 1 e 2) */
+    .card[data-module="1"] .media img,
+    .card[data-module="2"] .media img{object-position:center 18%}
 
     /* Materiais */
     details.materials{background:var(--glass);border:1px solid var(--stroke);border-radius:var(--radius);padding:14px 16px;margin-top:8px}
@@ -162,27 +137,30 @@
 
     /* Footer */
     footer{margin-top:20px;background:linear-gradient(180deg,rgba(2,8,23,.9),rgba(2,8,23,.95));border-top:1px solid var(--stroke);color:#e5e7eb}
-    .footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+    .footer-grid>div{min-width:0}
     footer h4{color:#ffe08a;margin-bottom:8px}
     footer a{color:#fff;text-decoration:none}
     footer a:hover{color:#ffe08a}
-    .footer-bottom{margin-top:10px;padding-top:12px;border-top:1px dashed var(--stroke);color:var(--text-3)}
+    .footer-bottom{margin-top:10px;padding-top:12px;border-top:1px dashed var(--stroke);color:var(--text-3);text-align:center}
+    .footer-grid .cta{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+    .footer-grid .cta .btn{display:inline-flex;margin:0}
 
     /* FABs */
-    .fab{
-      position:fixed;right:18px;bottom:18px;z-index:9990;background:linear-gradient(180deg,#25d366,#1fa753);color:#042;
-      display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:var(--shadow)
-    }
-    .fab-danger{
-      right:auto;left:18px;background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff
-    }
+    .fab{position:fixed;right:18px;bottom:18px;z-index:9990;background:linear-gradient(180deg,#25d366,#1fa753);color:#042;
+      display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:var(--shadow)}
+    .fab-danger{right:auto;left:18px;background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff}
+    .to-top{position:fixed;right:18px;bottom:84px;z-index:9989;background:var(--glass);backdrop-filter:var(--backdrop);
+      border:1px solid var(--stroke);color:var(--text-1);padding:8px 10px;border-radius:12px;font-weight:800;cursor:pointer}
 
     /* Responsivo */
     @media (max-width: 980px){
       .hero-inner{grid-template-columns:1fr}
       .card,.video-grid .card{grid-column:span 12}
       .footer-grid{grid-template-columns:1fr}
-      .nav-links{display:none} /* simples para mobile */
+      .nav-links{display:none}
+      .hero p{font-size:.98rem}
+      .container{padding:28px 16px}
     }
   </style>
 
@@ -197,17 +175,17 @@
 <body>
   <div class="progress-bar" id="progress"></div>
 
-  <!-- Splash CENTRADO -->
+  <!-- Splash -->
   <div id="splash" role="status" aria-live="polite">
     <h1>Carregando plataforma…</h1>
     <div class="spinner" aria-hidden="true"></div>
   </div>
 
-  <!-- Onboarding (1ª visita) -->
+  <!-- Onboarding -->
   <div id="onboard" role="dialog" aria-modal="true" aria-labelledby="ob-title">
     <div class="onboard-card" role="document">
       <h3 id="ob-title">Bem-vindo(a) ao Curso ATS</h3>
-      <p>Este ambiente reúne aulas, materiais e vídeos. Use a <strong>busca</strong> e os <strong>filtros</strong> para localizar rápido.</p>
+      <p>Este ambiente reúne aulas, materiais e vídeos. Use os cards abaixo ou acesse os materiais complementares.</p>
       <div class="o-actions">
         <button class="btn ghost" id="ob-skip"><i class="ri-skip-forward-mini-fill"></i> Pular</button>
         <button class="btn" id="ob-next">Entendi</button>
@@ -243,31 +221,22 @@
         <p>Conteúdo estruturado para profissionais: fundamentos, condução em campo, prevenção e integração pós-ocorrência.</p>
         <div class="actions">
           <a class="btn" href="#videos"><i class="ri-movie-line"></i> Vídeos</a>
-          <a class="btn ghost" href="#materiais"><i class="ri-archive-2-line"></i> Materiais</a>
+          <a class="btn ghost" href="#materiais"><i class="ri-archive-2-line"></i> Materiais Complementares</a>
         </div>
       </div>
 
       <aside class="hero-card" aria-label="Indicadores & progresso">
         <div class="hero-grid">
-          <div class="hero-kpi">
-            <small>Módulos</small><strong id="kpi-modulos">6 módulos</strong>
-          </div>
-          <div class="hero-kpi">
-            <small>Conteúdos extras</small><strong>+ materiais</strong>
-          </div>
-          <div class="hero-kpi">
-            <small>Formato</small><strong>EAD</strong>
-          </div>
-          <div class="hero-kpi">
-            <small>Recurso</small><strong>Vídeos selecionados</strong>
-          </div>
+          <div class="hero-kpi"><small>Módulos</small><strong id="kpi-modulos">4 módulos</strong></div>
+          <div class="hero-kpi"><small>Conteúdos extras</small><strong>Bônus + Projeto</strong></div>
+          <div class="hero-kpi"><small>Formato</small><strong>EAD</strong></div>
+          <div class="hero-kpi"><small>Recurso</small><strong>Vídeos selecionados</strong></div>
         </div>
-
         <!-- Termômetro -->
         <div class="progress-wrap">
           <div class="progress-label">
             <span><i class="ri-bar-chart-box-line"></i> Progresso dos módulos</span>
-            <span><b id="progressLabel">0</b>/6</span>
+            <span><b id="progressLabel">0</b>/4</span>
           </div>
           <div class="thermo" id="thermo"></div>
         </div>
@@ -281,21 +250,19 @@
       <div class="section-head">
         <div>
           <h2><i class="ri-book-2-line"></i> Aulas</h2>
-          <p>Use a busca ou filtros para localizar rapidamente.</p>
+          <p>Navegue pelos módulos abaixo ou acesse os <a href="#materiais" style="color:#ffd166;text-decoration:underline">Materiais Complementares</a>.</p>
         </div>
-        <div class="toolbar" role="group" aria-label="Ferramentas de busca">
-          <input id="search" class="input" type="search" placeholder="Buscar por título ou tema…" aria-label="Buscar" />
-          <button class="chip" data-tag="fundamentos" aria-pressed="false">Fundamentos</button>
-          <button class="chip" data-tag="abordagem" aria-pressed="false">Abordagem</button>
-          <button class="chip" data-tag="especificos" aria-pressed="false">Específicos</button>
-          <button class="chip" data-tag="gerenciamento" aria-pressed="false">Gerenciamento</button>
-          <button class="chip" data-reset aria-pressed="false">Limpar</button>
+        <!-- CTA para Materiais -->
+        <div>
+          <a class="btn ghost" href="#materiais"><i class="ri-archive-2-line"></i> Materiais Complementares</a>
         </div>
       </div>
 
       <div class="grid" id="cards">
         <!-- 1 -->
-        <article class="card" data-tags="fundamentos" data-module="1">
+        <article class="card" data-tags="fundamentos" data-module="1"
+          data-title="Aspectos Gerais"
+          data-keywords="definição de comportamento suicida, estatísticas, dinâmica psicológica, psicopatologia, mitos, fatores de risco, fatores de proteção, OMS, efeito Werther, CBMMG">
           <div class="media">
             <span class="badge">Módulo 1</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" alt="Aspectos Gerais" />
@@ -312,7 +279,9 @@
         </article>
 
         <!-- 2 -->
-        <article class="card" data-tags="abordagem" data-module="2">
+        <article class="card" data-tags="abordagem" data-module="2"
+          data-title="Abordagem Técnica"
+          data-keywords="comunicação em crise, silêncio inicial, perguntas simples, perguntas complexas, ferramentas do diálogo, agressivos, depressivos, psicóticos, pré-abordagem, isolamento, EPI, abordagem tática, SICORBOM, COBOM, ITO 30">
           <div class="media">
             <span class="badge">Módulo 2</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/3d/ed/d3/3dedd32bf56863095e45ecd35ced74d6.jpg" alt="Abordagem Técnica" />
@@ -329,7 +298,9 @@
         </article>
 
         <!-- 3 -->
-        <article class="card" data-tags="especificos" data-module="3">
+        <article class="card" data-tags="especificos" data-module="3"
+          data-title="Aspectos Específicos"
+          data-keywords="abordagem tática, entrada forçada, contenção física, perícia, encerramento, REDS, pós-abordagem, altura, afogamento, enforcamento, arma branca, arma de fogo, ITO 23">
           <div class="media">
             <span class="badge">Módulo 3</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/8f/ef/40/8fef409190b4a29413762c81ecb8bf86.jpg" alt="Aspectos Específicos" />
@@ -346,7 +317,9 @@
         </article>
 
         <!-- 4 -->
-        <article class="card" data-tags="gerenciamento" data-module="4">
+        <article class="card" data-tags="gerenciamento" data-module="4"
+          data-title="Gerenciamento em ATS"
+          data-keywords="comandante da operação, plano de ação, método SMART, matriz de trabalho, segurança, equipes, deslocamento, avaliação da situação, gerenciamento, furtividade">
           <div class="media">
             <span class="badge">Módulo 4</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/f1/f2/4d/f1f24d12b7ee9f2d3415179b6de9089f.jpg" alt="Gerenciamento em ATS" />
@@ -362,10 +335,11 @@
           </div>
         </article>
 
-        <!-- 5 -->
-        <article class="card" data-tags="fundamentos" data-module="5">
+        <!-- Bônus -->
+        <article class="card" data-title="Aula Bônus: Prevenção"
+          data-keywords="prevenção universal, seletiva, indicada, sinais de alerta, comunicação responsável, proteção, restrição de meios, mídia, posvenção, autocuidado, resiliência, CAPS, CVV, PREVENSUIC">
           <div class="media">
-            <span class="badge">Módulo 5</span>
+            <span class="badge">Bônus</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/1f/68/67/1f6867294fd6c1b101f2fdab626e658b.jpg" alt="Aula Bônus: Prevenção" />
           </div>
           <div class="content">
@@ -374,15 +348,15 @@
             <div class="actions">
               <a class="btn small" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1BMqWl87S-dgdNcNHAHNe3oLGqc1eCo8d/edit?usp=sharing">Acessar aula</a>
               <button class="btn small ghost objectives">Ver objetivos</button>
-              <button class="btn small complete">Concluir módulo</button>
             </div>
           </div>
         </article>
 
-        <!-- 6 -->
-        <article class="card" data-tags="fundamentos" data-module="6">
+        <!-- Projeto -->
+        <article class="card" data-title="Girando a Ampulheta da Vida"
+          data-keywords="materiais complementares, podcasts, aprendizagem continuada, prática, prevenção, saúde mental">
           <div class="media">
-            <span class="badge">Módulo 6</span>
+            <span class="badge">Projeto</span>
             <img loading="lazy" src="https://i.pinimg.com/736x/46/a2/33/46a2335ebc2074b6df9a9774ce9cfd5d.jpg" alt="Projeto Ampulheta da Vida" />
           </div>
           <div class="content">
@@ -391,7 +365,6 @@
             <div class="actions">
               <a class="btn small" target="_blank" rel="noopener" href="https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/">Acessar projeto</a>
               <button class="btn small ghost objectives">Ver objetivos</button>
-              <button class="btn small complete">Concluir módulo</button>
             </div>
           </div>
         </article>
@@ -472,10 +445,10 @@
         <p><strong>Email:</strong> <a href="mailto:richelmy.pinto@bombeiros.mg.gov.br">richelmy.pinto@bombeiros.mg.gov.br</a></p>
         <p><strong>Telefone:</strong> <a href="tel:+5535984640729">(35) 98464-0729</a></p>
       </div>
-      <div>
+      <div class="cta">
         <h4>Envie sua sugestão</h4>
         <p>Deixe sua ideia pelo WhatsApp:</p>
-        <p><a class="btn" style="display:inline-block" href="https://wa.me/5535984640729?text=Olá,%20tenho%20uma%20sugestão!" target="_blank" rel="noopener"><i class="ri-whatsapp-line"></i> Contribuir agora</a></p>
+        <p><a class="btn" href="https://wa.me/5535984640729?text=Olá,%20tenho%20uma%20sugestão!" target="_blank" rel="noopener"><i class="ri-whatsapp-line"></i> Contribuir agora</a></p>
       </div>
     </div>
     <div class="container footer-bottom">
@@ -483,16 +456,16 @@
     </div>
   </footer>
 
-  <!-- FAB WhatsApp (suporte) -->
+  <!-- FABs -->
   <a class="fab" href="https://wa.me/5535984640729?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20Curso%20ATS." target="_blank" rel="noopener">
     <i class="ri-whatsapp-line"></i> Suporte
   </a>
-  <!-- FAB CVV 188 (Botão do pânico) -->
   <a class="fab fab-danger" href="tel:188" title="Botão do Pânico – CVV 188">
     <i class="ri-alert-line"></i> CVV 188
   </a>
+  <button id="toTop" class="to-top" title="Voltar ao topo"><i class="ri-arrow-up-line"></i> Topo</button>
 
-  <!-- Modal genérico (objetivos) -->
+  <!-- Modal Objetivos -->
   <dialog id="modal" style="border:none;border-radius:16px;max-width:min(92vw,760px);width:760px;padding:0;background:var(--glass);backdrop-filter:var(--backdrop);box-shadow:var(--shadow)">
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--stroke)">
       <strong style="color:var(--text-1)"><i class="ri-flag-line"></i> Objetivos do módulo</strong>
@@ -505,10 +478,8 @@
   </dialog>
 
   <script>
-    // Tema (persistente)
-    const body = document.body;
-    const themeBtn = document.getElementById('themeBtn');
-    const themeIcon = document.getElementById('themeIcon');
+    // Tema
+    const body = document.body, themeBtn = document.getElementById('themeBtn'), themeIcon = document.getElementById('themeIcon');
     const storedTheme = localStorage.getItem('theme') || 'dark';
     if(storedTheme === 'light'){ body.classList.add('light'); themeIcon.className='ri-moon-line'; themeBtn.setAttribute('aria-pressed','true'); }
     themeBtn.addEventListener('click', ()=>{
@@ -524,7 +495,7 @@
       if(!localStorage.getItem('ats_onboarded')){
         const ob = document.getElementById('onboard');
         const close = ()=>{ ob.style.display='none'; localStorage.setItem('ats_onboarded','1'); }
-        document.getElementById('onboard').style.display='grid';
+        ob.style.display='grid';
         document.getElementById('ob-skip').addEventListener('click', close);
         document.getElementById('ob-next').addEventListener('click', close);
       }
@@ -539,33 +510,10 @@
     };
     document.addEventListener('scroll', setProgress, {passive:true}); setProgress();
 
-    // Busca / filtros
+    // ===== Referência aos cards (sem busca) =====
     const cards = [...document.querySelectorAll('#cards .card')];
-    const search = document.getElementById('search');
-    const chips = [...document.querySelectorAll('.chip')];
-    const applyFilter = ()=>{
-      const q = search.value.trim().toLowerCase();
-      const activeTags = chips.filter(c=>c.getAttribute('aria-pressed')==='true' && !c.hasAttribute('data-reset')).map(c=>c.dataset.tag);
-      cards.forEach(card=>{
-        const text = card.innerText.toLowerCase();
-        const tags = (card.dataset.tags||'').split(',');
-        const matchText = !q || text.includes(q);
-        const matchTag = !activeTags.length || activeTags.some(t=>tags.includes(t));
-        card.style.display = (matchText && matchTag) ? '' : 'none';
-      });
-    };
-    search.addEventListener('input', applyFilter);
-    chips.forEach(ch=>{
-      ch.addEventListener('click', ()=>{
-        if(ch.hasAttribute('data-reset')){
-          chips.forEach(c=>c.setAttribute('aria-pressed','false')); search.value=''; applyFilter(); return;
-        }
-        const pressed = ch.getAttribute('aria-pressed')==='true';
-        ch.setAttribute('aria-pressed', String(!pressed)); applyFilter();
-      });
-    });
 
-    // Modal de objetivos
+    // ===== Modal de objetivos =====
     const modal = document.getElementById('modal');
     const modalBody = document.getElementById('modalBody');
     const modalClose = document.getElementById('modalClose');
@@ -582,19 +530,13 @@
           'Organizar encaminhamentos.'],
       4: ['Planejar e coordenar o atendimento em ATS.',
           'Gerenciar riscos e encerramento seguro.',
-          'Registrar e reportar conforme protocolos.'],
-      5: ['Estratégias preventivas baseadas em evidências.',
-          'Fatores de proteção e comunicação responsável.',
-          'Fluxos intersetoriais.'],
-      6: ['Utilizar materiais complementares e podcasts.',
-          'Consolidar aprendizagem continuada.',
-          'Compartilhar boas práticas.']
+          'Registrar e reportar conforme protocolos.']
     };
     document.querySelectorAll('.objectives').forEach(btn=>{
       btn.addEventListener('click', e=>{
         const card = e.target.closest('.card');
         const idx = card?.dataset.module || 0;
-        const list = objectivesMap[idx] || ['Objetivos deste módulo.'];
+        const list = objectivesMap[idx] || ['Objetivos deste conteúdo.'];
         modalBody.innerHTML = '<ul style="margin-left:1rem">'+list.map(i=>`<li style="margin:.4rem 0">${i}</li>`).join('')+'</ul>';
         modal.showModal?.(); modal.style.display='block';
       });
@@ -603,62 +545,42 @@
     modalClose.addEventListener('click', closeModal); modalOk.addEventListener('click', closeModal);
     modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
-    // Termômetro (6 módulos)
+    // ===== Termômetro (4 módulos) =====
     const thermo = document.getElementById('thermo');
     const label = document.getElementById('progressLabel');
-    const TOTAL = 6;
-    const key = 'ats_progress_v2';
+    const TOTAL = 4;
+    const key = 'ats_progress_v3';
     let progressSet = new Set(JSON.parse(localStorage.getItem(key) || '[]'));
-
     const updateThermo = ()=>{
+      progressSet = new Set([...progressSet].filter(n=>[1,2,3,4].includes(Number(n))));
       const done = progressSet.size;
       const pct = Math.min(100, Math.round((done/TOTAL)*100));
-      thermo.style.setProperty('--pct', pct+'%');
-      thermo.style.setProperty('background', 'linear-gradient(90deg,#2d3748,#2d3748)');
-      thermo.style.setProperty('--fill', pct+'%');
-      thermo.style.setProperty('position','relative');
-      thermo.style.setProperty('overflow','hidden');
-      thermo.style.setProperty('border','1px solid var(--stroke)');
-      thermo.style.setProperty('box-shadow','inset 0 0 8px rgba(0,0,0,.25)');
-      thermo.style.setProperty('--grad','linear-gradient(90deg,#ff7f0e,#ffd166)');
-
-      // preenche barra via pseudo-elemento "after"
-      thermo.style.setProperty('background-image','var(--grad)');
+      thermo.style.setProperty('background-image','linear-gradient(90deg,#ff7f0e,#ffd166)');
       thermo.style.setProperty('background-size', pct+'% 100%');
       thermo.style.setProperty('background-repeat','no-repeat');
-
       label.textContent = done;
-      // Destaque visual nos cards concluídos
       cards.forEach(c=>{
         const id = Number(c.dataset.module);
-        c.style.borderColor = progressSet.has(id) ? 'rgba(255,193,120,.9)' : 'var(--stroke)';
+        c.style.borderColor = id && progressSet.has(id) ? 'rgba(255,193,120,.9)' : 'var(--stroke)';
       });
     };
     updateThermo();
-
-    // Botões de "Concluir módulo"
     document.querySelectorAll('.complete').forEach(btn=>{
       btn.addEventListener('click', e=>{
         const id = Number(e.target.closest('.card').dataset.module);
+        if(!id) return;
         if(progressSet.has(id)) progressSet.delete(id); else progressSet.add(id);
         localStorage.setItem(key, JSON.stringify([...progressSet]));
         updateThermo();
       });
     });
 
-    // Scroll reveal sutil (centralização e simetria mantidas)
-    const io = new IntersectionObserver(entries=>{
-      for(const e of entries){
-        if(e.isIntersecting){
-          e.target.animate([{opacity:0, transform:'translateY(8px)'},{opacity:1, transform:'none'}], {duration:350, easing:'ease-out', fill:'both'});
-          io.unobserve(e.target);
-        }
-      }
-    },{threshold:.15});
-    document.querySelectorAll('.card, .materials, .hero-card').forEach(el=>io.observe(el));
+    // Botão Topo
+    document.getElementById('toTop').addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
   </script>
 
-  <!-- Tawk.to (chat) -->
+  <!-- Tawk.to -->
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
