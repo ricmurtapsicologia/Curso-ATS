@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Curso de Atendimento a Tentativas de Suicídio – Plataforma EAD</title>
+  <title>Curso ATS – CBMMG | Plataforma EAD</title>
 
   <!-- SEO / Open Graph -->
-  <meta name="description" content="Plataforma EAD do Curso de Atendimento a Tentativas de Suicídio. Conteúdos, aulas, materiais e vídeos selecionados." />
-  <meta property="og:title" content="Curso de Atendimento a Tentativas de Suicídio - Plataforma EAD" />
-  <meta property="og:description" content="Participe do nosso curso online de Atendimento a Tentativas de Suicídio. Aprenda técnicas fundamentais para lidar com situações de emergência." />
+  <meta name="description" content="Material complementar às aulas do Curso de Atendimento a Tentativas de Suicídio (CBMMG), com foco em abordagem técnica e humanizada." />
+  <meta property="og:title" content="Curso ATS – CBMMG | Plataforma EAD" />
+  <meta property="og:description" content="Material complementar às aulas de Atendimento a Tentativas de Suicídio, com foco em abordagem técnica e humanizada." />
   <meta property="og:image" content="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" />
   <meta property="og:url" content="https://ricmurtapsicologia.github.io/Curso-ATS/" />
   <link rel="icon" href="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" />
@@ -46,24 +46,20 @@
     }
 
     /* ===== Barra de progresso do scroll ===== */
-    .progress-bar{
-      position:fixed;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--brand),#ffd166);
-      transform-origin:left;transform:scaleX(0);z-index:9999;box-shadow:0 0 10px rgba(255,193,120,.6)
-    }
+    .progress-bar{position:fixed;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--brand),#ffd166);transform-origin:left;transform:scaleX(0);z-index:9999;box-shadow:0 0 10px rgba(255,193,120,.6)}
 
     /* ===== Splash ===== */
-    #splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;
-      background:linear-gradient(180deg,#001a33,#000814);color:#fff;z-index:9999;text-align:center;padding:16px}
+    #splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(180deg,#001a33,#000814);color:#fff;z-index:9999;text-align:center;padding:16px}
     #splash h1{font-size:1.6rem;margin-bottom:12px}
-    .spinner{width:44px;height:44px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;
-      animation:spin .9s linear infinite;margin-top:10px}
+    .spinner{width:44px;height:44px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin .9s linear infinite;margin-top:10px}
     @keyframes spin{to{transform:rotate(360deg)}}
 
     /* ===== Onboarding ===== */
     #onboard{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:rgba(2,8,23,.72);backdrop-filter:var(--backdrop);z-index:9998}
-    .onboard-card{max-width:680px;width:min(92vw,680px);background:var(--glass);border:1px solid var(--stroke);border-radius:18px;box-shadow:var(--shadow);padding:22px}
+    .onboard-card{max-width:760px;width:min(92vw,760px);background:var(--glass);border:1px solid var(--stroke);border-radius:18px;box-shadow:var(--shadow);padding:22px}
     .onboard-card h3{color:var(--text-1);margin-bottom:6px}
     .onboard-card p{color:var(--text-2)}
+    .onboard-list{margin:10px 0 2px 18px;color:var(--text-2)}
     .o-actions{display:flex;gap:10px;margin-top:14px}
     .btn{background:var(--brand);color:#1b2433;border:none;padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
     .btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
@@ -74,18 +70,18 @@
     .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:14px}
     .brand{display:flex;align-items:center;gap:10px;color:var(--text-1);font-weight:800}
     .brand i{color:var(--brand)}
+    .brand small{color:var(--text-3);font-weight:700}
     .nav-links{display:flex;gap:18px}
     .nav-links a{color:var(--text-1);text-decoration:none;font-weight:700;font-size:.95rem;padding:8px 10px;border-radius:10px}
     .nav-links a:hover{background:var(--glass)}
     .theme-toggle{background:transparent;border:1px solid var(--stroke);color:var(--text-1);border-radius:12px;padding:8px 10px}
 
     /* ===== Hero ===== */
-    .hero{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--stroke);
-      background:url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg') center/cover no-repeat}
+    .hero{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--stroke);background:url('https://i.pinimg.com/originals/38/70/c5/3870c5a678e72a0c16ca58914e14df3f.jpg') center/cover no-repeat}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,23,.75),rgba(2,8,23,.85));z-index:-1}
     .hero-inner{max-width:1200px;margin:auto;padding:72px 20px 56px;display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:center}
     .hero h1{color:#fff;font-size:clamp(2rem,1.2rem + 2.5vw,3rem);line-height:1.1;margin-bottom:10px}
-    .hero p{color:var(--text-2);font-size:1.05rem;margin-bottom:18px}
+    .hero p{color:var(--text-2);font-size:1.05rem;margin-bottom:0}
     .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid var(--stroke);padding:8px 12px;border-radius:999px;color:#fff;margin-bottom:12px}
 
     .hero-card{background:var(--glass);backdrop-filter:var(--backdrop);border:1px solid var(--stroke);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
@@ -147,11 +143,21 @@
     .footer-grid .cta .btn{display:inline-flex;margin:0}
 
     /* FABs */
-    .fab{position:fixed;right:18px;bottom:18px;z-index:9990;background:linear-gradient(180deg,#25d366,#1fa753);color:#042;
-      display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:var(--shadow)}
+    .fab{position:fixed;right:18px;bottom:18px;z-index:9990;background:linear-gradient(180deg,#25d366,#1fa753);color:#042;display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:var(--shadow)}
     .fab-danger{right:auto;left:18px;background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff}
-    .to-top{position:fixed;right:18px;bottom:84px;z-index:9989;background:var(--glass);backdrop-filter:var(--backdrop);
-      border:1px solid var(--stroke);color:var(--text-1);padding:8px 10px;border-radius:12px;font-weight:800;cursor:pointer}
+    .to-top{position:fixed;right:18px;bottom:84px;z-index:9989;background:var(--glass);backdrop-filter:var(--backdrop);border:1px solid var(--stroke);color:var(--text-1);padding:8px 10px;border-radius:12px;font-weight:800;cursor:pointer}
+
+    /* ===== Modais (objetivos e slides) ===== */
+    dialog.modal{border:none;border-radius:18px;max-width:min(92vw,820px);width:820px;padding:0;background:var(--glass);backdrop-filter:var(--backdrop);box-shadow:var(--shadow)}
+    dialog.modal::backdrop{background:rgba(2,8,23,.72);backdrop-filter:blur(3px)}
+    .modal-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--stroke)}
+    .modal-body{padding:14px 16px;color:var(--text-2);line-height:1.55}
+    .modal-actions{padding:12px 16px;border-top:1px solid var(--stroke);display:flex;gap:10px;justify-content:flex-end}
+
+    /* Viewer de Slides */
+    dialog.viewer{max-width:96vw;width:96vw}
+    .viewer .frame-wrap{width:100%;aspect-ratio:16/9}
+    .viewer iframe{width:100%;height:100%;border:0}
 
     /* Responsivo */
     @media (max-width: 980px){
@@ -181,11 +187,18 @@
     <div class="spinner" aria-hidden="true"></div>
   </div>
 
-  <!-- Onboarding -->
+  <!-- Onboarding (explica como usar) -->
   <div id="onboard" role="dialog" aria-modal="true" aria-labelledby="ob-title">
     <div class="onboard-card" role="document">
-      <h3 id="ob-title">Bem-vindo(a) ao Curso ATS</h3>
-      <p>Este ambiente reúne aulas, materiais e vídeos. Use os cards abaixo ou acesse os materiais complementares.</p>
+      <h3 id="ob-title">Bem-vindo(a) ao Curso ATS – CBMMG</h3>
+      <p>Esta página reúne *Aulas*, *Materiais Complementares* e *Vídeos* de apoio.</p>
+      <ul class="onboard-list">
+        <li>Escolha um módulo em *Aulas* e clique em *Acessar aula* para abrir a apresentação **dentro da página**.</li>
+        <li>Use *Ver objetivos* para revisar as metas de cada módulo.</li>
+        <li>Veja *Materiais Complementares* com ITO 30 e Boletins Epidemiológicos.</li>
+        <li>Em situação de crise, o *Botão do Pânico* liga para **188 (CVV)**.</li>
+        <li>Alterne o tema claro/escuro no topo. Seu progresso fica salvo no dispositivo.</li>
+      </ul>
       <div class="o-actions">
         <button class="btn ghost" id="ob-skip"><i class="ri-skip-forward-mini-fill"></i> Pular</button>
         <button class="btn" id="ob-next">Entendi</button>
@@ -196,7 +209,11 @@
   <!-- Navbar -->
   <nav class="navbar" aria-label="Navegação">
     <div class="nav-inner">
-      <div class="brand"><i class="ri-fire-fill"></i><span>Curso ATS</span></div>
+      <div class="brand">
+        <i class="ri-fire-fill"></i>
+        <span>Curso ATS – CBMMG</span>
+        <small>Atendimento a Tentativas de Suicídio</small>
+      </div>
       <div class="nav-links" role="menubar">
         <a role="menuitem" href="#aulas">Aulas</a>
         <a role="menuitem" href="#materiais">Materiais</a>
@@ -218,11 +235,8 @@
       <div>
         <span class="pill"><i class="ri-shield-cross-line"></i> Atendimento a Tentativas de Suicídio</span>
         <h1>Plataforma EAD – comunicação, abordagem técnica e cuidado</h1>
-        <p>Conteúdo estruturado para profissionais: fundamentos, condução em campo, prevenção e integração pós-ocorrência.</p>
-        <div class="actions">
-          <a class="btn" href="#videos"><i class="ri-movie-line"></i> Vídeos</a>
-          <a class="btn ghost" href="#materiais"><i class="ri-archive-2-line"></i> Materiais Complementares</a>
-        </div>
+        <p>Material complementar às aulas do Curso de Atendimento a Tentativas de Suicídio do CBMMG, com foco em abordagem técnica e humanizada.</p>
+        <!-- Ações removidas aqui para evitar redundância com o topo -->
       </div>
 
       <aside class="hero-card" aria-label="Indicadores & progresso">
@@ -250,19 +264,13 @@
       <div class="section-head">
         <div>
           <h2><i class="ri-book-2-line"></i> Aulas</h2>
-          <p>Navegue pelos módulos abaixo ou acesse os <a href="#materiais" style="color:#ffd166;text-decoration:underline">Materiais Complementares</a>.</p>
-        </div>
-        <!-- CTA para Materiais -->
-        <div>
-          <a class="btn ghost" href="#materiais"><i class="ri-archive-2-line"></i> Materiais Complementares</a>
+          <p>Navegue pelos módulos abaixo. Os slides abrem **nesta página**.</p>
         </div>
       </div>
 
       <div class="grid" id="cards">
         <!-- 1 -->
-        <article class="card" data-tags="fundamentos" data-module="1"
-          data-title="Aspectos Gerais"
-          data-keywords="definição de comportamento suicida, estatísticas, dinâmica psicológica, psicopatologia, mitos, fatores de risco, fatores de proteção, OMS, efeito Werther, CBMMG">
+        <article class="card" data-tags="fundamentos" data-module="1" data-title="Aspectos Gerais" data-keywords="definição de comportamento suicida, estatísticas, dinâmica psicológica, psicopatologia, mitos, fatores de risco, fatores de proteção, OMS, efeito Werther, CBMMG">
           <div class="media">
             <span class="badge">Módulo 1</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" alt="Aspectos Gerais" />
@@ -271,7 +279,7 @@
             <h3>Aspectos Gerais</h3>
             <p>Introdução ao comportamento suicida: dinâmica, psicopatologia e mitos.</p>
             <div class="actions">
-              <a class="btn small" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB/edit?usp=sharing">Acessar aula</a>
+              <a class="btn small open-slide" data-slide-id="1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB" href="https://docs.google.com/presentation/d/1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB/edit?usp=sharing">Acessar aula</a>
               <button class="btn small ghost objectives">Ver objetivos</button>
               <button class="btn small complete">Concluir módulo</button>
             </div>
@@ -279,9 +287,7 @@
         </article>
 
         <!-- 2 -->
-        <article class="card" data-tags="abordagem" data-module="2"
-          data-title="Abordagem Técnica"
-          data-keywords="comunicação em crise, silêncio inicial, perguntas simples, perguntas complexas, ferramentas do diálogo, agressivos, depressivos, psicóticos, pré-abordagem, isolamento, EPI, abordagem tática, SICORBOM, COBOM, ITO 30">
+        <article class="card" data-tags="abordagem" data-module="2" data-title="Abordagem Técnica" data-keywords="comunicação em crise, silêncio inicial, perguntas simples, perguntas complexas, ferramentas do diálogo, agressivos, depressivos, psicóticos, pré-abordagem, isolamento, EPI, abordagem tática, SICORBOM, COBOM, ITO 30">
           <div class="media">
             <span class="badge">Módulo 2</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/3d/ed/d3/3dedd32bf56863095e45ecd35ced74d6.jpg" alt="Abordagem Técnica" />
@@ -290,7 +296,7 @@
             <h3>Abordagem Técnica</h3>
             <p>Procedimentos em ocorrências: comunicação, segurança e aproximação.</p>
             <div class="actions">
-              <a class="btn small" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs/edit?usp=sharing">Acessar aula</a>
+              <a class="btn small open-slide" data-slide-id="1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs" href="https://docs.google.com/presentation/d/1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs/edit?usp=sharing">Acessar aula</a>
               <button class="btn small ghost objectives">Ver objetivos</button>
               <button class="btn small complete">Concluir módulo</button>
             </div>
@@ -298,9 +304,7 @@
         </article>
 
         <!-- 3 -->
-        <article class="card" data-tags="especificos" data-module="3"
-          data-title="Aspectos Específicos"
-          data-keywords="abordagem tática, entrada forçada, contenção física, perícia, encerramento, REDS, pós-abordagem, altura, afogamento, enforcamento, arma branca, arma de fogo, ITO 23">
+        <article class="card" data-tags="especificos" data-module="3" data-title="Aspectos Específicos" data-keywords="abordagem tática, entrada forçada, contenção física, perícia, encerramento, REDS, pós-abordagem, altura, afogamento, enforcamento, arma branca, arma de fogo, ITO 23">
           <div class="media">
             <span class="badge">Módulo 3</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/8f/ef/40/8fef409190b4a29413762c81ecb8bf86.jpg" alt="Aspectos Específicos" />
@@ -309,7 +313,7 @@
             <h3>Aspectos Específicos</h3>
             <p>Manejo conforme perfis: agressividade, depressão, psicose e comorbidades.</p>
             <div class="actions">
-              <a class="btn small" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp/edit?usp=sharing">Acessar aula</a>
+              <a class="btn small open-slide" data-slide-id="1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp" href="https://docs.google.com/presentation/d/1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp/edit?usp=sharing">Acessar aula</a>
               <button class="btn small ghost objectives">Ver objetivos</button>
               <button class="btn small complete">Concluir módulo</button>
             </div>
@@ -317,9 +321,7 @@
         </article>
 
         <!-- 4 -->
-        <article class="card" data-tags="gerenciamento" data-module="4"
-          data-title="Gerenciamento em ATS"
-          data-keywords="comandante da operação, plano de ação, método SMART, matriz de trabalho, segurança, equipes, deslocamento, avaliação da situação, gerenciamento, furtividade">
+        <article class="card" data-tags="gerenciamento" data-module="4" data-title="Gerenciamento em ATS" data-keywords="comandante da operação, plano de ação, método SMART, matriz de trabalho, segurança, equipes, deslocamento, avaliação da situação, gerenciamento, furtividade">
           <div class="media">
             <span class="badge">Módulo 4</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/f1/f2/4d/f1f24d12b7ee9f2d3415179b6de9089f.jpg" alt="Gerenciamento em ATS" />
@@ -328,7 +330,7 @@
             <h3>Gerenciamento em ATS</h3>
             <p>Estratégia, planejamento e encerramento seguro. Uso de métodos e coordenação.</p>
             <div class="actions">
-              <a class="btn small" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1_6dVFpv3trAtLAd2dXSrZbMris95jy1B/edit?usp=sharing">Acessar aula</a>
+              <a class="btn small open-slide" data-slide-id="1_6dVFpv3trAtLAd2dXSrZbMris95jy1B" href="https://docs.google.com/presentation/d/1_6dVFpv3trAtLAd2dXSrZbMris95jy1B/edit?usp=sharing">Acessar aula</a>
               <button class="btn small ghost objectives">Ver objetivos</button>
               <button class="btn small complete">Concluir módulo</button>
             </div>
@@ -336,8 +338,7 @@
         </article>
 
         <!-- Bônus -->
-        <article class="card" data-title="Aula Bônus: Prevenção"
-          data-keywords="prevenção universal, seletiva, indicada, sinais de alerta, comunicação responsável, proteção, restrição de meios, mídia, posvenção, autocuidado, resiliência, CAPS, CVV, PREVENSUIC">
+        <article class="card" data-title="Aula Bônus: Prevenção" data-keywords="prevenção universal, seletiva, indicada, sinais de alerta, comunicação responsável, proteção, restrição de meios, mídia, posvenção, autocuidado, resiliência, CAPS, CVV, PREVENSUIC">
           <div class="media">
             <span class="badge">Bônus</span>
             <img loading="lazy" src="https://i.pinimg.com/originals/1f/68/67/1f6867294fd6c1b101f2fdab626e658b.jpg" alt="Aula Bônus: Prevenção" />
@@ -346,15 +347,14 @@
             <h3>Aula Bônus: Prevenção</h3>
             <p>Estratégias baseadas em evidências, fatores de proteção e comunicação responsável.</p>
             <div class="actions">
-              <a class="btn small" target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1BMqWl87S-dgdNcNHAHNe3oLGqc1eCo8d/edit?usp=sharing">Acessar aula</a>
+              <a class="btn small open-slide" data-slide-id="1BMqWl87S-dgdNcNHAHNe3oLGqc1eCo8d" href="https://docs.google.com/presentation/d/1BMqWl87S-dgdNcNHAHNe3oLGqc1eCo8d/edit?usp=sharing">Acessar aula</a>
               <button class="btn small ghost objectives">Ver objetivos</button>
             </div>
           </div>
         </article>
 
-        <!-- Projeto -->
-        <article class="card" data-title="Girando a Ampulheta da Vida"
-          data-keywords="materiais complementares, podcasts, aprendizagem continuada, prática, prevenção, saúde mental">
+        <!-- Projeto (externo) -->
+        <article class="card" data-title="Girando a Ampulheta da Vida" data-keywords="materiais complementares, podcasts, aprendizagem continuada, prática, prevenção, saúde mental">
           <div class="media">
             <span class="badge">Projeto</span>
             <img loading="lazy" src="https://i.pinimg.com/736x/46/a2/33/46a2335ebc2074b6df9a9774ce9cfd5d.jpg" alt="Projeto Ampulheta da Vida" />
@@ -375,12 +375,12 @@
         <details class="materials">
           <summary><i class="ri-archive-2-line"></i> Materiais Complementares</summary>
           <div class="mat-links">
-            <a href="#" target="_blank" rel="noopener">Boletim Epidemiológico 1</a>
-            <a href="#" target="_blank" rel="noopener">Boletim Epidemiológico 2</a>
-            <a href="#" target="_blank" rel="noopener">Boletim Epidemiológico 3</a>
-            <a href="#" target="_blank" rel="noopener">Boletim Epidemiológico 4</a>
-            <a href="#" target="_blank" rel="noopener">Instrução Técnica Operacional nº 30</a>
-            <a href="#" target="_blank" rel="noopener">Aplicativo PREVENSUIC</a>
+            <a href="https://drive.google.com/file/d/1QW7Wzr6GgBHctNKf7oqTC_I1D0OMHxfA/view?usp=sharing" target="_blank" rel="noopener">Instrução Técnica Operacional nº 30 (ITO 30)</a>
+            <a href="https://drive.google.com/file/d/19G98R3O4MKzOSiEWULyv13u4e_t_L57p/view?usp=sharing" target="_blank" rel="noopener">Boletim Epidemiológico nº 15 (2019)</a>
+            <a href="https://drive.google.com/file/d/1iQIiE9gXo64CtaxMDdpeoaZ9Jp3TqLW1/view?usp=sharing" target="_blank" rel="noopener">Boletim Epidemiológico nº 30 (2017)</a>
+            <a href="https://drive.google.com/file/d/142Xo_BKypSz7PInWKay5y-8X--O8gYjO/view?usp=sharing" target="_blank" rel="noopener">Boletim Epidemiológico nº 33 (2021)</a>
+            <a href="https://drive.google.com/file/d/1CmZ5pAgDNk7OhPZkM0mgHANYj9PTVaBa/view?usp=sharing" target="_blank" rel="noopener">Boletim Epidemiológico nº 55 (2024)</a>
+            <a href="https://play.google.com/store/apps/details?id=es.aciliainternet.prevensuic&hl=pt_BR&pli=1" target="_blank" rel="noopener">Aplicativo PREVENSUIC (Google Play)</a>
           </div>
         </details>
       </div>
@@ -460,25 +460,39 @@
   <a class="fab" href="https://wa.me/5535984640729?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20Curso%20ATS." target="_blank" rel="noopener">
     <i class="ri-whatsapp-line"></i> Suporte
   </a>
-  <a class="fab fab-danger" href="tel:188" title="Botão do Pânico – CVV 188">
+  <a class="fab fab-danger" id="panicCVV" href="tel:188" title="Botão do Pânico – CVV 188">
     <i class="ri-alert-line"></i> CVV 188
   </a>
   <button id="toTop" class="to-top" title="Voltar ao topo"><i class="ri-arrow-up-line"></i> Topo</button>
 
   <!-- Modal Objetivos -->
-  <dialog id="modal" style="border:none;border-radius:16px;max-width:min(92vw,760px);width:760px;padding:0;background:var(--glass);backdrop-filter:var(--backdrop);box-shadow:var(--shadow)">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--stroke)">
-      <strong style="color:var(--text-1)"><i class="ri-flag-line"></i> Objetivos do módulo</strong>
+  <dialog id="modal" class="modal" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <strong id="modalTitle" style="color:var(--text-1)"><i class="ri-flag-line"></i> Objetivos do módulo</strong>
       <button id="modalClose" class="theme-toggle" aria-label="Fechar"><i class="ri-close-line"></i></button>
     </div>
-    <div id="modalBody" style="padding:14px 16px;color:var(--text-2);line-height:1.55"></div>
-    <div style="padding:12px 16px;border-top:1px solid var(--stroke);display:flex;gap:10px;justify-content:flex-end">
+    <div id="modalBody" class="modal-body"></div>
+    <div class="modal-actions">
       <button class="btn ghost" id="modalOk">OK</button>
     </div>
   </dialog>
 
+  <!-- Viewer de Slides (abre apresentação na mesma página) -->
+  <dialog id="slidesViewer" class="modal viewer" aria-labelledby="slidesTitle">
+    <div class="modal-head">
+      <strong id="slidesTitle" style="color:var(--text-1)"><i class="ri-slideshow-2-line"></i> Apresentação</strong>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a id="openExternal" class="btn ghost" target="_blank" rel="noopener">Abrir no Google Slides</a>
+        <button id="slidesClose" class="theme-toggle" aria-label="Fechar"><i class="ri-close-line"></i></button>
+      </div>
+    </div>
+    <div class="modal-body frame-wrap">
+      <iframe id="slidesFrame" allow="autoplay; fullscreen" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </dialog>
+
   <script>
-    // Tema
+    // ===== Tema =====
     const body = document.body, themeBtn = document.getElementById('themeBtn'), themeIcon = document.getElementById('themeIcon');
     const storedTheme = localStorage.getItem('theme') || 'dark';
     if(storedTheme === 'light'){ body.classList.add('light'); themeIcon.className='ri-moon-line'; themeBtn.setAttribute('aria-pressed','true'); }
@@ -489,19 +503,21 @@
       themeBtn.setAttribute('aria-pressed', String(isLight));
     });
 
-    // Splash / Onboarding
+    // ===== Splash / Onboarding =====
     window.addEventListener('load', ()=>{
-      setTimeout(()=>{ document.getElementById('splash').style.display='none'; }, 800);
-      if(!localStorage.getItem('ats_onboarded')){
-        const ob = document.getElementById('onboard');
-        const close = ()=>{ ob.style.display='none'; localStorage.setItem('ats_onboarded','1'); }
-        ob.style.display='grid';
-        document.getElementById('ob-skip').addEventListener('click', close);
-        document.getElementById('ob-next').addEventListener('click', close);
-      }
+      setTimeout(()=>{ document.getElementById('splash').style.display='none';
+        // Mostra onboarding logo após a splash na primeira visita
+        if(!localStorage.getItem('ats_onboarded')){
+          const ob = document.getElementById('onboard');
+          const close = ()=>{ ob.style.display='none'; localStorage.setItem('ats_onboarded','1'); }
+          ob.style.display='grid';
+          document.getElementById('ob-skip').addEventListener('click', close);
+          document.getElementById('ob-next').addEventListener('click', close);
+        }
+      }, 800);
     });
 
-    // Scroll progress
+    // ===== Scroll progress =====
     const progress = document.getElementById('progress');
     const setProgress = ()=>{
       const h = document.documentElement;
@@ -510,27 +526,19 @@
     };
     document.addEventListener('scroll', setProgress, {passive:true}); setProgress();
 
-    // ===== Referência aos cards (sem busca) =====
+    // ===== Cards =====
     const cards = [...document.querySelectorAll('#cards .card')];
 
-    // ===== Modal de objetivos =====
+    // ===== Modal de objetivos (centralizado e elegante) =====
     const modal = document.getElementById('modal');
     const modalBody = document.getElementById('modalBody');
     const modalClose = document.getElementById('modalClose');
     const modalOk = document.getElementById('modalOk');
     const objectivesMap = {
-      1: ['Compreender a natureza multifatorial do comportamento suicida.',
-          'Reconhecer mitos e vieses de comunicação.',
-          'Identificar sinais de alerta iniciais.'],
-      2: ['Aplicar comunicação eficaz em crise.',
-          'Estabelecer segurança e perímetro.',
-          'Conduzir aproximação técnica e humanizada.'],
-      3: ['Ajustar intervenções conforme perfil clínico.',
-          'Mapear comorbidades e riscos adicionais.',
-          'Organizar encaminhamentos.'],
-      4: ['Planejar e coordenar o atendimento em ATS.',
-          'Gerenciar riscos e encerramento seguro.',
-          'Registrar e reportar conforme protocolos.']
+      1: ['Compreender a natureza multifatorial do comportamento suicida.', 'Reconhecer mitos e vieses de comunicação.', 'Identificar sinais de alerta iniciais.'],
+      2: ['Aplicar comunicação eficaz em crise.', 'Estabelecer segurança e perímetro.', 'Conduzir aproximação técnica e humanizada.'],
+      3: ['Ajustar intervenções conforme perfil clínico.', 'Mapear comorbidades e riscos adicionais.', 'Organizar encaminhamentos.'],
+      4: ['Planejar e coordenar o atendimento em ATS.', 'Gerenciar riscos e encerramento seguro.', 'Registrar e reportar conforme protocolos.']
     };
     document.querySelectorAll('.objectives').forEach(btn=>{
       btn.addEventListener('click', e=>{
@@ -538,10 +546,10 @@
         const idx = card?.dataset.module || 0;
         const list = objectivesMap[idx] || ['Objetivos deste conteúdo.'];
         modalBody.innerHTML = '<ul style="margin-left:1rem">'+list.map(i=>`<li style="margin:.4rem 0">${i}</li>`).join('')+'</ul>';
-        modal.showModal?.(); modal.style.display='block';
+        try{ modal.showModal(); }catch(err){ modal.style.display='block'; }
       });
     });
-    const closeModal = ()=>{ modal.close?.(); modal.style.display='none'; }
+    const closeModal = ()=>{ try{ modal.close(); }catch{} modal.style.display='none'; };
     modalClose.addEventListener('click', closeModal); modalOk.addEventListener('click', closeModal);
     modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
@@ -575,9 +583,40 @@
       });
     });
 
-    // Botão Topo
+    // ===== Botão Topo =====
     document.getElementById('toTop').addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
+    // ===== Viewer de Slides (abre na mesma página) =====
+    const slidesViewer = document.getElementById('slidesViewer');
+    const slidesFrame = document.getElementById('slidesFrame');
+    const slidesTitle = document.getElementById('slidesTitle');
+    const slidesClose = document.getElementById('slidesClose');
+    const openExternal = document.getElementById('openExternal');
+
+    const buildEmbed = (id)=> `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=60000&rm=minimal`;
+    const buildViewUrl = (id)=> `https://docs.google.com/presentation/d/${id}/view`;
+
+    document.querySelectorAll('a.open-slide').forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        ev.preventDefault();
+        const id = a.getAttribute('data-slide-id');
+        const card = a.closest('.card');
+        slidesTitle.textContent = `Apresentação – ${card?.querySelector('h3')?.textContent || ''}`;
+        slidesFrame.src = buildEmbed(id);
+        openExternal.href = buildViewUrl(id);
+        try{ slidesViewer.showModal(); }catch(err){ slidesViewer.style.display='block'; }
+      });
+    });
+    const closeViewer = ()=>{ slidesFrame.src='about:blank'; try{ slidesViewer.close(); }catch{} slidesViewer.style.display='none'; };
+    slidesClose.addEventListener('click', closeViewer);
+    slidesViewer.addEventListener('click', e=>{ if(e.target===slidesViewer) closeViewer(); });
+
+    // ===== CVV 188: garante discagem no dispositivo =====
+    // Mantém o link tel:188 e reforça via script (especialmente mobile)
+    document.getElementById('panicCVV').addEventListener('click', ()=>{
+      // Se o ambiente suportar, navega explicitamente para o esquema tel
+      try{ window.location.href = 'tel:188'; }catch{}
+    });
   </script>
 
   <!-- Tawk.to -->
@@ -591,3 +630,4 @@
   </script>
 </body>
 </html>
+
