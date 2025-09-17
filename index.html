@@ -9,6 +9,7 @@
   <meta property="og:url" content="https://ricmurtapsicologia.github.io/Curso-ATS/" />
   <title>Curso de Atendimento a Tentativas de Suicídio</title>
   <link rel="icon" href="https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg" />
+  <!-- Remix Icon para ícones leves (melhor DX) -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
 
   <!-- CSS -->
@@ -93,6 +94,16 @@
     .viewer iframe{width:100%;height:100%;border:0;background:#000}
     .tip{color:#475569;font-size:.9rem;margin-top:auto}
     .modal-actions{padding:12px 16px;border-top:1px solid var(--stroke);display:flex;justify-content:flex-end}
+
+    /* Rodapé */
+    footer{background-color:var(--footer-bg);color:#fff;text-align:center;padding:20px;width:100%}
+    footer .footer-container{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;padding:0 20px}
+    footer .footer-col{flex:1;min-width:250px;text-align:left}
+    footer .footer-col h4{color:var(--footer-accent);font-size:1.2em;margin-bottom:10px}
+    footer .footer-col ul{list-style:none}
+    footer .footer-col a{color:#fff;text-decoration:none}
+    footer .footer-col a:hover{color:var(--footer-accent)}
+    footer .footer-bottom{text-align:center;margin-top:15px;border-top:1px solid var(--footer-accent);padding-top:10px;font-size:.9em}
 
     /* Responsividade */
     @media (max-width: 980px){
@@ -261,12 +272,8 @@
         </div>
         <h3>Materiais Complementares</h3>
         <p>Acesse materiais adicionais que complementam o conteúdo das aulas.</p>
-        <!-- ESSENCIAL: toggle acessível -->
-        <button id="materials-btn" class="btn" type="button"
-                aria-expanded="false" aria-controls="materials-links">
-          Acesse aqui os Materiais
-        </button>
-        <div id="materials-links" class="hidden-links" aria-hidden="true" hidden>
+        <button id="materials-btn" class="btn" type="button">Acesse aqui os Materiais</button>
+        <div id="materials-links" class="hidden-links" aria-hidden="true">
           <a href="https://drive.google.com/file/d/1iQIiE9gXo64CtaxMDdpeoaZ9Jp3TqLW1/view?usp=sharing" target="_blank" rel="noopener noreferrer">Boletim Epidemiológico Nº 30 (2017)</a>
           <a href="https://drive.google.com/file/d/19G98R3O4MKzOSiEWULyv13u4e_t_L57p/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Boletim Epidemiológico Nº 15 (2019)</a>
           <a href="https://drive.google.com/file/d/142Xo_BKypSz7PInWKay5y-8X--O8gYjO/view?usp=sharing" target="_blank" rel="noopener noreferrer">Boletim Epidemiológico Nº 33 (2021)</a>
@@ -287,6 +294,34 @@
         <div class="btn-group">
           <a class="btn secondary" href="https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/" target="_blank" rel="noopener"><i class="ri-external-link-line"></i> Acessar projeto</a>
         </div>
+      </article>
+    </section>
+
+    <!-- Seção de Vídeos -->
+    <section class="videos-box" aria-label="Vídeos selecionados">
+      <article class="video-item">
+        <iframe loading="lazy" src="https://www.youtube.com/embed/gJBlY3opAVU" title="Suicídio explicado - Nerdologia" allowfullscreen></iframe>
+        <p>Suicídio explicado no Nerdologia</p>
+      </article>
+      <article class="video-item">
+        <iframe loading="lazy" src="https://www.youtube.com/embed/N88STTQVaE8" title="CVV/Unicef - O que evitar" allowfullscreen></iframe>
+        <p>CVV/Unicef: O que evitar na prevenção do suicídio</p>
+      </article>
+      <article class="video-item">
+        <iframe loading="lazy" src="https://www.youtube.com/embed/VW3mvMz5AXs" title="CVV/Unicef - Quebrando tabus" allowfullscreen></iframe>
+        <p>CVV/Unicef: Quebrando tabus sobre suicídio</p>
+      </article>
+      <article class="video-item">
+        <iframe loading="lazy" src="https://www.youtube.com/embed/YmIIiuaJgkk" title="CVV/Unicef - Situações de risco" allowfullscreen></iframe>
+        <p>CVV/Unicef: Situações que levam ao suicídio</p>
+      </article>
+      <article class="video-item">
+        <iframe loading="lazy" src="https://www.youtube.com/embed/BbJi72PmDXI" title="CVV/Unicef - Prevenção entre jovens" allowfullscreen></iframe>
+        <p>CVV/Unicef: Prevenção do suicídio entre jovens</p>
+      </article>
+      <article class="video-item">
+        <iframe loading="lazy" src="https://www.youtube.com/embed/w6qQW5neQek" title="Primeiros cuidados emocionais" allowfullscreen></iframe>
+        <p>Diógenes Munhoz: Primeiros cuidados emocionais</p>
       </article>
     </section>
   </main>
@@ -324,8 +359,8 @@
     </div>
   </footer>
 
-  <!-- Modal Viewer de Slides (ESSENCIAL: aria-modal) -->
-  <dialog id="slidesViewer" class="modal viewer" aria-modal="true" aria-labelledby="slidesTitle">
+  <!-- Modal Viewer de Slides -->
+  <dialog id="slidesViewer" class="modal viewer" aria-labelledby="slidesTitle">
     <div class="modal-head">
       <strong id="slidesTitle"><i class="ri-slideshow-2-line"></i> Apresentação</strong>
       <button id="closeX" class="btn ghost" aria-label="Fechar"><i class="ri-close-line"></i></button>
@@ -336,8 +371,6 @@
         <button id="nextSlide" class="btn" title="Próximo">Próximo <i class="ri-arrow-right-line"></i></button>
         <a id="openExternal" class="btn secondary" target="_blank" rel="noopener"><i class="ri-external-link-line"></i> Abrir no Google Slides</a>
         <a id="downloadPptx" class="btn ghost" target="_blank" rel="noopener"><i class="ri-download-2-line"></i> Baixar PPTX</a>
-        <!-- ESSENCIAL: status do slide -->
-        <span id="slideStatus" class="tip" aria-live="polite"></span>
         <span class="tip">Dica: clique no slide e use as setas ⟵ ⟶.</span>
       </div>
       <div class="frame-wrap">
@@ -371,21 +404,20 @@
     });
     document.getElementById("skip-btn").addEventListener("click", ()=>{ document.getElementById("onboarding").style.display="none"; });
 
-    /* ===== Materiais toggle (ESSENCIAL acessível) ===== */
-    const btn = document.getElementById("materials-btn");
-    const panel = document.getElementById("materials-links");
-    if (btn && panel) {
-      btn.addEventListener("click", () => {
-        const open = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", String(!open));
-        panel.hidden = open;
-        panel.toggleAttribute("inert", open);
-        panel.setAttribute("aria-hidden", String(open));
-        btn.classList.toggle("active", !open);
+    /* ===== Materiais toggle ===== */
+    const materialsBtn = document.getElementById("materials-btn");
+    const materialsLinks = document.getElementById("materials-links");
+    if(materialsBtn && materialsLinks){
+      materialsBtn.addEventListener("click", ()=>{
+        const show = !materialsLinks.classList.contains("active");
+        materialsLinks.classList.toggle("active", show);
+        materialsLinks.style.display = show ? "block" : "none";
+        materialsLinks.setAttribute("aria-hidden", String(!show));
+        materialsBtn.classList.toggle("active", show);
       });
     }
 
-    /* ===== Viewer de Slides ===== */
+    /* ===== Viewer de Slides (igual ao estilo anterior) ===== */
     const slidesViewer = document.getElementById('slidesViewer');
     const slidesFrame  = document.getElementById('slidesFrame');
     const slidesTitle  = document.getElementById('slidesTitle');
@@ -395,43 +427,22 @@
     const nextSlideBtn = document.getElementById('nextSlide');
     const slidesClose  = document.getElementById('slidesClose');
     const closeX       = document.getElementById('closeX');
-    const statusEl     = document.getElementById('slideStatus');
 
     let currentDeck = { id:null, index:1, title:"" };
-    let openerBtn = null; // ESSENCIAL: devolver foco ao abrir/fechar
 
     const baseEmbed   = id => `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=60000&rm=minimal`;
     const viewUrl     = id => `https://docs.google.com/presentation/d/${id}/view`;
     const downloadUrl = id => `https://docs.google.com/presentation/d/${id}/export/pptx`;
     const srcWithIndex = (id, i) => `${baseEmbed(id)}#slide=id.p${Math.max(1,i)}`;
 
-    function updateFrame(){
-      slidesFrame.src = srcWithIndex(currentDeck.id, currentDeck.index);
-      if (statusEl) statusEl.textContent = `Slide ${currentDeck.index}`;
-    }
-
-    function trapFocus(dialog){
-      const sel='button,[href],iframe,input,select,textarea,[tabindex]:not([tabindex="-1"])';
-      dialog.addEventListener('keydown', e=>{
-        if(e.key!=='Tab') return;
-        const items=[...dialog.querySelectorAll(sel)].filter(el=>!el.disabled);
-        if(!items.length) return;
-        const first=items[0], last=items[items.length-1];
-        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
-        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-      });
-    }
-
     function openViewer(id, title){
-      openerBtn = document.activeElement; // ESSENCIAL
       currentDeck = { id, index:1, title };
       slidesTitle.textContent = `Apresentação – ${title}`;
+      slidesFrame.src = srcWithIndex(id, currentDeck.index);
       openExternal.href = viewUrl(id);
       downloadPptx.href = downloadUrl(id);
       slidesViewer.showModal();
       document.documentElement.style.overflow='hidden';
-      trapFocus(slidesViewer);
-      updateFrame();
       setTimeout(()=>slidesFrame.focus(),150);
     }
     function closeViewer(){
@@ -439,7 +450,6 @@
       if(slidesViewer.open) slidesViewer.close();
       slidesViewer.removeAttribute('open');
       document.documentElement.style.overflow='';
-      if (openerBtn && typeof openerBtn.focus === 'function') openerBtn.focus(); // ESSENCIAL
     }
 
     // Botões dos cards: abrir modal
@@ -456,30 +466,18 @@
     prevSlideBtn.addEventListener('click', ()=>{
       if(!currentDeck.id) return;
       currentDeck.index = Math.max(1, currentDeck.index - 1);
-      updateFrame();
+      slidesFrame.src = srcWithIndex(currentDeck.id, currentDeck.index);
     });
     nextSlideBtn.addEventListener('click', ()=>{
       if(!currentDeck.id) return;
       currentDeck.index = currentDeck.index + 1;
-      updateFrame();
-    });
-
-    // Atalhos ← / →
-    document.addEventListener('keydown', e=>{
-      if(!slidesViewer.open) return;
-      if(e.key==='ArrowLeft') prevSlideBtn.click();
-      if(e.key==='ArrowRight') nextSlideBtn.click();
-      if(e.key==='Escape') closeViewer();
-    });
-
-    // Fallback do iframe (embed bloqueado)
-    slidesFrame.addEventListener('error', ()=>{
-      alert('Não foi possível embutir os slides. Use "Abrir no Google Slides".');
+      slidesFrame.src = srcWithIndex(currentDeck.id, currentDeck.index);
     });
 
     // Fechar
     [slidesClose, closeX].forEach(b=> b.addEventListener('click', closeViewer));
     slidesViewer.addEventListener('click', e=>{ if(e.target===slidesViewer) closeViewer(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeViewer(); }});
   })();
   </script>
 
@@ -494,5 +492,3 @@
   </script>
 </body>
 </html>
-
-
