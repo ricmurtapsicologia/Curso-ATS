@@ -1,0 +1,63 @@
+name: Gerar microaulas em áudio N2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "audio/manifest.json"
+      - "scripts/generate_audio_n2.py"
+      - ".github/workflows/generate-audio-n2.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar ffmpeg e dependências
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          pip install edge-tts pydub
+
+      - name: Gerar 24 microaulas N2
+        run: python scripts/generate_audio_n2.py
+
+      - name: Validar arquivos
+        run: |
+          test "$(find audio/n2 -maxdepth 1 -type f -name '*.mp3' | wc -l)" -eq 24
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          spec=json.loads(Path("audio/audio-spec.json").read_text(encoding="utf-8"))
+          assert spec["profile"]=="Ampulheta N2"
+          assert spec["voice"]=="pt-BR-AntonioNeural"
+          assert spec["track_count"]==24
+          assert all(40 <= t["seconds"] <= 150 for t in spec["tracks"])
+          print("Validação concluída:", spec["track_count"], "microaulas")
+          PY
+
+      - name: Publicar arquivos gerados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/n2 audio/audio-spec.json
+          if git diff --cached --quiet; then
+            echo "Sem alterações de áudio."
+            exit 0
+          fi
+          git commit -m "build: gerar 24 microaulas ATS no padrão N2"
+          git pull --rebase origin main
+          git push origin HEAD:main
