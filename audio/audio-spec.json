@@ -1,0 +1,193 @@
+{
+  "profile": "Ampulheta N2",
+  "voice": "pt-BR-AntonioNeural",
+  "rate": "-4%",
+  "pitch": "-1Hz",
+  "opening_silence_ms": 130,
+  "ending_silence_ms": 240,
+  "target_dbfs": -18.0,
+  "max_peak_dbfs": -1.2,
+  "compression": {
+    "threshold_db": -20.0,
+    "ratio": 2.0,
+    "attack_ms": 8.0,
+    "release_ms": 70.0
+  },
+  "format": {
+    "codec": "mp3",
+    "bitrate": "128k",
+    "channels": 1,
+    "sample_rate_hz": 44100
+  },
+  "track_count": 24,
+  "tracks": [
+    {
+      "id": "e1-01",
+      "lesson": 1,
+      "title": "O que chamamos de comportamento suicida",
+      "file": "audio/n2/e1-01-comportamento-suicida.mp3",
+      "seconds": 67.9
+    },
+    {
+      "id": "e1-02",
+      "lesson": 1,
+      "title": "O que a epidemiologia ensina ao abordador",
+      "file": "audio/n2/e1-02-epidemiologia.mp3",
+      "seconds": 69.3
+    },
+    {
+      "id": "e1-03",
+      "lesson": 1,
+      "title": "Dinâmica psicológica da crise e efeito Werther",
+      "file": "audio/n2/e1-03-dinamica-psicologica-werther.mp3",
+      "seconds": 70.9
+    },
+    {
+      "id": "e1-04",
+      "lesson": 1,
+      "title": "Multicausalidade, psicopatologia e os três D",
+      "file": "audio/n2/e1-04-multicausalidade.mp3",
+      "seconds": 76.2
+    },
+    {
+      "id": "e1-05",
+      "lesson": 1,
+      "title": "Cérebro em crise: emoção, impulsividade e ganho de tempo",
+      "file": "audio/n2/e1-05-cerebro-em-crise.mp3",
+      "seconds": 73.7
+    },
+    {
+      "id": "e1-06",
+      "lesson": 1,
+      "title": "Fatores de risco, fatores precipitantes e mitos",
+      "file": "audio/n2/e1-06-risco-e-mitos.mp3",
+      "seconds": 79.2
+    },
+    {
+      "id": "e2-01",
+      "lesson": 2,
+      "title": "Abordagem técnica e abordagem tática",
+      "file": "audio/n2/e2-01-tecnica-e-tatica.mp3",
+      "seconds": 75.1
+    },
+    {
+      "id": "e2-02",
+      "lesson": 2,
+      "title": "Pré-abordagem: preparar a cena antes de falar",
+      "file": "audio/n2/e2-02-pre-abordagem.mp3",
+      "seconds": 73.3
+    },
+    {
+      "id": "e2-03",
+      "lesson": 2,
+      "title": "Aproximação, silêncio inicial e apresentação pessoal",
+      "file": "audio/n2/e2-03-aproximacao.mp3",
+      "seconds": 69.3
+    },
+    {
+      "id": "e2-04",
+      "lesson": 2,
+      "title": "Perguntas e ferramentas de diálogo",
+      "file": "audio/n2/e2-04-perguntas-e-dialogo.mp3",
+      "seconds": 75.5
+    },
+    {
+      "id": "e2-05",
+      "lesson": 2,
+      "title": "Perfis de interação: agressivo, depressivo e psicótico",
+      "file": "audio/n2/e2-05-perfis-de-interacao.mp3",
+      "seconds": 71.2
+    },
+    {
+      "id": "e2-06",
+      "lesson": 2,
+      "title": "Quando trocar o abordador",
+      "file": "audio/n2/e2-06-troca-de-abordador.mp3",
+      "seconds": 76.3
+    },
+    {
+      "id": "e3-01",
+      "lesson": 3,
+      "title": "Quando a técnica precisa do backup tático",
+      "file": "audio/n2/e3-01-backup-tatico.mp3",
+      "seconds": 68.3
+    },
+    {
+      "id": "e3-02",
+      "lesson": 3,
+      "title": "Riscos específicos conforme o cenário",
+      "file": "audio/n2/e3-02-riscos-por-cenario.mp3",
+      "seconds": 77.9
+    },
+    {
+      "id": "e3-03",
+      "lesson": 3,
+      "title": "Outras instituições na cena",
+      "file": "audio/n2/e3-03-outras-instituicoes.mp3",
+      "seconds": 76.7
+    },
+    {
+      "id": "e3-04",
+      "lesson": 3,
+      "title": "Entrada forçada: decisão, segurança e comunicação",
+      "file": "audio/n2/e3-04-entrada-forcada.mp3",
+      "seconds": 72.8
+    },
+    {
+      "id": "e3-05",
+      "lesson": 3,
+      "title": "Contenção: finalidade, limites e dignidade",
+      "file": "audio/n2/e3-05-contencao.mp3",
+      "seconds": 76.8
+    },
+    {
+      "id": "e3-06",
+      "lesson": 3,
+      "title": "Lesões, óbito e encerramento da ocorrência",
+      "file": "audio/n2/e3-06-encerramento.mp3",
+      "seconds": 74.0
+    },
+    {
+      "id": "e4-01",
+      "lesson": 4,
+      "title": "Quem faz o quê na ocorrência",
+      "file": "audio/n2/e4-01-funcoes-na-cena.mp3",
+      "seconds": 73.5
+    },
+    {
+      "id": "e4-02",
+      "lesson": 4,
+      "title": "Coleta de informações e segurança",
+      "file": "audio/n2/e4-02-informacao-e-seguranca.mp3",
+      "seconds": 77.5
+    },
+    {
+      "id": "e4-03",
+      "lesson": 4,
+      "title": "Avaliação da situação antes do plano",
+      "file": "audio/n2/e4-03-avaliacao-da-situacao.mp3",
+      "seconds": 71.7
+    },
+    {
+      "id": "e4-04",
+      "lesson": 4,
+      "title": "Plano de ação e método SMART",
+      "file": "audio/n2/e4-04-plano-smart.mp3",
+      "seconds": 76.3
+    },
+    {
+      "id": "e4-05",
+      "lesson": 4,
+      "title": "Matriz de trabalho e recursos",
+      "file": "audio/n2/e4-05-matriz-de-trabalho.mp3",
+      "seconds": 74.2
+    },
+    {
+      "id": "e4-06",
+      "lesson": 4,
+      "title": "Tomada de decisão e coordenação integrada",
+      "file": "audio/n2/e4-06-coordenacao-integrada.mp3",
+      "seconds": 79.9
+    }
+  ]
+}
