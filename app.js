@@ -66,6 +66,22 @@
 })();
 
 ;(()=>{
+  "use strict";
+  function cleanFrontstage(){
+    const viewerTip=document.querySelector("#slidesViewer .tip");
+    if(viewerTip) viewerTip.textContent="Use os controles do Google Slides para navegar pela apresentação.";
+
+    document.querySelectorAll("#privacyDialog .privacy-body p").forEach(p=>{
+      const text=(p.textContent||"").toLowerCase();
+      if(text.includes("antigo chat externo")||text.includes("foi removido para reduzir dependências")) p.remove();
+    });
+  }
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",cleanFrontstage,{once:true});
+  else cleanFrontstage();
+})();
+
+;(()=>{
   if(!document.querySelector('link[href*="audio-aulas.css"]')){
     const link=document.createElement('link');
     link.rel='stylesheet';
