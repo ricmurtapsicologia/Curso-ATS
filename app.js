@@ -22,11 +22,7 @@
     const submit=gate?.querySelector("#catsAuthSubmit");
     if(!gate||!form||!input)return false;
 
-    if(submit){
-      submit.hidden=true;
-      submit.setAttribute("aria-hidden","true");
-      submit.tabIndex=-1;
-    }
+    if(submit) submit.remove();
 
     const help=gate.querySelector("#catsAuthHelp");
     if(help) help.textContent="Digite sua matrícula BM/PM (7 números) ou CPF cadastrado (11 números). O acesso é validado automaticamente.";
