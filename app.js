@@ -14,18 +14,19 @@
   let timer=0;
 
   const digits=value=>String(value||"").replace(/\D/g,"");
+  const setText=(root,selector,value)=>{const node=root?.querySelector(selector);if(node&&node.textContent!==value)node.textContent=value};
 
   function bindAutoAccess(){
     const gate=document.getElementById("catsAuthGate");
     const form=gate?.querySelector("#catsAuthForm");
     const input=gate?.querySelector("#catsAuthInput");
-    const submit=gate?.querySelector("#catsAuthSubmit");
     if(!gate||!form||!input)return false;
 
-    if(submit) submit.remove();
-
-    const help=gate.querySelector("#catsAuthHelp");
-    if(help) help.textContent="Digite sua matrícula BM/PM (7 números) ou CPF cadastrado (11 números). O acesso é validado automaticamente.";
+    gate.querySelector("#catsAuthSubmit")?.remove();
+    setText(gate,"#catsAuthHelp","Matrícula BM/PM: 7 números. CPF cadastrado: 11 números.");
+    setText(gate,".cats-auth-subtitle","Informe sua credencial de acesso.");
+    setText(gate,".cats-auth-hero-foot span","Identifique-se para acessar o ambiente.");
+    setText(gate,".cats-auth-note","Acesso individual para pessoas cadastradas.");
 
     if(input.dataset.autoAccessBound==="1")return true;
     input.dataset.autoAccessBound="1";
