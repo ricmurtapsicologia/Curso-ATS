@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const VERSION = "2026-09-09.4";
+  const VERSION = "2026-09-09.5";
   const GA_ID = "G-38D052F915";
   const PAGE_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/";
   const PAGE_TITLE = "Atendimento a Tentativas de Suicídio | Aulas ATS — CBMMG";
@@ -17,6 +17,14 @@
 
   const ITO_OLD_ID = "1QW7Wzr6GgBHctNKf7oqTC_I1D0OMHxfA";
   const ITO_2026_ID = "1uAauPvrL-VW3KmVScx-k0UKCnsenbaHC";
+
+  function loadSupplementalAuth() {
+    if (document.querySelector("script[data-ats-extra-auth]")) return;
+    const script = document.createElement("script");
+    script.src = "auth-extra.js?v=20260909-1";
+    script.dataset.atsExtraAuth = "true";
+    document.head.appendChild(script);
+  }
 
   function setMeta(selector, attrs) {
     let el = document.head.querySelector(selector);
@@ -161,6 +169,7 @@
   }
 
   function init() {
+    loadSupplementalAuth();
     setupSeo();
     disableAnalyticsUntilConsent();
     replaceSlideReferences();
