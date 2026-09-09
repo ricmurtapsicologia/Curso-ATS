@@ -1,29 +1,32 @@
 (()=>{
   "use strict";
 
+  // Conjunto histórico vigente em março de 2026.
+  // Fonte: index.html no commit 6b397f44dad7407e759ed9f71dff737344e6083e (26/01/2026),
+  // último estado do arquivo antes de abril de 2026.
   const lessons = [
     {
       title: "Aspectos Gerais",
       dataTitle: "Encontro 1: Aspectos Gerais",
-      description: "Conceitos gerais sobre comportamento suicida, dinâmicas psicológicas, psicopatologia e mitos.",
+      description: "Introdução aos conceitos gerais sobre o comportamento suicida, incluindo dinâmicas psicológicas, psicopatologia e mitos.",
       slideId: "1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB"
     },
     {
       title: "Abordagem Técnica",
       dataTitle: "Encontro 2: Abordagem Técnica",
-      description: "Procedimentos técnicos em ocorrências de ATS, com foco na comunicação e nas estratégias de abordagem.",
+      description: "Procedimentos técnicos em ocorrências de tentativas de suicídio, com foco na comunicação e estratégias de abordagem.",
       slideId: "1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs"
     },
     {
       title: "Aspectos Específicos",
       dataTitle: "Encontro 3: Aspectos Específicos",
-      description: "Abordagens diante de diferentes condições clínicas e comportamentais, incluindo agitação/agressividade, sintomas depressivos e manifestações psicóticas.",
+      description: "Abordagens específicas para diferentes perfis de tentantes, como agressivos, depressivos e psicóticos.",
       slideId: "1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp"
     },
     {
       title: "Gerenciamento em ATS",
       dataTitle: "Encontro 4: Gerenciamento em ATS",
-      description: "Gerenciamento de ocorrências envolvendo tentativas de suicídio, com foco em coordenação da cena e tomada de decisão.",
+      description: "Gerenciamento de ocorrências envolvendo tentativas de suicídio, com foco em planos de ação e uso de métodos.",
       slideId: "1_6dVFpv3trAtLAd2dXSrZbMris95jy1B"
     }
   ];
