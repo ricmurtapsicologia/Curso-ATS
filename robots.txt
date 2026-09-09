@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://ricmurtapsicologia.github.io/Curso-ATS/sitemap.xml
