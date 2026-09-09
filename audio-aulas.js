@@ -133,9 +133,9 @@ function render(manifest){
     byLesson.get(t.lesson).push(t);
   });
 
-  const lessonsHtml=manifest.lessons.map((lesson,idx)=>{
+  const lessonsHtml=manifest.lessons.map((lesson)=>{
     const tracks=byLesson.get(lesson.number)||[];
-    return `<details class="audio-lesson" id="audio-encontro-${lesson.number}" ${idx===0?'open':''}>
+    return `<details class="audio-lesson" id="audio-encontro-${lesson.number}">
       <summary>
         <span class="audio-lesson-number">Encontro ${lesson.number}</span>
         <span class="audio-lesson-title">${esc(lesson.title)}</span>
