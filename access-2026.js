@@ -2,7 +2,7 @@
   "use strict";
 
   // Complemento canônico 14/09/2026: instrutores + alunos autorizados.
-  // 60 matrículas militares únicas; somente hashes SHA-256 são publicados.
+  // Credenciais complementares únicas (matrículas de 7 dígitos e CPFs de 11 dígitos); somente hashes SHA-256 são publicados.
   // Fonte única para as três páginas: Aulas ATS, VIII CATS Pouso Alegre e Podcast Ampulheta.
   const EXTRA_HASHES = new Set([
     "facadc5f08021d016764f8a6879f008d31a57d1d5e6b9b35b5303a57c0edc64f",
@@ -64,7 +64,13 @@
     "c74996532bbe376d348510e44e382d634333096768ba6908e1d61067ad4fcc48",
     "5f6a8f8366adde3931d6b32f8d036a7b29fcd8f93a09610928a456f2e32c7410",
     "f5bb78ae6f90019d743ad959f2ad4c8dc6fab91a0122a3af1c67ca380200e93d",
-    "48c07f2903eb9e0c11478d17b8caa457e849e7667f592397986126f44e23dafa"
+    "48c07f2903eb9e0c11478d17b8caa457e849e7667f592397986126f44e23dafa",
+    "e183b2c36352f04f75e73e1e1062a79d244b34712e648b6fd420eb2f67e4da4c",
+    "588ff7c7bd91e4c7b00a0116f8f0e5dd1e18892ac9d2354c11466594f92d2569",
+    "3283d28d0e3c991d10da9dca843aa85c89668b9a0482b4daf198ad7c9de06289",
+    "bcfbb4d9c8eb8a01e0fcc6dfb377733d6af7dcc058dc32c049a147769c9926e6",
+    "b99374538f716fa0bb4f37ca149ff02bc32f8be98d0cb707171abb9db595a12e",
+    "33c541ce5cfa43ed0447f67ea6ef96c65f61da257d56099451f8760ba56e34c7"
   ]);
 
   const SESSION_KEY = "curso_ats_auth_v3";
@@ -118,7 +124,7 @@
 
     const input = form.querySelector("#catsAuthInput");
     const credential = normalize(input?.value);
-    if (!/^\d{7}$/.test(credential)) return;
+    if (!/^(?:\d{7}|\d{11})$/.test(credential)) return;
 
     event.preventDefault();
     event.stopImmediatePropagation();
