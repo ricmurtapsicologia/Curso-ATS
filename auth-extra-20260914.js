@@ -1,20 +1,27 @@
 (() => {
   "use strict";
 
-  // Credencial complementar adicionada em 14/09/2026.
-  // Somente o hash SHA-256 é publicado; a credencial em texto puro não é armazenada.
-  const AUTH_HASH_B64 = "SMB/KQPrngwRR40XuMqkV+hJ52Z/WSOXmGEm9E4j2vo=";
+  // Política complementar compartilhada entre CATS Pouso Alegre, Podcast Ampulheta e Aulas ATS.
+  // Credenciais são normalizadas para 7 dígitos e comparadas apenas por SHA-256.
+  const ALLOW_HASHES_B64 = new Set([
+    "X2qPg2at3jkx1rMvjQNqeyn82Pk6CWEJKKRW8uMsdBA=",
+    "9bt4rm+QAZ10OtlZ8q1Mjcb6uRoBIqOvHGfKOAIA6T0=",
+    "SMB/KQPrngwRR40XuMqkV+hJ52Z/WSOXmGEm9E4j2vo="
+  ]);
+
+  const REVOKED_HASHES_B64 = new Set([
+    "XVfHxER1nHJnzXdbbVihZgM095MKRsppN2MymY9YwRs=",
+    "M1ewcn4KoJX7mO9uiiDeej5QMYfJoTsVnDysHUH33M4=",
+    "m9ASPEckCxU3bEDbwwZukkSsgjMocMw+6gvCnPGfkiw="
+  ]);
+
   const SESSION_KEY = "curso_ats_auth_v3";
   const FORM_ID = "catsAuthForm";
   const INPUT_ID = "catsAuthInput";
   const GATE_ID = "catsAuthGate";
-  const BYPASS_ATTR = "data-auth-extra-20260914-bypass";
+  const BYPASS_ATTR = "data-auth-policy-20260914-bypass";
 
-  const normalize = value => {
-    const raw = String(value || "").trim().toLowerCase();
-    if (!raw) return "";
-    return /^[\d.\-\s]+$/.test(raw) ? raw.replace(/\D+/g, "") : raw;
-  };
+  const normalize = value => String(value || "").replace(/\D+/g, "");
 
   async function digestB64(value) {
     const bytes = new TextEncoder().encode(value);
@@ -22,6 +29,15 @@
     let binary = "";
     for (const byte of digest) binary += String.fromCharCode(byte);
     return btoa(binary);
+  }
+
+  function showMessage(tone, text) {
+    const box = document.getElementById("catsAuthMessage");
+    const label = document.getElementById("catsAuthMessageText");
+    if (!box || !label) return;
+    box.classList.add("is-visible");
+    box.dataset.tone = tone;
+    label.textContent = text;
   }
 
   function saveSession() {
@@ -38,18 +54,12 @@
 
   function unlock(gate) {
     saveSession();
-    const box = document.getElementById("catsAuthMessage");
-    const label = document.getElementById("catsAuthMessageText");
-    if (box && label) {
-      box.classList.add("is-visible");
-      box.dataset.tone = "success";
-      label.textContent = "Acesso autorizado. Abrindo o ambiente.";
-    }
+    showMessage("success", "Acesso autorizado. Abrindo o ambiente.");
     if (gate) gate.hidden = true;
     document.documentElement.classList.remove("cats-auth-locked");
     const logout = document.getElementById("catsAuthLogout");
     if (logout) logout.hidden = false;
-    window.dispatchEvent(new CustomEvent("cats:authenticated", { detail: { source: "supplemental-20260914" } }));
+    window.dispatchEvent(new CustomEvent("cats:authenticated", { detail: { source: "shared-policy-20260914" } }));
   }
 
   async function intercept(event) {
@@ -69,7 +79,18 @@
     event.stopImmediatePropagation();
 
     try {
-      if (await digestB64(credential) === AUTH_HASH_B64) {
+      const hash = await digestB64(credential);
+
+      if (REVOKED_HASHES_B64.has(hash)) {
+        showMessage("error", "Credencial não autorizada.");
+        if (input) {
+          input.value = "";
+          input.focus();
+        }
+        return;
+      }
+
+      if (credential.length === 7 && ALLOW_HASHES_B64.has(hash)) {
         unlock(document.getElementById(GATE_ID));
         return;
       }
