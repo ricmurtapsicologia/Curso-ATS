@@ -1,0 +1,74 @@
+name: Purge revoked auth hashes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/purge-revoked-auth.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remove revoked hashes from canonical auth base
+        shell: python
+        run: |
+          from pathlib import Path
+          import base64
+          import hashlib
+          import re
+
+          path = Path('auth.js')
+          text = path.read_text(encoding='utf-8')
+          match = re.search(r'const HASH_B64\s*=\s*`([^`]*)`;', text, re.S)
+          if not match:
+              raise SystemExit('HASH_B64 not found')
+
+          raw = base64.b64decode(match.group(1))
+          if len(raw) % 32:
+              raise SystemExit('Invalid HASH_B64 length')
+
+          hashes = [raw[i:i+32] for i in range(0, len(raw), 32)]
+          targets = {
+              hashlib.sha256(value.encode('utf-8')).digest()
+              for value in ('1729458', '1528124', '1844117')
+          }
+
+          before = len(hashes)
+          hashes = [item for item in hashes if item not in targets]
+          removed = before - len(hashes)
+          if removed not in (2, 3):
+              raise SystemExit(f'Unexpected removal count: {removed}')
+          if any(target in hashes for target in targets):
+              raise SystemExit('Revoked hash still present')
+
+          updated_b64 = base64.b64encode(b''.join(hashes)).decode('ascii')
+          text = text[:match.start(1)] + updated_b64 + text[match.end(1):]
+          text = re.sub(
+              r'(\n\s*)406 credenciais autorizadas\.',
+              lambda m: f'{m.group(1)}{len(hashes)} credenciais autorizadas.',
+              text,
+              count=1,
+          )
+          path.write_text(text, encoding='utf-8')
+          print(f'Removed {removed}; canonical base now has {len(hashes)} hashes.')
+
+      - name: Commit canonical cleanup
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add auth.js
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Remove credenciais revogadas da base canônica"
+          git push
