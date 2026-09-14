@@ -1,8 +1,9 @@
 (() => {
   "use strict";
 
-  // Complemento canônico 09/09/2026: instrutores + alunos convocados.
+  // Complemento canônico 14/09/2026: instrutores + alunos autorizados.
   // 60 matrículas militares únicas; somente hashes SHA-256 são publicados.
+  // Fonte única para as três páginas: Aulas ATS, VIII CATS Pouso Alegre e Podcast Ampulheta.
   const EXTRA_HASHES = new Set([
     "facadc5f08021d016764f8a6879f008d31a57d1d5e6b9b35b5303a57c0edc64f",
     "7fc12a8bfaf88cc82a3f3f79a0a97a1be8dc2150739b9b21f9acb39d525c65ef",
@@ -29,10 +30,8 @@
     "72a2e2d8cf285ee5da20f4f6b3c658fef4fff37bd6b80fe7ab44abd42ba6b5e4",
     "80a98584115f33882a1133cde999429d4aa601cf0f7f8dee69b64ba573ef70fd",
     "71655f67d7e85a6cd2d0ed6149a9680c69f9851dda481fae7a50f5c9033abdb7",
-    "5d57c7c444759c7267cd775b6d58a1660334f7930a46ca69376332998f58c11b",
     "6278068d8b6823f8d1974cc72319ec8f4924acbdd1f6df88db9051b6ad618942",
     "8cdbb7e572c6ec0e306b56abbfffa8021845515ab615a7eb471c55272f7ce2f4",
-    "3357b0727e0aa095fb98ef6e8a20de7a3e503187c9a13b159c3cac1d41f7dcce",
     "30b3b58c449cfff87be9e3da8593d42e5fb3531aadfd4d2cd46b13364d8be591",
     "28fb1a33516a5c9c8f948322f1fc08918bb09c46896ef5bc63b9d03503538902",
     "0639abd8bba5d3d814538040ffe30d0d7c5a6469396c56a9ba006aba2ffd70cf",
@@ -56,14 +55,16 @@
     "af91f2d667c8db9bf2b2fe4da9f1287834a1be6f672fb6d8470c876988cec5db",
     "5a78d95fb49b359b22991ae1a127196f09bd4071da2497ce7bac24966fca0d1b",
     "8e0d06cd41deda86c776e1a041ee19d5e134e985ea97ac27b5dd4930d0946418",
-    "9bd0123c47240b15376c40dbc3066e9244ac82332870cc3eea0bc29cf19f922c",
     "6c41b7ceacf87ab03e6bdcb46c13750985db35f827e3f20e88dd589e4b9d22c7",
     "9a535c2bc90cc17cce8132d925201266b1b036b88d68f303338d3f0256699681",
     "969e7d92d611e819cc6d34b52b448d3eb3e1faf0fe6c395e6a801ab6d9cd25df",
     "381e347c1c0cb03dd06bd081e04f3ee6d71174090eb4c5442d75949e5e7be796",
     "fdb73883218e9e7b1f378573efffee9ff14f7d52b97a8c1cf5064e639d4ff9c4",
     "6e1e9703cc8c6852fb00f7304765a9e3b5a4c1050db9bf71ea3bf99e60b0cab0",
-    "c74996532bbe376d348510e44e382d634333096768ba6908e1d61067ad4fcc48"
+    "c74996532bbe376d348510e44e382d634333096768ba6908e1d61067ad4fcc48",
+    "5f6a8f8366adde3931d6b32f8d036a7b29fcd8f93a09610928a456f2e32c7410",
+    "f5bb78ae6f90019d743ad959f2ad4c8dc6fab91a0122a3af1c67ca380200e93d",
+    "48c07f2903eb9e0c11478d17b8caa457e849e7667f592397986126f44e23dafa"
   ]);
 
   const SESSION_KEY = "curso_ats_auth_v3";
@@ -119,8 +120,6 @@
     const credential = normalize(input?.value);
     if (!/^\d{7}$/.test(credential)) return;
 
-    // Bloqueia esta submissão enquanto verifica o complemento. Se não estiver
-    // nele, reenvia uma única vez para a base canônica de auth.js.
     event.preventDefault();
     event.stopImmediatePropagation();
 
