@@ -32,6 +32,7 @@
     injectManualCta();
   }
 
+  load('auth-extra-20260914.js?v=20260914-1');
   load('access-2026.js?v=20260909-1');
   load('app-core.js?v=20260909-1');
   load('restore-original-lessons.js?v=20260909-1');
