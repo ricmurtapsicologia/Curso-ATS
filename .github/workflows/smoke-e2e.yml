@@ -39,6 +39,8 @@ jobs:
 
           with sync_playwright() as p:
               browser=p.chromium.launch(headless=True)
+
+              # Smoke funcional do gate de acesso.
               page=browser.new_page()
               response=page.goto(URL, wait_until='domcontentloaded', timeout=45000)
               assert response and response.ok, f'HTTP inválido: {response.status if response else "sem resposta"}'
@@ -46,6 +48,7 @@ jobs:
               assert page.locator('#catsAuthGate').count() == 1, 'Gate de acesso não foi montado'
               page.close()
 
+              # Fluxo autenticado, sem usar credencial real.
               ctx=browser.new_context(viewport={'width':1365,'height':900})
               ctx.add_init_script(SESSION)
               page=ctx.new_page()
@@ -54,12 +57,24 @@ jobs:
               assert page.locator('.lesson-card').count() >= 4, 'Apresentações não renderizadas'
               assert page.locator('header.site-header').is_visible(), 'Hero principal não visível'
               assert page.locator('#splash-screen').evaluate("el => getComputedStyle(el).display === 'none'"), 'Splash não encerrou'
+
+              # Se o onboarding abre automaticamente nesta versão, validar e fechar primeiro.
+              onboarding=page.locator('#onboarding')
+              if onboarding.is_visible():
+                  assert page.locator('#skip-btn').is_visible(), 'Onboarding automático sem controle de saída'
+                  page.locator('#skip-btn').click()
+                  page.wait_for_timeout(150)
+                  assert not onboarding.is_visible(), 'Onboarding automático não fechou'
+
+              # O CTA deve conseguir reabrir a orientação.
               how=page.locator('#how-to-btn')
               assert how.is_visible(), 'CTA de orientação ausente'
               how.click()
               page.wait_for_timeout(150)
-              assert page.locator('#onboarding').is_visible(), 'Onboarding não abriu pelo CTA'
+              assert onboarding.is_visible(), 'Onboarding não abriu pelo CTA'
               page.locator('#skip-btn').click()
+              page.wait_for_timeout(150)
+
               materials=page.locator('#materials-btn')
               if materials.count():
                   materials.click()
@@ -67,6 +82,7 @@ jobs:
                   assert page.locator('.hidden-links.is-visible').count() > 0, 'Materiais não abriram'
               ctx.close()
 
+              # Responsividade essencial.
               ctx=browser.new_context(viewport={'width':390,'height':844})
               ctx.add_init_script(SESSION)
               mobile=ctx.new_page()
