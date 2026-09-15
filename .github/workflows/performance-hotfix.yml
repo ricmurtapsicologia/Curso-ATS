@@ -1,0 +1,38 @@
+name: Hotfix — performance Aulas ATS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/performance-hotfix.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  hotfix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplicar hotfix sem alterar conteúdo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          old='<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="auth.css?v=20260905-2">'
+          new='''<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>\n<link rel="preconnect" href="https://i.pinimg.com" crossorigin>\n<link rel="preload" as="image" href="https://i.pinimg.com/736x/29/42/2a/29422ad8bed8166ef119bcef4792218f.jpg" fetchpriority="high">\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" media="print" onload="this.media='all'">\n<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"></noscript>\n<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="auth.css?v=20260905-2">'''
+          if old in s:
+              s=s.replace(old,new,1)
+          s=s.replace('ric-analytics.js?v=1.0.0','ric-analytics.js?v=1.1.2')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Publicar hotfix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Hotfix performance e carregamento crítico da página ATS'
+          git push origin HEAD:main
