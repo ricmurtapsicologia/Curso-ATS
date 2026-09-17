@@ -6,8 +6,11 @@ on:
     paths:
       - '.github/workflows/smoke-e2e.yml'
       - 'index.html'
+      - 'app.js'
       - 'app-core.js'
       - 'auth.js'
+      - 'access-2026.js'
+      - 'auth-extra.js'
       - 'styles.css'
   workflow_dispatch: {}
 
@@ -25,11 +28,52 @@ jobs:
         run: |
           curl -fsS --retry 5 --retry-delay 3 --max-time 30 https://ricmurtapsicologia.github.io/Curso-ATS/ -o /tmp/page.html
           grep -q 'Atendimento a Tentativas de' /tmp/page.html
+      - name: Confirmar credencial canônica publicada
+        run: |
+          TARGET_HASH='1bd2fd2ad645a7d6413629f09a5b6e43fc1812188159389cc5ea06ef2e32d3ce'
+          for i in {1..30}; do
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260917-1" -o /tmp/access.js || true
+            if grep -q "$TARGET_HASH" /tmp/access.js 2>/dev/null; then
+              echo 'PASS: credencial canônica publicada.'
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'FAIL: hash da credencial ainda não apareceu na publicação.'
+          exit 1
       - name: Instalar Chromium para E2E
         run: |
           pip install playwright
           playwright install --with-deps chromium
-      - name: E2E — acesso, conteúdo, interação e mobile
+      - name: E2E — gates públicos ATS, CATS e Podcast
+        run: |
+          cat > /tmp/e2e_gates.py <<'PY'
+          from playwright.sync_api import sync_playwright
+
+          targets = {
+              'ATS': 'https://ricmurtapsicologia.github.io/Curso-ATS/',
+              'CATS': 'https://ricmurtapsicologia.github.io/CATS.pousoalegre/',
+              'PODCAST': 'https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/',
+          }
+
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              for name, url in targets.items():
+                  page = browser.new_page(viewport={'width': 1365, 'height': 900})
+                  response = page.goto(url, wait_until='domcontentloaded', timeout=60000)
+                  assert response and response.ok, f'{name}: HTTP inválido'
+                  page.wait_for_selector('#catsAuthGate', timeout=15000)
+                  page.wait_for_selector('#catsAuthInput', timeout=15000)
+                  gate = page.locator('#catsAuthGate')
+                  assert gate.is_visible(), f'{name}: gate não visível'
+                  assert page.locator('#catsAuthForm').count() == 1, f'{name}: formulário ausente'
+                  print(f'PASS_GATE_{name}')
+                  page.close()
+              browser.close()
+          print('PASS_GATES_ALL')
+          PY
+          python /tmp/e2e_gates.py
+      - name: E2E — acesso, conteúdo, interação e mobile ATS
         run: |
           cat > /tmp/e2e.py <<'PY'
           from playwright.sync_api import sync_playwright
@@ -39,8 +83,6 @@ jobs:
 
           with sync_playwright() as p:
               browser=p.chromium.launch(headless=True)
-
-              # Smoke funcional do gate de acesso.
               page=browser.new_page()
               response=page.goto(URL, wait_until='domcontentloaded', timeout=45000)
               assert response and response.ok, f'HTTP inválido: {response.status if response else "sem resposta"}'
@@ -48,7 +90,6 @@ jobs:
               assert page.locator('#catsAuthGate').count() == 1, 'Gate de acesso não foi montado'
               page.close()
 
-              # Fluxo autenticado, sem usar credencial real.
               ctx=browser.new_context(viewport={'width':1365,'height':900})
               ctx.add_init_script(SESSION)
               page=ctx.new_page()
@@ -58,7 +99,6 @@ jobs:
               assert page.locator('header.site-header').is_visible(), 'Hero principal não visível'
               assert page.locator('#splash-screen').evaluate("el => getComputedStyle(el).display === 'none'"), 'Splash não encerrou'
 
-              # Se o onboarding abre automaticamente nesta versão, validar e fechar primeiro.
               onboarding=page.locator('#onboarding')
               if onboarding.is_visible():
                   assert page.locator('#skip-btn').is_visible(), 'Onboarding automático sem controle de saída'
@@ -66,7 +106,6 @@ jobs:
                   page.wait_for_timeout(150)
                   assert not onboarding.is_visible(), 'Onboarding automático não fechou'
 
-              # O CTA deve conseguir reabrir a orientação.
               how=page.locator('#how-to-btn')
               assert how.is_visible(), 'CTA de orientação ausente'
               how.click()
@@ -82,7 +121,6 @@ jobs:
                   assert page.locator('.hidden-links.is-visible').count() > 0, 'Materiais não abriram'
               ctx.close()
 
-              # Responsividade essencial.
               ctx=browser.new_context(viewport={'width':390,'height':844})
               ctx.add_init_script(SESSION)
               mobile=ctx.new_page()
