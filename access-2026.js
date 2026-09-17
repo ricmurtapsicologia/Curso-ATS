@@ -5,6 +5,7 @@
   // Credenciais complementares únicas (matrículas de 7 dígitos e CPFs de 11 dígitos); somente hashes SHA-256 são publicados.
   // Fonte única para as três páginas: Aulas ATS, VIII CATS Pouso Alegre e Podcast Ampulheta.
   const EXTRA_HASHES = new Set([
+    "1bd2fd2ad645a7d6413629f09a5b6e43fc1812188159389cc5ea06ef2e32d3ce",
     "facadc5f08021d016764f8a6879f008d31a57d1d5e6b9b35b5303a57c0edc64f",
     "7fc12a8bfaf88cc82a3f3f79a0a97a1be8dc2150739b9b21f9acb39d525c65ef",
     "2ed7359735cfe59a52f9010748e18305f1e223c7b3d7905de51e622900609651",
