@@ -1,11 +1,15 @@
 (() => {
   "use strict";
 
-  // Compatibilidade: a lista suplementar de credenciais foi consolidada em access-2026.js.
-  // Este arquivo não contém credenciais nem hashes próprios.
-  if (document.querySelector('script[src*="access-2026.js"]')) return;
-  const script = document.createElement("script");
-  script.src = "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260917-1";
-  script.async = false;
-  document.head.appendChild(script);
+  const load = src => {
+    const key = src.split('?')[0];
+    if (document.querySelector(`script[src*="${key}"]`)) return;
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = false;
+    document.head.appendChild(script);
+  };
+
+  load("https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260917-1");
+  load("https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260918-2");
 })();
