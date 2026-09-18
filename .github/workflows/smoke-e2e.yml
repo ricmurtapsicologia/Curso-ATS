@@ -10,6 +10,7 @@ on:
       - 'app-core.js'
       - 'auth.js'
       - 'access-2026.js'
+      - 'access-hotfix-20260918.js'
       - 'auth-extra.js'
       - 'styles.css'
   workflow_dispatch: {}
@@ -28,18 +29,20 @@ jobs:
         run: |
           curl -fsS --retry 5 --retry-delay 3 --max-time 30 https://ricmurtapsicologia.github.io/Curso-ATS/ -o /tmp/page.html
           grep -q 'Atendimento a Tentativas de' /tmp/page.html
-      - name: Confirmar credencial canônica publicada
+      - name: Confirmar credenciais publicadas
         run: |
-          TARGET_HASH='b5575b8bb873f37cfcf809cd4b52747814a3ccdcd4a5fe1c6f8540dd37fdc6f3'
+          CANONICAL_HASH='b5575b8bb873f37cfcf809cd4b52747814a3ccdcd4a5fe1c6f8540dd37fdc6f3'
+          HOTFIX_HASH='9bd0123c47240b15376c40dbc3066e9244ac82332870cc3eea0bc29cf19f922c'
           for i in {1..30}; do
             curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260918-1" -o /tmp/access.js || true
-            if grep -q "$TARGET_HASH" /tmp/access.js 2>/dev/null; then
-              echo 'PASS: credencial canônica publicada.'
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260918-2" -o /tmp/hotfix.js || true
+            if grep -q "$CANONICAL_HASH" /tmp/access.js 2>/dev/null && grep -q "$HOTFIX_HASH" /tmp/hotfix.js 2>/dev/null; then
+              echo 'PASS: credenciais canônica e suplementar publicadas.'
               exit 0
             fi
             sleep 5
           done
-          echo 'FAIL: hash da credencial ainda não apareceu na publicação.'
+          echo 'FAIL: hashes esperados ainda não apareceram na publicação.'
           exit 1
       - name: Instalar Chromium para E2E
         run: |
@@ -67,10 +70,13 @@ jobs:
                   gate = page.locator('#catsAuthGate')
                   assert gate.is_visible(), f'{name}: gate não visível'
                   assert page.locator('#catsAuthForm').count() == 1, f'{name}: formulário ausente'
+                  page.wait_for_function("document.querySelector('script[src*=\"access-hotfix-20260918.js\"]') !== null", timeout=20000)
                   print(f'PASS_GATE_{name}')
+                  print(f'PASS_HOTFIX_LOADER_{name}')
                   page.close()
               browser.close()
           print('PASS_GATES_ALL')
+          print('PASS_HOTFIX_ALL')
           PY
           python /tmp/e2e_gates.py
       - name: E2E — acesso, conteúdo, interação e mobile ATS
