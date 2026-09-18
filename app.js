@@ -33,6 +33,7 @@
   }
 
   load('access-2026.js?v=20260917-1');
+  load('access-hotfix-20260918.js?v=20260918-2');
   load('app-core.js?v=20260909-1');
   load('restore-original-lessons.js?v=20260909-1');
 })();
