@@ -30,9 +30,9 @@ jobs:
           grep -q 'Atendimento a Tentativas de' /tmp/page.html
       - name: Confirmar credencial canônica publicada
         run: |
-          TARGET_HASH='1bd2fd2ad645a7d6413629f09a5b6e43fc1812188159389cc5ea06ef2e32d3ce'
+          TARGET_HASH='b5575b8bb873f37cfcf809cd4b52747814a3ccdcd4a5fe1c6f8540dd37fdc6f3'
           for i in {1..30}; do
-            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260917-1" -o /tmp/access.js || true
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260918-1" -o /tmp/access.js || true
             if grep -q "$TARGET_HASH" /tmp/access.js 2>/dev/null; then
               echo 'PASS: credencial canônica publicada.'
               exit 0
