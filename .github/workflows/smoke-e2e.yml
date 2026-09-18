@@ -101,10 +101,9 @@ jobs:
               page=ctx.new_page()
               page.goto(URL, wait_until='domcontentloaded', timeout=45000)
               page.wait_for_selector('.lesson-card', timeout=20000)
-              page.wait_for_timeout(900)
+              page.wait_for_function("getComputedStyle(document.querySelector('#splash-screen')).display === 'none'", timeout=15000)
               assert page.locator('.lesson-card').count() >= 4, 'Apresentações não renderizadas'
               assert page.locator('header.site-header').is_visible(), 'Hero principal não visível'
-              assert page.locator('#splash-screen').evaluate("el => getComputedStyle(el).display === 'none'"), 'Splash não encerrou'
 
               onboarding=page.locator('#onboarding')
               if onboarding.is_visible():
@@ -133,7 +132,7 @@ jobs:
               mobile=ctx.new_page()
               mobile.goto(URL, wait_until='domcontentloaded', timeout=45000)
               mobile.wait_for_selector('.lesson-card', timeout=20000)
-              mobile.wait_for_timeout(1000)
+              mobile.wait_for_function("getComputedStyle(document.querySelector('#splash-screen')).display === 'none'", timeout=15000)
               overflow=mobile.evaluate('document.documentElement.scrollWidth - window.innerWidth')
               assert overflow <= 3, f'Overflow horizontal mobile: {overflow}px'
               assert mobile.locator('.lesson-card').count() >= 4
