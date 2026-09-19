@@ -65,7 +65,9 @@ try {
 
     page.on('response', async response => {
       if (!response.url().includes('/api/course_telemetry/event')) return;
-      responses.push({ status: response.status(), url: response.url() });
+      const record = { status: response.status(), url: response.url(), body: '' };
+      responses.push(record);
+      try { record.body = await response.text(); } catch {}
     });
 
     const nav = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60_000 });
@@ -81,16 +83,11 @@ try {
       { timeout: 20_000 },
     );
 
-    await page.waitForFunction(
-      () => performance.getEntriesByType('resource').some(entry => entry.name.includes('/api/course_telemetry/event')),
-      undefined,
-      { timeout: 20_000 },
-    ).catch(() => {});
-
     const deadline = Date.now() + 20_000;
     while (Date.now() < deadline && !seen.some(e => e.page === expectedPage && e.event === 'page_view')) {
       await page.waitForTimeout(250);
     }
+    await page.waitForTimeout(1000);
 
     const pageViews = seen.filter(e => e.page === expectedPage && e.event === 'page_view');
     assert.ok(pageViews.length >= 1, `${expectedPage}: no page_view telemetry request observed; seen=${JSON.stringify(seen)}`);
@@ -98,7 +95,7 @@ try {
     assert.ok(seen.every(e => typeof e.session_id === 'string' && e.session_id.startsWith('e2e-monitor-')), `${expectedPage}: E2E session marker missing`);
 
     const accepted = responses.some(r => r.status === 202 || r.status === 200);
-    assert.ok(accepted, `${expectedPage}: backend did not accept telemetry; responses=${JSON.stringify(responses)}`);
+    assert.ok(accepted, `${expectedPage}: backend did not accept telemetry; seen=${JSON.stringify(seen)} responses=${JSON.stringify(responses)}`);
 
     if (expectedPage === 'cats-precurso') {
       const preOpen = seen.some(e => e.page === 'cats-precurso' && e.event === 'precurso_open');
