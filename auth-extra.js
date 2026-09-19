@@ -10,6 +10,6 @@
     document.head.appendChild(script);
   };
 
-  load("https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260919-1");
+  load("https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260919-2");
   load("https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260918-2");
 })();
