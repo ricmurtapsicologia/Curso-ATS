@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  // Política canônica de acesso complementar/revogação para as três páginas:
+  // Política canônica de acesso complementar para as três páginas:
   // Aulas ATS, VIII CATS Pouso Alegre e Podcast Ampulheta.
   // Somente hashes SHA-256 são publicados.
   const EXTRA_HASHES = new Set([
@@ -76,11 +76,6 @@
     "b5575b8bb873f37cfcf809cd4b52747814a3ccdcd4a5fe1c6f8540dd37fdc6f3"
   ]);
 
-  const REVOKED_HASHES = new Set([
-    "5d57c7c444759c7267cd775b6d58a1660334f7930a46ca69376332998f58c11b",
-    "3357b0727e0aa095fb98ef6e8a20de7a3e503187c9a13b159c3cac1d41f7dcce"
-  ]);
-
   const SESSION_KEY = "curso_ats_auth_v3";
   const ATTEMPTS_KEY = "ats_login_attempts_v3";
   const TTL_MS = 8 * 60 * 60 * 1000;
@@ -121,15 +116,6 @@
     if (button) button.disabled = true;
   }
 
-  function revokedUi(form) {
-    const input = form.querySelector("#catsAuthInput");
-    const msg = form.querySelector("#catsAuthMessage");
-    const text = form.querySelector("#catsAuthMessageText");
-    if (input) input.setAttribute("aria-invalid", "true");
-    if (msg) { msg.classList.add("is-visible"); msg.dataset.tone = "error"; }
-    if (text) text.textContent = "Credencial não autorizada.";
-  }
-
   function intercept(event) {
     const form = event.target;
     if (!(form instanceof HTMLFormElement) || form.id !== "catsAuthForm") return;
@@ -147,10 +133,6 @@
     event.stopImmediatePropagation();
 
     sha256Hex(credential).then(hash => {
-      if (REVOKED_HASHES.has(hash)) {
-        revokedUi(form);
-        return;
-      }
       if (EXTRA_HASHES.has(hash)) {
         saveSession();
         successUi(form);
