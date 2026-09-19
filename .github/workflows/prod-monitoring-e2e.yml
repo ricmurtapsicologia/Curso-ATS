@@ -39,4 +39,5 @@ jobs:
         run: node tests/prod-monitoring-e2e.mjs
 
       - name: No deployment in E2E
-        run: echo 'PASS: validation only; no deploy action executed.'
+        run: |
+          echo 'PASS: validation only; no deploy action executed.'
