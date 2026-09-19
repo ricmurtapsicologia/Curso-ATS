@@ -1,10 +1,11 @@
 (() => {
   "use strict";
 
-  // Complemento canônico 14/09/2026: instrutores + alunos autorizados.
-  // Credenciais complementares únicas (matrículas de 7 dígitos e CPFs de 11 dígitos); somente hashes SHA-256 são publicados.
-  // Fonte única para as três páginas: Aulas ATS, VIII CATS Pouso Alegre e Podcast Ampulheta.
+  // Política canônica de acesso complementar/revogação para as três páginas:
+  // Aulas ATS, VIII CATS Pouso Alegre e Podcast Ampulheta.
+  // Somente hashes SHA-256 são publicados.
   const EXTRA_HASHES = new Set([
+    "66e876aef0a8cbf432175f54ffae266fab1946a99e70ad60b8cbad9e780f9a51",
     "1bd2fd2ad645a7d6413629f09a5b6e43fc1812188159389cc5ea06ef2e32d3ce",
     "facadc5f08021d016764f8a6879f008d31a57d1d5e6b9b35b5303a57c0edc64f",
     "7fc12a8bfaf88cc82a3f3f79a0a97a1be8dc2150739b9b21f9acb39d525c65ef",
@@ -75,6 +76,11 @@
     "b5575b8bb873f37cfcf809cd4b52747814a3ccdcd4a5fe1c6f8540dd37fdc6f3"
   ]);
 
+  const REVOKED_HASHES = new Set([
+    "5d57c7c444759c7267cd775b6d58a1660334f7930a46ca69376332998f58c11b",
+    "3357b0727e0aa095fb98ef6e8a20de7a3e503187c9a13b159c3cac1d41f7dcce"
+  ]);
+
   const SESSION_KEY = "curso_ats_auth_v3";
   const ATTEMPTS_KEY = "ats_login_attempts_v3";
   const TTL_MS = 8 * 60 * 60 * 1000;
@@ -115,6 +121,15 @@
     if (button) button.disabled = true;
   }
 
+  function revokedUi(form) {
+    const input = form.querySelector("#catsAuthInput");
+    const msg = form.querySelector("#catsAuthMessage");
+    const text = form.querySelector("#catsAuthMessageText");
+    if (input) input.setAttribute("aria-invalid", "true");
+    if (msg) { msg.classList.add("is-visible"); msg.dataset.tone = "error"; }
+    if (text) text.textContent = "Credencial não autorizada.";
+  }
+
   function intercept(event) {
     const form = event.target;
     if (!(form instanceof HTMLFormElement) || form.id !== "catsAuthForm") return;
@@ -132,6 +147,10 @@
     event.stopImmediatePropagation();
 
     sha256Hex(credential).then(hash => {
+      if (REVOKED_HASHES.has(hash)) {
+        revokedUi(form);
+        return;
+      }
       if (EXTRA_HASHES.has(hash)) {
         saveSession();
         successUi(form);
