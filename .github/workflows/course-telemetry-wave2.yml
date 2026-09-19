@@ -1,0 +1,54 @@
+name: Course Telemetry — Wave 2
+
+on:
+  push:
+    branches:
+      - feat/course-telemetry-wave2-20260919
+    paths:
+      - 'course-telemetry.js'
+      - 'tests/course-telemetry.test.mjs'
+      - '.github/workflows/course-telemetry-wave2.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  wave2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Unit tests — privacy, identity and fail-open
+        run: node tests/course-telemetry.test.mjs
+
+      - name: Gate — autenticação idêntica ao baseline
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- \
+            auth.js \
+            access-2026.js \
+            access-hotfix-20260918.js \
+            auth-extra.js \
+            app.js \
+            index.html
+
+      - name: Gate — nenhum armazenamento persistente de credencial
+        run: |
+          ! grep -n 'localStorage' course-telemetry.js
+          ! grep -n 'console\.log' course-telemetry.js
+          grep -n 'credential_hash' course-telemetry.js
+          ! grep -n 'JSON.stringify({ credential:' course-telemetry.js
+
+      - name: Gate — nenhuma promoção nesta onda
+        run: |
+          test "${GITHUB_REF_NAME}" = 'feat/course-telemetry-wave2-20260919'
+          echo 'PASS: Wave 2 permanece isolada; nenhuma alteração em main.'
