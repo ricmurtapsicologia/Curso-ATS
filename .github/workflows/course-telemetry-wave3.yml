@@ -1,0 +1,43 @@
+name: Course Telemetry — Wave 3
+
+on:
+  push:
+    branches:
+      - feat/course-telemetry-wave3-20260919
+    paths:
+      - 'course-telemetry.js'
+      - 'course-telemetry-adapter.js'
+      - 'auth-extra.js'
+      - 'tests/course-telemetry*.test.mjs'
+      - '.github/workflows/course-telemetry-wave3.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  wave3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit tests — core
+        run: node tests/course-telemetry.test.mjs
+      - name: Unit tests — four-surface adapter
+        run: node tests/course-telemetry-adapter.test.mjs
+      - name: Gate — functional pages remain unchanged
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- auth.js access-2026.js access-hotfix-20260918.js app.js index.html
+      - name: Gate — no PII fields or blocking hooks in adapter
+        run: |
+          ! grep -En 'preventDefault\(|stopPropagation\(|stopImmediatePropagation\(|localStorage' course-telemetry-adapter.js
+          ! grep -Ein 'cpf|bdi|alerg|sangue|diagn' course-telemetry-adapter.js
+      - name: Gate — no production deployment
+        run: |
+          test "${GITHUB_REF_NAME}" = 'feat/course-telemetry-wave3-20260919'
+          echo 'PASS: Wave 3 isolated from main.'

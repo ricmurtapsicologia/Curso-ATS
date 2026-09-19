@@ -1,0 +1,41 @@
+name: Course Telemetry Wave 4
+
+on:
+  push:
+    branches:
+      - feat/course-telemetry-wave4-20260919
+
+permissions:
+  contents: read
+
+jobs:
+  four-surfaces:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+      - name: Four-surface regression with branch sidecar injection
+        run: python tests/wave4_four_surfaces.py
+      - name: Verify no functional source regression
+        shell: bash
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- auth.js access-2026.js access-hotfix-20260918.js app.js app-core.js index.html styles.css
+      - name: Verify telemetry is fail-open by construction
+        shell: bash
+        run: |
+          grep -q "adapter_fail_open" course-telemetry-adapter.js
+          grep -q "identity_unavailable" course-telemetry.js
+          if grep -q "preventDefault" course-telemetry.js; then exit 1; fi
+          if grep -q "stopImmediatePropagation" course-telemetry.js; then exit 1; fi
+          echo FAIL_OPEN_OK
+      - name: No deploy gate
+        run: echo NO_DEPLOY_WAVE4

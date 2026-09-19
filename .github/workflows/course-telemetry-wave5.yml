@@ -1,0 +1,55 @@
+name: Course Telemetry Wave 5
+
+on:
+  push:
+    branches:
+      - release/course-telemetry-wave5-20260919
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  release-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests — telemetry core
+        run: node tests/course-telemetry.test.mjs
+      - name: Unit tests — four-surface adapter
+        run: node tests/course-telemetry-adapter.test.mjs
+      - name: Canonical 39 active / 3 removed credential gate
+        run: node tests/course-telemetry-roster-wave5.test.mjs
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Four-surface regression with collector up and down
+        run: python tests/wave4_four_surfaces.py
+      - name: Gate functional source drift is surgical
+        shell: bash
+        run: |
+          git fetch origin main --depth=1
+          changed="$(git diff --name-only origin/main...HEAD)"
+          echo "$changed"
+          forbidden="$(printf '%s\n' "$changed" | grep -E '^(index\.html|app\.js|auth\.js|styles\.css)$' || true)"
+          test -z "$forbidden"
+      - name: Gate removed credentials stay removed
+        shell: bash
+        run: |
+          ! grep -q '5d57c7c444759c7267cd775b6d58a1660334f7930a46ca69376332998f58c11b' access-2026.js access-hotfix-20260918.js
+          ! grep -q '3357b0727e0aa095fb98ef6e8a20de7a3e503187c9a13b159c3cac1d41f7dcce' access-2026.js access-hotfix-20260918.js
+          ! grep -q '6e1e9703cc8c6852fb00f7304765a9e3b5a4c1050db9bf71ea3bf99e60b0cab0' access-2026.js access-hotfix-20260918.js
+      - name: No deploy in validation gate
+        run: echo NO_PRODUCTION_DEPLOY_WAVE5_GATE
