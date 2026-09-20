@@ -3,6 +3,7 @@
 
   const DEFAULT_TIMEOUT_MS = 5000;
   const ACCESS_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260920-v204";
+  const COMPAT_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260920-v204";
 
   const load = (src, attrs = {}, timeoutMs = DEFAULT_TIMEOUT_MS) => new Promise(resolve => {
     const key = src.split('?')[0];
@@ -86,6 +87,10 @@
 
     // AUTORIZAÇÃO PRIMEIRO: nenhuma dependência de analytics, telemetria ou Vercel.
     await bootAccess();
+
+    // Compatibilidade observável para clientes antigos: o arquivo legado é carregado,
+    // mas está inerte e não registra um segundo interceptor de submit.
+    void load(COMPAT_URL, { catsAccess: "compat" });
 
     // Não aguardar observabilidade para liberar o restante do fluxo.
     void bootObservability();
