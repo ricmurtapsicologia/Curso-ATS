@@ -22,7 +22,7 @@
   function loadSupplementalAuth() {
     if (document.querySelector("script[data-ats-extra-auth]")) return;
     const script = document.createElement("script");
-    script.src = "auth-extra.js?v=20260920-v202";
+    script.src = "auth-extra.js?v=20260920-v203";
     script.dataset.atsExtraAuth = "true";
     document.head.appendChild(script);
   }
