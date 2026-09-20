@@ -12,6 +12,7 @@ on:
       - 'access-2026.js'
       - 'access-hotfix-20260918.js'
       - 'auth-extra.js'
+      - 'cats-analytics-v2.js'
       - 'styles.css'
   workflow_dispatch: {}
 
@@ -43,6 +44,19 @@ jobs:
             sleep 5
           done
           echo 'FAIL: hashes esperados ainda não apareceram na publicação.'
+          exit 1
+      - name: Confirmar Analytics V2 publicado
+        run: |
+          for i in {1..30}; do
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js?v=20260920-v2" -o /tmp/analytics-v2.js || true
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/auth-extra.js?v=20260920-ops1" -o /tmp/auth-extra.js || true
+            if grep -q 'presentation_open' /tmp/analytics-v2.js 2>/dev/null && grep -q 'cats-analytics-v2.js?v=20260920-v2' /tmp/auth-extra.js 2>/dev/null; then
+              echo 'PASS: Analytics V2 e loader universal publicados.'
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'FAIL: Analytics V2 ainda não apareceu na publicação.'
           exit 1
       - name: Instalar Chromium para E2E
         run: |
@@ -79,6 +93,50 @@ jobs:
           print('PASS_HOTFIX_ALL')
           PY
           python /tmp/e2e_gates.py
+      - name: E2E — Analytics V2 coleta antes do login
+        run: |
+          cat > /tmp/e2e_analytics.py <<'PY'
+          import json
+          from playwright.sync_api import sync_playwright
+
+          targets = {
+              'curso-ats': 'https://ricmurtapsicologia.github.io/Curso-ATS/',
+              'cats-pouso-alegre': 'https://ricmurtapsicologia.github.io/CATS.pousoalegre/',
+              'podcast-ats': 'https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/',
+          }
+          endpoint = 'https://secretaria-digital-core.vercel.app/api/analytics/v2/collect'
+
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              for expected_page, url in targets.items():
+                  context = browser.new_context(viewport={'width': 390, 'height': 844})
+                  page = context.new_page()
+                  events = []
+
+                  def capture(route, request):
+                      if request.method == 'POST':
+                          try:
+                              events.append(json.loads(request.post_data or '{}'))
+                          except Exception:
+                              pass
+                      route.fulfill(status=202, content_type='application/json', body='{"ok":true,"accepted":true}')
+
+                  page.route(endpoint, capture)
+                  response = page.goto(url, wait_until='domcontentloaded', timeout=60000)
+                  assert response and response.ok, f'{expected_page}: HTTP inválido'
+                  page.wait_for_function('window.CATSAnalyticsV2 && window.CATSAnalyticsV2.version === "2.0.0"', timeout=20000)
+                  page.wait_for_timeout(1000)
+                  pageviews = [e for e in events if e.get('event') == 'page_view']
+                  assert pageviews, f'{expected_page}: page_view ausente antes do login'
+                  assert pageviews[0].get('page') == expected_page, f'{expected_page}: página incorreta {pageviews[0]}'
+                  assert pageviews[0].get('device_category') == 'mobile', f'{expected_page}: dispositivo não classificado como mobile'
+                  assert not any(k in pageviews[0] for k in ('uid','credential_hash','cpf','email','bdi')), f'{expected_page}: campo sensível no payload'
+                  print(f'PASS_ANALYTICS_NOLOGIN_{expected_page}')
+                  context.close()
+              browser.close()
+          print('PASS_ANALYTICS_V2_UNIVERSAL')
+          PY
+          python /tmp/e2e_analytics.py
       - name: E2E — acesso, conteúdo, interação e mobile ATS
         run: |
           cat > /tmp/e2e.py <<'PY'
