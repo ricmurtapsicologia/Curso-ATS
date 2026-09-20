@@ -21,13 +21,13 @@ assert.ok(source.includes('share-page'), 'share control must be observable');
 assert.ok(hardening.includes('data.telemetryId') || hardening.includes('dataset.telemetryId'), 'course resources must expose telemetry IDs');
 assert.ok(hardening.includes('share-page'), 'share button must expose telemetry ID');
 
-const corePos = authExtra.indexOf('course-telemetry.js');
 const accessPos = authExtra.indexOf('access-2026.js');
 const hotfixPos = authExtra.indexOf('access-hotfix-20260918.js');
-const adapterPos = authExtra.indexOf('course-telemetry-adapter.js');
-assert.ok(corePos >= 0 && accessPos > corePos && hotfixPos > accessPos && adapterPos > hotfixPos,
-  'telemetry core must load before access interceptors and adapter must load last');
-assert.ok(authExtra.includes('await load('), 'shared loader must enforce sequential loading');
+const observabilityCall = authExtra.lastIndexOf('void bootObservability()');
+assert.ok(accessPos >= 0 && hotfixPos >= 0 && observabilityCall > accessPos && observabilityCall > hotfixPos,
+  'access policies must initialize before observability');
+assert.ok(authExtra.includes('DEFAULT_TIMEOUT_MS = 3500'), 'shared loader must fail open on stalled auxiliary scripts');
+assert.ok(authExtra.includes('Promise.all(['), 'shared loader must not serialize independent access policies');
 
 assert.ok(!source.includes('preventDefault('), 'telemetry adapter must not block page interactions');
 assert.ok(!source.includes('stopPropagation('), 'telemetry adapter must not stop page interactions');
