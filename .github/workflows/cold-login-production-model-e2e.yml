@@ -1,0 +1,47 @@
+name: Cold Login Production Model E2E
+
+on:
+  push:
+    branches:
+      - qa/cold-login-production-e2e-20260919
+    paths:
+      - 'tests/cold-login-production-model-e2e.mjs'
+      - '.github/workflows/cold-login-production-model-e2e.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Cold-login browser E2E
+        run: node tests/cold-login-production-model-e2e.mjs
+      - name: Live shared auth source has cold-login fix
+        run: |
+          for q in 20260919-coldlogin1 20260917-1 20260919-1; do
+            body="$(curl -fsSL --retry 3 --retry-delay 2 "https://ricmurtapsicologia.github.io/Curso-ATS/auth-extra.js?v=$q")"
+            echo "$body" | grep -q 'course-telemetry.js?v=20260919-coldlogin1'
+            echo "$body" | grep -q 'await load'
+          done
+      - name: Four live pages respond
+        run: |
+          for url in \
+            'https://ricmurtapsicologia.github.io/Curso-ATS/' \
+            'https://ricmurtapsicologia.github.io/CATS.pousoalegre/' \
+            'https://ricmurtapsicologia.github.io/CATS.pousoalegre/precurso.html' \
+            'https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/'; do
+            test "$(curl -L -s -o /dev/null -w '%{http_code}' "$url")" = '200'
+          done
+      - name: No deployment
+        run: echo 'PASS: QA-only workflow; no deploy step.'
