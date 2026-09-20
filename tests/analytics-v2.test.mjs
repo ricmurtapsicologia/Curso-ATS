@@ -27,14 +27,16 @@ assert.match(source, /version:"2\.0\.1"/, 'versão 2.0.1 não exposta');
 
 assert.match(loader, /DEFAULT_TIMEOUT_MS\s*=\s*3500/, 'timeout fail-open do loader ausente');
 assert.match(loader, /void bootObservability\(\)/, 'observabilidade precisa ser não bloqueante');
+assert.match(loader, /access-2026\.js\?v=20260920-bypass1/, 'cache-bust da política canônica ausente');
+assert.match(loader, /access-hotfix-20260918\.js\?v=20260920-bypass1/, 'cache-bust da política suplementar ausente');
 assert.match(loader, /catsAccess: "canonical"/, 'política canônica de acesso não priorizada');
 assert.match(loader, /catsAccess: "supplemental"/, 'política suplementar de acesso não priorizada');
 
-const accessPos = loader.indexOf('access-2026.js?v=20260919-3');
+const accessPos = loader.indexOf('access-2026.js?v=20260920-bypass1');
 const observeCallPos = loader.lastIndexOf('void bootObservability()');
 assert.ok(accessPos >= 0 && observeCallPos >= 0 && accessPos < observeCallPos, 'autorização deve ser iniciada antes da observabilidade');
 assert.ok(!loader.includes('await load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js'), 'analytics não pode bloquear política de acesso');
-assert.ok(hardening.includes('auth-extra.js?v=20260920-v202'), 'cache-bust v202 do loader de acesso ausente');
+assert.ok(hardening.includes('auth-extra.js?v=20260920-v203'), 'cache-bust v203 do loader de acesso ausente');
 
 for (const candidate of [accessCanonical, accessHotfix]) {
   assert.match(candidate, /const SHARED_BYPASS = "catsAccessBypass"/, 'interceptadores precisam compartilhar o mesmo bypass');
