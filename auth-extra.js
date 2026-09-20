@@ -48,12 +48,10 @@
   };
 
   const bootObservability = async () => {
-    // Observabilidade é sempre fail-open e nunca antecede a política suplementar de acesso.
     await Promise.all([
       load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js?v=20260920-v201", { catsAnalytics: "v2" }),
       load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry.js?v=20260919-coldlogin1", { catsTelemetry: "core" })
     ]);
-
     await Promise.all([
       load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry-adapter.js?v=20260919-coldlogin1", { catsTelemetry: "adapter" }),
       load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry-ops.js?v=20260920-ops1", { catsTelemetry: "ops" })
@@ -63,14 +61,12 @@
   const boot = async () => {
     configureTelemetry();
 
-    // AUTORIZAÇÃO PRIMEIRO: credenciais suplementares não podem depender de analytics,
-    // telemetria, Vercel ou qualquer outro serviço de observabilidade.
+    // Autorização vem primeiro e cada política recebe um cache-bust próprio desta correção.
     await Promise.all([
-      load("https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260919-3", { catsAccess: "canonical" }),
-      load("https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260919-3", { catsAccess: "supplemental" })
+      load("https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260920-bypass1", { catsAccess: "canonical" }),
+      load("https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260920-bypass1", { catsAccess: "supplemental" })
     ]);
 
-    // Não aguardar observabilidade para liberar o restante do fluxo.
     void bootObservability();
   };
 
