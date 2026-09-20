@@ -25,6 +25,7 @@
       if (!window.CATS_COURSE_TELEMETRY_CONFIG) {
         window.CATS_COURSE_TELEMETRY_CONFIG = Object.freeze({
           endpoint: "https://secretaria-digital-core.vercel.app/api/course_telemetry",
+          opsEndpoint: "https://secretaria-digital-core.vercel.app/api/course_telemetry_signal",
           authWaitMs: 1600,
           authPollMs: 25
         });
@@ -43,8 +44,9 @@
     await load("https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260919-3");
     await load("https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260919-3");
 
-    // Adapter somente após core e políticas de acesso.
+    // Adapters observacionais carregados depois do core e das políticas de acesso.
     await load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry-adapter.js?v=20260919-coldlogin1", { catsTelemetry: "adapter" });
+    await load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry-ops.js?v=20260920-ops1", { catsTelemetry: "ops" });
   };
 
   void boot();
