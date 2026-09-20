@@ -25,7 +25,7 @@
       if (!window.CATS_COURSE_TELEMETRY_CONFIG) {
         window.CATS_COURSE_TELEMETRY_CONFIG = Object.freeze({
           endpoint: "https://secretaria-digital-core.vercel.app/api/course_telemetry",
-          opsEndpoint: "https://secretaria-digital-core.vercel.app/api/course_telemetry_signal",
+          opsEndpoint: "https://secretaria-digital-core.vercel.app/api/course_telemetry/signal",
           authWaitMs: 1600,
           authPollMs: 25
         });
