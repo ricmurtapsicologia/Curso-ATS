@@ -108,8 +108,9 @@ jobs:
 
           with sync_playwright() as p:
               browser = p.chromium.launch(headless=True)
+              pixel = {k: v for k, v in p.devices['Pixel 7'].items() if k != 'default_browser_type'}
               for expected_page, url in targets.items():
-                  context = browser.new_context(viewport={'width': 390, 'height': 844})
+                  context = browser.new_context(**pixel)
                   page = context.new_page()
                   events = []
 
