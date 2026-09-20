@@ -45,3 +45,5 @@ jobs:
         run: |
           ! grep -Eqi 'deploy|gh-pages|pages deploy' .github/workflows/telemetry-cold-login-fix.yml
           echo 'PASS: validation-only workflow.'
+
+# Validation-only gate for the cold-login observability closure.
