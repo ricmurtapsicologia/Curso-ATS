@@ -1,0 +1,41 @@
+name: CATS telemetry ops hotfix
+
+on:
+  push:
+    branches:
+      - hotfix/cats-telemetry-ops-20260920
+    paths:
+      - 'auth-extra.js'
+      - 'course-telemetry*.js'
+      - 'tests/course-telemetry*.test.mjs'
+      - '.github/workflows/course-telemetry-ops-hotfix.yml'
+  pull_request:
+    paths:
+      - 'auth-extra.js'
+      - 'course-telemetry*.js'
+      - 'tests/course-telemetry*.test.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  telemetry-ops:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax gates
+        run: |
+          node --check auth-extra.js
+          node --check course-telemetry.js
+          node --check course-telemetry-adapter.js
+          node --check course-telemetry-ops.js
+      - name: Existing telemetry regressions
+        run: |
+          node tests/course-telemetry.test.mjs
+          node tests/course-telemetry-adapter.test.mjs
+      - name: Ops privacy regression
+        run: node tests/course-telemetry-ops.test.mjs
