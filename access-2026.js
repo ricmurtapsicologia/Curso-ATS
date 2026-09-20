@@ -78,6 +78,7 @@
   const SESSION_KEY = "curso_ats_auth_v3";
   const ATTEMPTS_KEY = "ats_login_attempts_v3";
   const TTL_MS = 8 * 60 * 60 * 1000;
+  const SHARED_BYPASS = "catsAccessBypass";
 
   const normalize = value => {
     const raw = String(value || "").trim().toLowerCase();
@@ -115,14 +116,19 @@
     if (button) button.disabled = true;
   }
 
+  function retryBase(form) {
+    form.dataset[SHARED_BYPASS] = "1";
+    try {
+      form.requestSubmit();
+    } finally {
+      queueMicrotask(() => { delete form.dataset[SHARED_BYPASS]; });
+    }
+  }
+
   function intercept(event) {
     const form = event.target;
     if (!(form instanceof HTMLFormElement) || form.id !== "catsAuthForm") return;
-
-    if (form.dataset.extraAuthBypass === "1") {
-      delete form.dataset.extraAuthBypass;
-      return;
-    }
+    if (form.dataset[SHARED_BYPASS] === "1") return;
 
     const input = form.querySelector("#catsAuthInput");
     const credential = normalize(input?.value);
@@ -138,12 +144,8 @@
         window.setTimeout(() => window.location.reload(), 180);
         return;
       }
-      form.dataset.extraAuthBypass = "1";
-      form.requestSubmit();
-    }).catch(() => {
-      form.dataset.extraAuthBypass = "1";
-      form.requestSubmit();
-    });
+      retryBase(form);
+    }).catch(() => retryBase(form));
   }
 
   document.addEventListener("submit", intercept, true);
