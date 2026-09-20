@@ -39,7 +39,7 @@
     configureTelemetry();
 
     // Analytics universal nasce antes do login. Falha de analytics nunca bloqueia acesso.
-    await load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js?v=20260920-v2", { catsAnalytics: "v2" });
+    await load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js?v=20260920-v201", { catsAnalytics: "v2" });
 
     // Core autenticado preservado para vincular sessão pseudônima ao integrante autorizado.
     await load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry.js?v=20260919-coldlogin1", { catsTelemetry: "core" });
