@@ -41,3 +41,58 @@ jobs:
           done
           echo 'FAIL: publicação ainda não convergiu para a política canônica.'
           exit 1
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: E2E — canonical login path on all three surfaces
+        run: |
+          cat > /tmp/access-e2e.mjs <<'JS'
+          import { chromium } from 'playwright';
+
+          const hash = '9bd0123c47240b15376c40dbc3066e9244ac82332870cc3eea0bc29cf19f922c';
+          const bytes = hash.match(/../g).map(h => Number.parseInt(h, 16));
+          const targets = {
+            ATS: 'https://ricmurtapsicologia.github.io/Curso-ATS/',
+            CATS: 'https://ricmurtapsicologia.github.io/CATS.pousoalegre/',
+            PODCAST: 'https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/'
+          };
+
+          const browser = await chromium.launch({ headless: true });
+          for (const [name, url] of Object.entries(targets)) {
+            const context = await browser.newContext();
+            await context.addInitScript(({ bytes }) => {
+              const digest = new Uint8Array(bytes).buffer;
+              Object.defineProperty(SubtleCrypto.prototype, 'digest', {
+                configurable: true,
+                value: async function () { return digest.slice(0); }
+              });
+            }, { bytes });
+
+            const page = await context.newPage();
+            const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+            if (!response?.ok()) throw new Error(`${name}: HTTP inválido`);
+
+            await page.waitForSelector('#catsAuthInput', { timeout: 20000 });
+            await page.waitForFunction(() => document.querySelector('script[src*="access-2026.js"]') !== null, null, { timeout: 20000 });
+            await page.locator('#catsAuthInput').fill('0000000');
+            await page.locator('#catsAuthForm').evaluate(form => form.requestSubmit());
+
+            await page.waitForFunction(() => {
+              for (let i = 0; i < sessionStorage.length; i += 1) {
+                const key = sessionStorage.key(i);
+                try {
+                  const value = JSON.parse(sessionStorage.getItem(key) || 'null');
+                  if (value?.authenticated === true) return true;
+                } catch {}
+              }
+              return false;
+            }, null, { timeout: 15000 });
+
+            console.log(`PASS_CANONICAL_LOGIN_${name}`);
+            await context.close();
+          }
+          await browser.close();
+          console.log('PASS_CANONICAL_LOGIN_ALL');
+          JS
+          node /tmp/access-e2e.mjs
