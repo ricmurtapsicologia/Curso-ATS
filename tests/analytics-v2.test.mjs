@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 const source = readFileSync(new URL('../cats-analytics-v2.js', import.meta.url), 'utf8');
 const loader = readFileSync(new URL('../auth-extra.js', import.meta.url), 'utf8');
 const hardening = readFileSync(new URL('../hardening.js', import.meta.url), 'utf8');
+const accessCanonical = readFileSync(new URL('../access-2026.js', import.meta.url), 'utf8');
+const accessHotfix = readFileSync(new URL('../access-hotfix-20260918.js', import.meta.url), 'utf8');
 
 assert.match(source, /send\("page_view"\)/, 'page_view universal ausente');
 assert.match(source, /presentation_open/, 'presentation_open ausente');
@@ -33,6 +35,15 @@ const observeCallPos = loader.lastIndexOf('void bootObservability()');
 assert.ok(accessPos >= 0 && observeCallPos >= 0 && accessPos < observeCallPos, 'autorização deve ser iniciada antes da observabilidade');
 assert.ok(!loader.includes('await load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js'), 'analytics não pode bloquear política de acesso');
 assert.ok(hardening.includes('auth-extra.js?v=20260920-v202'), 'cache-bust v202 do loader de acesso ausente');
+
+for (const candidate of [accessCanonical, accessHotfix]) {
+  assert.match(candidate, /const SHARED_BYPASS = "catsAccessBypass"/, 'interceptadores precisam compartilhar o mesmo bypass');
+  assert.match(candidate, /if \(form\.dataset\[SHARED_BYPASS\] === "1"\) return;/, 'retry ao gate-base precisa atravessar todos os interceptadores');
+  assert.match(candidate, /queueMicrotask\(\(\) => \{ delete form\.dataset\[SHARED_BYPASS\]; \}\)/, 'bypass precisa sobreviver ao evento de reenvio completo');
+  assert.match(candidate, /function retryBase\(form\)/, 'fallback explícito ao validador-base ausente');
+}
+assert.ok(!accessCanonical.includes('extraAuthBypass'), 'bypass antigo canônico não pode permanecer');
+assert.ok(!accessHotfix.includes('accessHotfixBypass'), 'bypass antigo do hotfix não pode permanecer');
 
 for (const forbidden of ['credential_hash:', 'cpf:', 'bdi:', 'email:']) {
   assert.ok(!source.includes(forbidden), `coletor não pode emitir ${forbidden}`);
