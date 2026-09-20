@@ -1,0 +1,43 @@
+name: Access Policy Regression
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'access-2026.js'
+      - 'access-hotfix-20260918.js'
+      - 'auth-extra.js'
+      - 'tests/access-policy-regression.test.mjs'
+      - '.github/workflows/access-policy-regression.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  access-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regression — single canonical interceptor
+        run: node tests/access-policy-regression.test.mjs
+      - name: Production publication gate
+        run: |
+          MIGRATED_HASH='9bd0123c47240b15376c40dbc3066e9244ac82332870cc3eea0bc29cf19f922c'
+          for i in {1..36}; do
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20260920-v204" -o /tmp/access.js || true
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260920-v204" -o /tmp/legacy.js || true
+            curl -fsS --max-time 30 "https://ricmurtapsicologia.github.io/Curso-ATS/auth-extra.js?v=20260920-v204" -o /tmp/loader.js || true
+            if grep -q "$MIGRATED_HASH" /tmp/access.js 2>/dev/null \
+              && ! grep -q 'document.addEventListener("submit"' /tmp/legacy.js 2>/dev/null \
+              && grep -q 'access-2026.js?v=20260920-v204' /tmp/loader.js 2>/dev/null; then
+              echo 'PASS: política canônica publicada, hotfix legado inerte e loader atualizado.'
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'FAIL: publicação ainda não convergiu para a política canônica.'
+          exit 1
