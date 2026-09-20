@@ -27,4 +27,5 @@ jobs:
       - name: Audit four live pages
         run: node tests/ga4-live-audit.mjs
       - name: No deployment
-        run: echo 'PASS: audit only; no deployment.'
+        run: |
+          echo 'PASS: audit only; no deployment.'
