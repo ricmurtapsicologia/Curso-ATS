@@ -2,7 +2,7 @@
   "use strict";
 
   const VERSION = "2026-09-19.6";
-  const GA_ID = "G-38D052F915";
+  const GA_ID = "G-N1GEBDNZ8B";
   const PAGE_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/";
   const PAGE_TITLE = "Atendimento a Tentativas de Suicídio | Aulas ATS — CBMMG";
   const PAGE_DESCRIPTION = "Material de apoio às aulas de Atendimento a Tentativas de Suicídio (ATS): apresentações, referências técnicas, vídeos e conteúdos institucionais do CBMMG.";
@@ -120,9 +120,14 @@
     button.addEventListener("click", async () => {
       const data = {title:PAGE_TITLE,text:"Material de apoio às aulas de ATS — CBMMG",url:PAGE_URL};
       if (navigator.share) {
-        try { await navigator.share(data); return; } catch (error) { if (error?.name === "AbortError") return; }
+        try {
+          await navigator.share(data);
+          void window.RICAnalytics?.track?.("share", {method:"native", content_type:"page", item_id:"curso-ats"});
+          return;
+        } catch (error) { if (error?.name === "AbortError") return; }
       }
       window.open(`https://wa.me/?text=${encodeURIComponent(data.text + "\n" + PAGE_URL)}`,"_blank","noopener,noreferrer");
+      void window.RICAnalytics?.track?.("share", {method:"whatsapp", content_type:"page", item_id:"curso-ats"});
     });
     actions.appendChild(button);
   }
