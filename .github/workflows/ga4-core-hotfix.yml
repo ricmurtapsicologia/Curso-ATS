@@ -1,0 +1,87 @@
+name: GA4 Core Hotfix
+
+on:
+  push:
+    branches: [hotfix/ga4-core-20260920]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: hotfix/ga4-core-20260920
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Apply canonical GA4 core
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          GA='G-N1GEBDNZ8B'
+
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'<meta name="ric-analytics-ga"[^>]*>\s*', '', s)
+          anchor='<meta name="ric-analytics-privacy" content="public">'
+          if anchor not in s:
+              raise SystemExit('analytics privacy meta missing')
+          s=s.replace(anchor, anchor+f'\n<meta name="ric-analytics-ga" content="{GA}">', 1)
+          s=re.sub(r'ric-analytics\.js\?v=[^"\']+', 'ric-analytics.js?v=1.1.3', s)
+          p.write_text(s, encoding='utf-8')
+
+          p=Path('hardening.js')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('const GA_ID = "G-38D052F915";', f'const GA_ID = "{GA}";')
+          old='''      if (navigator.share) {\n        try { await navigator.share(data); return; } catch (error) { if (error?.name === "AbortError") return; }\n      }\n      window.open(`https://wa.me/?text=${encodeURIComponent(data.text + "\\n" + PAGE_URL)}`,"_blank","noopener,noreferrer");'''
+          new='''      if (navigator.share) {\n        try {\n          await navigator.share(data);\n          void window.RICAnalytics?.track?.("share", {method:"native", content_type:"page", item_id:"curso-ats"});\n          return;\n        } catch (error) { if (error?.name === "AbortError") return; }\n      }\n      window.open(`https://wa.me/?text=${encodeURIComponent(data.text + "\\n" + PAGE_URL)}`,"_blank","noopener,noreferrer");\n      void window.RICAnalytics?.track?.("share", {method:"whatsapp", content_type:"page", item_id:"curso-ats"});'''
+          if old not in s and 'RICAnalytics?.track?.("share"' not in s:
+              raise SystemExit('share handler signature drift')
+          if old in s:
+              s=s.replace(old,new,1)
+          p.write_text(s, encoding='utf-8')
+
+          p=Path('.github/workflows/performance-hotfix.yml')
+          if p.exists():
+              s=p.read_text(encoding='utf-8')
+              s=s.replace('ric-analytics.js?v=1.1.2','ric-analytics.js?v=1.1.3')
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Validate GA4 and privacy invariants
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          idx=Path('index.html').read_text(encoding='utf-8')
+          hard=Path('hardening.js').read_text(encoding='utf-8')
+          assert idx.count('<meta name="ric-analytics-page" content="curso-ats">') == 1
+          assert idx.count('<meta name="ric-analytics-privacy" content="public">') == 1
+          assert idx.count('<meta name="ric-analytics-ga" content="G-N1GEBDNZ8B">') == 1
+          assert idx.count('ric-analytics.js?v=1.1.3') == 1
+          assert 'const GA_ID = "G-N1GEBDNZ8B";' in hard
+          assert 'G-38D052F915' not in hard
+          assert 'RICAnalytics?.track?.("share"' in hard
+          for forbidden in ['cpf','bdi','alerg','sangue','diagn']:
+              assert forbidden not in hard.lower()
+          print('COURSE_GA4_HOTFIX_OK')
+          PY
+      - name: Existing telemetry regressions
+        run: |
+          node tests/course-telemetry.test.mjs
+          node tests/course-telemetry-adapter.test.mjs
+      - name: Commit hotfix branch
+        run: |
+          if git diff --quiet -- index.html hardening.js .github/workflows/performance-hotfix.yml; then
+            echo 'No content patch needed.'
+            exit 0
+          fi
+          git config user.name 'ricmurtapsicologia'
+          git config user.email '164411318+ricmurtapsicologia@users.noreply.github.com'
+          git add index.html hardening.js .github/workflows/performance-hotfix.yml
+          git commit -m 'hotfix: unify Course ATS on canonical GA4 property'
+          git push origin HEAD:hotfix/ga4-core-20260920
