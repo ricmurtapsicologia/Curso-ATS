@@ -3,6 +3,9 @@ import { readFileSync } from 'node:fs';
 
 const source = readFileSync(new URL('../cats-analytics-v2.js', import.meta.url), 'utf8');
 const loader = readFileSync(new URL('../auth-extra.js', import.meta.url), 'utf8');
+const hardening = readFileSync(new URL('../hardening.js', import.meta.url), 'utf8');
+const accessCanonical = readFileSync(new URL('../access-2026.js', import.meta.url), 'utf8');
+const accessHotfix = readFileSync(new URL('../access-hotfix-20260918.js', import.meta.url), 'utf8');
 
 assert.match(source, /send\("page_view"\)/, 'page_view universal ausente');
 assert.match(source, /presentation_open/, 'presentation_open ausente');
@@ -22,11 +25,25 @@ assert.match(source, /cats-manual/, 'Manual não incluído');
 assert.match(source, /navigator\.webdriver === true/, 'filtro de automação ausente');
 assert.match(source, /version:"2\.0\.1"/, 'versão 2.0.1 não exposta');
 
-const universalPos = loader.indexOf('cats-analytics-v2.js?v=20260920-v201');
-const authCorePos = loader.indexOf('course-telemetry.js?v=20260919-coldlogin1');
-assert.ok(universalPos >= 0, 'loader universal 2.0.1 não publicado no auth-extra');
-assert.ok(authCorePos >= 0, 'core autenticado não preservado');
-assert.ok(universalPos < authCorePos, 'analytics universal precisa carregar antes do core autenticado');
+assert.match(loader, /DEFAULT_TIMEOUT_MS\s*=\s*3500/, 'timeout fail-open do loader ausente');
+assert.match(loader, /void bootObservability\(\)/, 'observabilidade precisa ser não bloqueante');
+assert.match(loader, /catsAccess: "canonical"/, 'política canônica de acesso não priorizada');
+assert.match(loader, /catsAccess: "supplemental"/, 'política suplementar de acesso não priorizada');
+
+const accessPos = loader.indexOf('access-2026.js?v=20260919-3');
+const observeCallPos = loader.lastIndexOf('void bootObservability()');
+assert.ok(accessPos >= 0 && observeCallPos >= 0 && accessPos < observeCallPos, 'autorização deve ser iniciada antes da observabilidade');
+assert.ok(!loader.includes('await load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js'), 'analytics não pode bloquear política de acesso');
+assert.ok(hardening.includes('auth-extra.js?v=20260920-v202'), 'cache-bust v202 do loader de acesso ausente');
+
+for (const candidate of [accessCanonical, accessHotfix]) {
+  assert.match(candidate, /const SHARED_BYPASS = "catsAccessBypass"/, 'interceptadores precisam compartilhar o mesmo bypass');
+  assert.match(candidate, /if \(form\.dataset\[SHARED_BYPASS\] === "1"\) return;/, 'retry ao gate-base precisa atravessar todos os interceptadores');
+  assert.match(candidate, /queueMicrotask\(\(\) => \{ delete form\.dataset\[SHARED_BYPASS\]; \}\)/, 'bypass precisa sobreviver ao evento de reenvio completo');
+  assert.match(candidate, /function retryBase\(form\)/, 'fallback explícito ao validador-base ausente');
+}
+assert.ok(!accessCanonical.includes('extraAuthBypass'), 'bypass antigo canônico não pode permanecer');
+assert.ok(!accessHotfix.includes('accessHotfixBypass'), 'bypass antigo do hotfix não pode permanecer');
 
 for (const forbidden of ['credential_hash:', 'cpf:', 'bdi:', 'email:']) {
   assert.ok(!source.includes(forbidden), `coletor não pode emitir ${forbidden}`);
