@@ -1,0 +1,49 @@
+name: Telemetry Cold Login Fix
+
+on:
+  push:
+    branches:
+      - fix/telemetry-cold-login-observability-20260919
+    paths:
+      - 'auth-extra.js'
+      - 'course-telemetry.js'
+      - 'course-telemetry-adapter.js'
+      - 'hardening.js'
+      - 'tests/course-telemetry*.test.mjs'
+      - '.github/workflows/telemetry-cold-login-fix.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Core telemetry unit tests
+        run: node tests/course-telemetry.test.mjs
+      - name: Adapter cold-login and observability tests
+        run: node tests/course-telemetry-adapter.test.mjs
+      - name: Privacy and fail-open guard
+        run: |
+          ! grep -En 'preventDefault\(|stopPropagation\(|stopImmediatePropagation\(|localStorage' course-telemetry-adapter.js
+          ! grep -Ein 'cpf|bdi|alerg|sangue|diagn' course-telemetry-adapter.js
+          grep -q 'await load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry.js' auth-extra.js
+          grep -q 'google-resource-' course-telemetry-adapter.js
+          grep -q 'share-page' course-telemetry-adapter.js
+      - name: Access policy unchanged
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- auth.js access-2026.js access-hotfix-20260918.js app.js index.html
+      - name: No deployment in validation workflow
+        run: |
+          ! grep -Eqi 'deploy|gh-pages|pages deploy' .github/workflows/telemetry-cold-login-fix.yml
+          echo 'PASS: validation-only workflow.'
+
+# Validation-only gate for the cold-login observability closure.

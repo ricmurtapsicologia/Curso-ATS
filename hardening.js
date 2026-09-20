@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const VERSION = "2026-09-09.5";
+  const VERSION = "2026-09-19.6";
   const GA_ID = "G-38D052F915";
   const PAGE_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/";
   const PAGE_TITLE = "Atendimento a Tentativas de Suicídio | Aulas ATS — CBMMG";
@@ -17,11 +17,12 @@
 
   const ITO_OLD_ID = "1QW7Wzr6GgBHctNKf7oqTC_I1D0OMHxfA";
   const ITO_2026_ID = "1uAauPvrL-VW3KmVScx-k0UKCnsenbaHC";
+  const telemetrySlug = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 54);
 
   function loadSupplementalAuth() {
     if (document.querySelector("script[data-ats-extra-auth]")) return;
     const script = document.createElement("script");
-    script.src = "auth-extra.js?v=20260909-1";
+    script.src = "auth-extra.js?v=20260919-coldlogin1";
     script.dataset.atsExtraAuth = "true";
     document.head.appendChild(script);
   }
@@ -84,6 +85,7 @@
 
   function replaceSlideReferences() {
     SLIDES_2026.forEach(([oldId,newId,title,description],index) => {
+      const telemetryId = `cats-2026-slide-${index + 1}-${telemetrySlug(title)}`;
       const card = [...document.querySelectorAll(".lesson-card")].find(el => el.querySelector(`[data-slide-id="${oldId}"]`) || el.querySelector(`[href*="${oldId}"]`));
       if (card) {
         card.dataset.title = `Encontro ${index + 1}: ${title}`;
@@ -92,8 +94,8 @@
         if (p) p.textContent = description;
         if (badge) badge.innerHTML = `<i class="ri-slideshow-2-line" aria-hidden="true"></i> Encontro ${index + 1} • 2026`;
       }
-      document.querySelectorAll(`[data-slide-id="${oldId}"]`).forEach(el => el.dataset.slideId = newId);
-      document.querySelectorAll(`a[href*="${oldId}"]`).forEach(a => a.href = a.href.replace(oldId,newId));
+      document.querySelectorAll(`[data-slide-id="${oldId}"]`).forEach(el => { el.dataset.slideId = newId; el.dataset.telemetryId = telemetryId; });
+      document.querySelectorAll(`a[href*="${oldId}"]`).forEach(a => { a.href = a.href.replace(oldId,newId); a.dataset.telemetryId = telemetryId; });
     });
   }
 
@@ -102,6 +104,7 @@
       a.href = `https://drive.google.com/file/d/${ITO_2026_ID}/view`;
       a.textContent = "ITO Nº 30 — 2ª edição, revisão 2026 (v3.7 canônica)";
       a.dataset.canonicalSource = "ITO30-v3.7-2026";
+      a.dataset.telemetryId = "ito-30-v3.7-2026";
     });
   }
 
@@ -112,6 +115,7 @@
     button.id = "atsShareButton";
     button.type = "button";
     button.className = "btn ghost";
+    button.dataset.telemetryId = "share-page";
     button.innerHTML = '<i class="ri-share-forward-line" aria-hidden="true"></i> Compartilhar';
     button.addEventListener("click", async () => {
       const data = {title:PAGE_TITLE,text:"Material de apoio às aulas de ATS — CBMMG",url:PAGE_URL};
