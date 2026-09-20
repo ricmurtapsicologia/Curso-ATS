@@ -14,6 +14,6 @@ assert.ok(!/\b(?:cpf|bdi|alerg|sangue|diagn)\b/i.test(source), 'ops sidecar must
 assert.ok(!source.includes('error.message'), 'raw error messages must never be sent');
 assert.ok(!source.includes('error.stack'), 'raw stacks must never be sent');
 assert.match(authExtra, /course-telemetry-ops\.js\?v=20260920-ops1/, 'auth loader must load the ops sidecar');
-assert.match(authExtra, /course_telemetry_signal/, 'ops endpoint must be explicitly configured');
+assert.match(authExtra, /\/api\/course_telemetry\/signal/, 'ops endpoint must use the multiplexed telemetry route');
 
 console.log('COURSE_TELEMETRY_OPS_PRIVACY_REGRESSION_OK');
