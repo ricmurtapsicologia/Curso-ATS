@@ -47,7 +47,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: E2E — canonical login path on all three surfaces
         run: |
-          cat > /tmp/access-e2e.mjs <<'JS'
+          cat > access-e2e.mjs <<'JS'
           import { chromium } from 'playwright';
 
           const hash = '9bd0123c47240b15376c40dbc3066e9244ac82332870cc3eea0bc29cf19f922c';
@@ -95,4 +95,4 @@ jobs:
           await browser.close();
           console.log('PASS_CANONICAL_LOGIN_ALL');
           JS
-          node /tmp/access-e2e.mjs
+          node ./access-e2e.mjs
