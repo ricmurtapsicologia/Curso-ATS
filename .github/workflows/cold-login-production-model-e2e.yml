@@ -44,4 +44,5 @@ jobs:
             test "$(curl -L -s -o /dev/null -w '%{http_code}' "$url")" = '200'
           done
       - name: No deployment
-        run: echo 'PASS: QA-only workflow; no deploy step.'
+        run: |
+          echo 'PASS: QA-only workflow; no deploy step.'
