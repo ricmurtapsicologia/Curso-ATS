@@ -22,7 +22,7 @@
   function loadSupplementalAuth() {
     if (document.querySelector("script[data-ats-extra-auth]")) return;
     const script = document.createElement("script");
-    script.src = "auth-extra.js?v=20260920-ops1";
+    script.src = "auth-extra.js?v=20260920-v201";
     script.dataset.atsExtraAuth = "true";
     document.head.appendChild(script);
   }
@@ -53,7 +53,7 @@
     setMeta('meta[property="og:image:alt"]',{property:"og:image:alt",content:"Material de apoio às aulas de Atendimento a Tentativas de Suicídio — CBMMG"});
     setMeta('meta[name="twitter:card"]',{name:"twitter:card",content:"summary_large_image"});
     setMeta('meta[name="twitter:title"]',{name:"twitter:title",content:PAGE_TITLE});
-    setMeta('meta[name="twitter:description"]',{name:"twitter:description",content:PAGE_DESCRIPTION});
+    setMeta('meta[name="twitter:description"]',{name:"twitter",content:PAGE_DESCRIPTION});
     setMeta('meta[name="twitter:image"]',{name:"twitter:image",content:PAGE_IMAGE});
 
     let canonical = document.head.querySelector('link[rel="canonical"]');
