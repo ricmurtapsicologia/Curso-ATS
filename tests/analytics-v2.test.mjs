@@ -19,10 +19,12 @@ assert.match(source, /scroll_90/, 'scroll 90 ausente');
 assert.match(source, /user_engagement/, 'engajamento ausente');
 assert.match(source, /LINK_ENDPOINT/, 'ponte de identidade ausente');
 assert.match(source, /cats-manual/, 'Manual não incluído');
+assert.match(source, /navigator\.webdriver === true/, 'filtro de automação ausente');
+assert.match(source, /version:"2\.0\.1"/, 'versão 2.0.1 não exposta');
 
-const universalPos = loader.indexOf('cats-analytics-v2.js?v=20260920-v2');
+const universalPos = loader.indexOf('cats-analytics-v2.js?v=20260920-v201');
 const authCorePos = loader.indexOf('course-telemetry.js?v=20260919-coldlogin1');
-assert.ok(universalPos >= 0, 'loader universal não publicado no auth-extra');
+assert.ok(universalPos >= 0, 'loader universal 2.0.1 não publicado no auth-extra');
 assert.ok(authCorePos >= 0, 'core autenticado não preservado');
 assert.ok(universalPos < authCorePos, 'analytics universal precisa carregar antes do core autenticado');
 
