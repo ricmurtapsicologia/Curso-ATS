@@ -1,0 +1,30 @@
+name: GA4 Live Audit
+
+on:
+  push:
+    branches: [qa/ga4-audit-20260920]
+    paths:
+      - 'tests/ga4-live-audit.mjs'
+      - '.github/workflows/ga4-live-audit.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Audit four live pages
+        run: node tests/ga4-live-audit.mjs
+      - name: No deployment
+        run: echo 'PASS: audit only; no deployment.'
