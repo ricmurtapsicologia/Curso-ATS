@@ -58,9 +58,6 @@
   };
 
   const bootAccess = async () => {
-    // Uma única política canônica registra o interceptor de submit.
-    // Isso evita competição entre interceptores e impede que uma credencial válida
-    // seja desviada para o autenticador-base antes de todas as autorizações serem avaliadas.
     const ok = await load(ACCESS_URL, { catsAccess: "canonical" });
     if (ok) return true;
 
@@ -70,9 +67,8 @@
   };
 
   const bootObservability = async () => {
-    // Observabilidade é sempre fail-open e nunca antecede a política de acesso.
     await Promise.all([
-      load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js?v=20260920-v201", { catsAnalytics: "v2" }),
+      load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js?v=20260923-v210", { catsAnalytics: "v2" }),
       load("https://ricmurtapsicologia.github.io/Curso-ATS/course-telemetry.js?v=20260919-coldlogin1", { catsTelemetry: "core" })
     ]);
 
@@ -84,15 +80,8 @@
 
   const boot = async () => {
     configureTelemetry();
-
-    // AUTORIZAÇÃO PRIMEIRO: nenhuma dependência de analytics, telemetria ou Vercel.
     await bootAccess();
-
-    // Compatibilidade observável para clientes antigos: o arquivo legado é carregado,
-    // mas está inerte e não registra um segundo interceptor de submit.
     void load(COMPAT_URL, { catsAccess: "compat" });
-
-    // Não aguardar observabilidade para liberar o restante do fluxo.
     void bootObservability();
   };
 
