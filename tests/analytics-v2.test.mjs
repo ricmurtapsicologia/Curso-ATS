@@ -50,12 +50,12 @@ const observeCallPos = loader.lastIndexOf('void bootObservability()');
 assert.ok(accessPos >= 0 && observeCallPos >= 0 && accessPos < observeCallPos, 'autorização deve ser iniciada antes da observabilidade');
 assert.ok(!loader.includes('await load("https://ricmurtapsicologia.github.io/Curso-ATS/cats-analytics-v2.js'), 'analytics não pode bloquear política de acesso');
 
-for (const candidate of [accessCanonical, accessHotfix]) {
-  assert.match(candidate, /const SHARED_BYPASS = "catsAccessBypass"/, 'interceptadores precisam compartilhar o mesmo bypass');
-  assert.match(candidate, /if \(form\.dataset\[SHARED_BYPASS\] === "1"\) return;/, 'retry ao gate-base precisa atravessar todos os interceptadores');
-  assert.match(candidate, /queueMicrotask\(\(\) => \{ delete form\.dataset\[SHARED_BYPASS\]; \}\)/, 'bypass precisa sobreviver ao evento de reenvio completo');
-  assert.match(candidate, /function retryBase\(form\)/, 'fallback explícito ao validador-base ausente');
-}
+assert.match(accessCanonical, /const SHARED_BYPASS = "catsAccessBypass"/, 'interceptor canônico precisa preservar o bypass compartilhado');
+assert.match(accessCanonical, /if \(form\.dataset\[SHARED_BYPASS\] === "1"\) return;/, 'retry ao gate-base precisa atravessar o interceptor canônico');
+assert.match(accessCanonical, /queueMicrotask\(\(\) => \{ delete form\.dataset\[SHARED_BYPASS\]; \}\)/, 'bypass precisa sobreviver ao evento de reenvio completo');
+assert.match(accessCanonical, /function retryBase\(form\)/, 'fallback explícito ao validador-base ausente');
+assert.match(accessHotfix, /migrated:\s*true/, 'hotfix legado deve permanecer inerte e explicitamente migrado');
+assert.ok(!accessHotfix.includes('addEventListener("submit"'), 'hotfix legado não pode registrar um segundo interceptor');
 
 for (const forbidden of ['credential_hash:', 'cpf:', 'bdi:', 'email:']) {
   assert.ok(!source.includes(forbidden), `coletor não pode emitir ${forbidden}`);
