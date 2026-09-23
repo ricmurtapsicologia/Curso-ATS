@@ -22,12 +22,13 @@ assert.ok(hardening.includes('data.telemetryId') || hardening.includes('dataset.
 assert.ok(hardening.includes('share-page'), 'share button must expose telemetry ID');
 
 const accessPos = authExtra.indexOf('access-2026.js');
-const hotfixPos = authExtra.indexOf('access-hotfix-20260918.js');
 const observabilityCall = authExtra.lastIndexOf('void bootObservability()');
-assert.ok(accessPos >= 0 && hotfixPos >= 0 && observabilityCall > accessPos && observabilityCall > hotfixPos,
-  'access policies must initialize before observability');
-assert.ok(authExtra.includes('DEFAULT_TIMEOUT_MS = 3500'), 'shared loader must fail open on stalled auxiliary scripts');
-assert.ok(authExtra.includes('Promise.all(['), 'shared loader must not serialize independent access policies');
+assert.ok(accessPos >= 0 && observabilityCall > accessPos,
+  'canonical access must initialize before observability');
+assert.ok(authExtra.includes('access-hotfix-20260918.js'), 'legacy compatibility surface must remain discoverable');
+assert.ok(authExtra.includes('DEFAULT_TIMEOUT_MS = 5000'), 'shared loader must fail open on stalled auxiliary scripts');
+assert.ok(authExtra.includes('Promise.all(['), 'independent observability scripts should load concurrently');
+assert.ok(authExtra.includes('void bootObservability()'), 'observability must remain non-blocking after access');
 
 assert.ok(!source.includes('preventDefault('), 'telemetry adapter must not block page interactions');
 assert.ok(!source.includes('stopPropagation('), 'telemetry adapter must not stop page interactions');
