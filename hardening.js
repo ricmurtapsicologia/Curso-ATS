@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const VERSION = "2026-09-20.1";
+  const VERSION = "2026-10-06.2";
   const GA_ID = "G-38D052F915";
   const PAGE_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/";
   const PAGE_TITLE = "Atendimento a Tentativas de Suicídio | Aulas ATS — CBMMG";
@@ -9,14 +9,14 @@
   const PAGE_IMAGE = "https://i.pinimg.com/originals/33/9d/0c/339d0cc2f05bbb719debe6a5efb414dd.jpg";
 
   const SLIDES_2026 = [
-    ["1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB","1EuIjTZ-Eplx5kkF9hNJh5pNIy9_bEQ1ykOzh2OoEFgY","Fundamentos do ATS","Fundamentos do Atendimento a Tentativas de Suicídio, comportamento suicida, crise, fatores associados e bases para atuação técnica."],
-    ["1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs","1tKGhq9upuUsVSYO3mkSTJkG-hDZkHpyIgsDK5Du7SVw","Abordagem Técnica no ATS","Aplicação da abordagem técnica em ATS, com foco em comunicação, vínculo, escuta e estratégias de intervenção."],
-    ["1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp","14riZwvSFlkJ1ob_vxq-fCBU_qy2XVuXcDFtiySjaLLo","Cenários Específicos do ATS","Reconhecimento e intervenção em cenários específicos do ATS, considerando condições clínicas, comportamentais e operacionais."],
-    ["1_6dVFpv3trAtLAd2dXSrZbMris95jy1B","16bl_lT9UJlDNQXK3mKEhnE7v2ucoAgAQbS1NVBTujMg","Gerenciamento da Ocorrência de ATS","Gerenciamento da ocorrência de ATS, coordenação da cena, funções, planejamento e tomada de decisão."]
+    ["1JaUe1ANJjWOAY2fzWHxFe-aiKbUwLAJB","1EuIjTZ-Eplx5kkF9hNJh5pNIy9_bEQ1ykOzh2OoEFgY","Aspectos Gerais","Fundamentos do Atendimento a Tentativas de Suicídio, comportamento suicida, crise, fatores associados e bases para atuação técnica."],
+    ["1oGkMsxGiAsvUPYueQqx00Z8CC7115Nbs","1tKGhq9upuUsVSYO3mkSTJkG-hDZkHpyIgsDK5Du7SVw","Abordagem Técnica","Aplicação da abordagem técnica em ATS, com foco em comunicação, vínculo, escuta e estratégias de intervenção."],
+    ["1AN2XM7zEMdfKOsQcla39XqN-fpWq_ovp","14riZwvSFlkJ1ob_vxq-fCBU_qy2XVuXcDFtiySjaLLo","Situações Específicas","Reconhecimento e intervenção em cenários específicos do ATS, considerando condições clínicas, comportamentais e operacionais."],
+    ["1_6dVFpv3trAtLAd2dXSrZbMris95jy1B","16bl_lT9UJlDNQXK3mKEhnE7v2ucoAgAQbS1NVBTujMg","Gerenciamento da Ocorrência","Gerenciamento da ocorrência de ATS, coordenação da cena, funções, planejamento e tomada de decisão."]
   ];
 
   const ITO_OLD_ID = "1QW7Wzr6GgBHctNKf7oqTC_I1D0OMHxfA";
-  const ITO_2026_ID = "1uAauPvrL-VW3KmVScx-k0UKCnsenbaHC";
+  const ITO_2026_ID = ITO_OLD_ID;
   const telemetrySlug = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 54);
 
   function loadSupplementalAuth() {
@@ -39,8 +39,8 @@
 
   function setupSeo() {
     document.title = PAGE_TITLE;
-    setMeta('meta[name="robots"]',{name:"robots",content:"index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"});
-    setMeta('meta[name="googlebot"]',{name:"googlebot",content:"index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"});
+    setMeta('meta[name="robots"]',{name:"robots",content:"noindex,nofollow,noarchive"});
+    setMeta('meta[name="googlebot"]',{name:"googlebot",content:"noindex,nofollow,noarchive"});
     setMeta('meta[name="description"]',{name:"description",content:PAGE_DESCRIPTION});
     setMeta('meta[property="og:title"]',{property:"og:title",content:PAGE_TITLE});
     setMeta('meta[property="og:description"]',{property:"og:description",content:PAGE_DESCRIPTION});
@@ -85,14 +85,14 @@
 
   function replaceSlideReferences() {
     SLIDES_2026.forEach(([oldId,newId,title,description],index) => {
-      const telemetryId = `cats-2026-slide-${index + 1}-${telemetrySlug(title)}`;
+      const telemetryId = `ats-slide-${index + 1}-${telemetrySlug(title)}`;
       const card = [...document.querySelectorAll(".lesson-card")].find(el => el.querySelector(`[data-slide-id="${oldId}"]`) || el.querySelector(`[href*="${oldId}"]`));
       if (card) {
-        card.dataset.title = `Encontro ${index + 1}: ${title}`;
+        card.dataset.title = title;
         const h = card.querySelector("h3"), p = card.querySelector(".card-body > p"), badge = card.querySelector(".badge");
         if (h) h.textContent = title;
         if (p) p.textContent = description;
-        if (badge) badge.innerHTML = `<i class="ri-slideshow-2-line" aria-hidden="true"></i> Encontro ${index + 1} • 2026`;
+        if (badge) badge.innerHTML = `<i class="ri-slideshow-2-line" aria-hidden="true"></i> Apresentação • ATS`;
       }
       document.querySelectorAll(`[data-slide-id="${oldId}"]`).forEach(el => { el.dataset.slideId = newId; el.dataset.telemetryId = telemetryId; });
       document.querySelectorAll(`a[href*="${oldId}"]`).forEach(a => { a.href = a.href.replace(oldId,newId); a.dataset.telemetryId = telemetryId; });
@@ -102,10 +102,16 @@
   function replaceItoReference() {
     document.querySelectorAll(`a[href*="${ITO_OLD_ID}"]`).forEach(a => {
       a.href = `https://drive.google.com/file/d/${ITO_2026_ID}/view`;
-      a.textContent = "ITO Nº 30 — 2ª edição, revisão 2026 (v3.7 canônica)";
-      a.dataset.canonicalSource = "ITO30-v3.7-2026";
-      a.dataset.telemetryId = "ito-30-v3.7-2026";
+      a.textContent = "ITO Nº 30 — edição vigente";
+      a.dataset.canonicalSource = "ITO30-vigente";
+      a.dataset.telemetryId = "ito-30-vigente";
     });
+  }
+
+  function updatePrivacyCopy() {
+    const body = document.querySelector("#privacyDialog .privacy-body");
+    if (!body) return;
+    body.innerHTML = `<p>Este ambiente registra dados técnicos e estatísticos agregados para segurança, disponibilidade e melhoria da plataforma. Quando há autenticação, a telemetria utiliza identificador pseudônimo.</p><p>Matrícula BM, CPF e credenciais não são armazenados em texto claro nos eventos de navegação. Serviços externos, como Google, YouTube, Google Drive e outros sites indicados na página, possuem políticas de privacidade próprias.</p>`;
   }
 
   function addShareButton() {
@@ -178,6 +184,7 @@
     disableAnalyticsUntilConsent();
     replaceSlideReferences();
     replaceItoReference();
+    updatePrivacyCopy();
     addShareButton();
     observeGate();
     document.addEventListener("keydown",trapGateFocus,true);
