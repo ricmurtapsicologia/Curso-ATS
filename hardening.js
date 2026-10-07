@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const VERSION = "2026-10-06.2";
+  const VERSION = "2026-10-07.1";
   const GA_ID = "G-38D052F915";
   const PAGE_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/";
   const PAGE_TITLE = "Atendimento a Tentativas de Suicídio | Aulas ATS — CBMMG";
@@ -22,7 +22,7 @@
   function loadSupplementalAuth() {
     if (document.querySelector("script[data-ats-extra-auth]")) return;
     const script = document.createElement("script");
-    script.src = "auth-extra.js?v=20261006-cfs1";
+    script.src = "auth-extra.js?v=20261007-1788728";
     script.dataset.atsExtraAuth = "true";
     document.head.appendChild(script);
   }
