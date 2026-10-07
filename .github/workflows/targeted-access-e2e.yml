@@ -1,0 +1,101 @@
+name: Targeted Access E2E
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/targeted-access-e2e.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-access:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: E2E — ATS and Podcast targeted supplemental credential
+        run: |
+          cat > /tmp/targeted-access-e2e.mjs <<'JS'
+          import { chromium } from 'playwright';
+
+          const targetHash = '1000bbb8487f0a1350fdceb7194f333e13db401172e88983cb1bf435d4a80651';
+          const bytes = targetHash.match(/../g).map(h => Number.parseInt(h, 16));
+          const targets = {
+            ATS: 'https://ricmurtapsicologia.github.io/Curso-ATS/',
+            PODCAST: 'https://ricmurtapsicologia.github.io/Podcast-ATS-CBMMG/'
+          };
+
+          const browser = await chromium.launch({ headless: true });
+
+          for (const [name, url] of Object.entries(targets)) {
+            const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+            await context.addInitScript(({ bytes }) => {
+              const digest = new Uint8Array(bytes).buffer;
+              Object.defineProperty(SubtleCrypto.prototype, 'digest', {
+                configurable: true,
+                value: async function () { return digest.slice(0); }
+              });
+            }, { bytes });
+
+            const page = await context.newPage();
+            const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+            if (!response?.ok()) throw new Error(`${name}: HTTP ${response?.status() ?? 'sem resposta'}`);
+
+            await page.waitForSelector('#catsAuthInput', { timeout: 20000 });
+            await page.waitForFunction(
+              () => document.querySelector('script[src*="access-2026.js"]') !== null,
+              null,
+              { timeout: 20000 }
+            );
+
+            await page.locator('#catsAuthInput').fill('0000000');
+            await page.locator('#catsAuthForm').evaluate(form => form.requestSubmit());
+
+            await page.waitForFunction(() => {
+              for (let i = 0; i < sessionStorage.length; i += 1) {
+                const key = sessionStorage.key(i);
+                try {
+                  const value = JSON.parse(sessionStorage.getItem(key) || 'null');
+                  if (value?.authenticated === true) return true;
+                } catch {}
+              }
+              return false;
+            }, null, { timeout: 12000 });
+
+            await page.waitForTimeout(500);
+            await page.reload({ waitUntil: 'domcontentloaded', timeout: 60000 });
+            await page.waitForSelector('#catsAuthGate', { timeout: 20000 });
+            await page.waitForFunction(() => {
+              const gate = document.querySelector('#catsAuthGate');
+              return Boolean(gate && gate.hidden === true);
+            }, null, { timeout: 12000 });
+
+            const storageKeys = await page.evaluate(() => Array.from(
+              { length: sessionStorage.length },
+              (_, i) => sessionStorage.key(i)
+            ));
+
+            if (name === 'ATS' && !storageKeys.includes('curso_ats_auth_v3')) {
+              throw new Error('ATS: sessão canônica ausente');
+            }
+            if (name === 'PODCAST' && !storageKeys.includes('gav_auth_v1')) {
+              throw new Error('PODCAST: sessão mapeada ausente');
+            }
+
+            console.log(`PASS_TARGETED_${name}`);
+            await context.close();
+          }
+
+          await browser.close();
+          console.log('PASS_TARGETED_ATS_PODCAST');
+          JS
+          node /tmp/targeted-access-e2e.mjs
