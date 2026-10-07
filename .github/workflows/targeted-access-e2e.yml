@@ -24,7 +24,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: E2E — ATS and Podcast targeted supplemental credential
         run: |
-          cat > /tmp/targeted-access-e2e.mjs <<'JS'
+          cat > targeted-access-e2e.mjs <<'JS'
           import { chromium } from 'playwright';
 
           const targetHash = '1000bbb8487f0a1350fdceb7194f333e13db401172e88983cb1bf435d4a80651';
@@ -98,4 +98,4 @@ jobs:
           await browser.close();
           console.log('PASS_TARGETED_ATS_PODCAST');
           JS
-          node /tmp/targeted-access-e2e.mjs
+          node ./targeted-access-e2e.mjs
