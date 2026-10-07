@@ -2,7 +2,7 @@
   "use strict";
 
   const DEFAULT_TIMEOUT_MS = 5000;
-  const ACCESS_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20261006-cfs1";
+  const ACCESS_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/access-2026.js?v=20261007-1788728";
   const COMPAT_URL = "https://ricmurtapsicologia.github.io/Curso-ATS/access-hotfix-20260918.js?v=20260920-v204";
 
   const load = (src, attrs = {}, timeoutMs = DEFAULT_TIMEOUT_MS) => new Promise(resolve => {
